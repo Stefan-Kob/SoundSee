@@ -1,0 +1,23 @@
+﻿@model SoundSee.ViewModels.UserViewModel
+@{
+    ViewBag.Title = "AddUser";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@Model.User.Name</h2>
+<h3>@Model.User.Email</h3>
+
+@if (Model.Accounts.Count == 0)
+{
+    <p>There are no Users or accounts to show</p>
+}
+else
+{
+    foreach (var account in Model.Accounts)
+    {
+        <li>@account.Name</li>
+
+    }
+}
+
+
