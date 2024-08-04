@@ -11,12 +11,12 @@
     <p class="form-label mt-2"><b>Username:</b> @Model.User.Username</p>
 
 </div>
-<form asp-action="EditUser" method="post">
-    
-    <input type="hidden" asp-for="User.Email" />
-    <input type="hidden" asp-for="User.Username" />
-    <input type="hidden" asp-for="User.Password" />
-    <input type="hidden" asp-for="User.SignUpForNewsletters" />
+@using (Html.BeginForm("EditUser", "User", FormMethod.Post))
+{
+    @Html.HiddenFor(model => model.User.Email)
+    @Html.HiddenFor(model => model.User.Username)
+    @Html.HiddenFor(model => model.User.Password)
+    @Html.HiddenFor(model => model.User.SignUpForNewsletters)
 
     <section class="row" aria-labelledby="aspnetTitle">
         <h1 id="title">SoundSee</h1>
@@ -30,4 +30,4 @@
             </section>
         </div>
     </section>
-</form>
+}

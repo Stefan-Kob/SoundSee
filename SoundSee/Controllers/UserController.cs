@@ -25,12 +25,19 @@ namespace SoundSee.Controllers
             return View(viewmodel);
         }
 
-
+        // Depreciated possibly? If no errors than yes
         [HttpPost]
         [Route("User/AddUser")]
-        public ActionResult AddUsesr(UserViewModel model)
+        public ActionResult AddUser(UserViewModel model)
         {
 
+            return View("UserAccountConfirm", model);
+        }
+
+        [HttpPost]
+        [Route("User/UserAccountConfirm")]
+        public ActionResult UserAccountConfirm(UserViewModel model)
+        {
             User user = new User();
 
             user.Username = Request.Form["Username"];
@@ -40,15 +47,7 @@ namespace SoundSee.Controllers
 
             model.User = user;
 
-
             return View("UserAccountConfirm", model);
-        }
-
-        [HttpGet]
-        [Route("User/UserAccountConfirm")]
-        public ActionResult UserAccountConfirm(UserViewModel model)
-        {
-            return View(model);
         }
 
         [HttpPost]
@@ -56,13 +55,8 @@ namespace SoundSee.Controllers
         public ActionResult EditUser(UserViewModel model)
         {
 
-            if (ModelState.IsValid)
-            {
-                // Update user in the database or perform other actions
-                return RedirectToAction("EditUser", model);
-            }
 
-            return View(model);
+            return View("EditUser", model);
         }
 
 

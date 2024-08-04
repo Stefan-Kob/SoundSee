@@ -5,16 +5,17 @@
 }
 
 <h1 class="col-md-6">Fix the Deats!</h1>
+@using (Html.BeginForm("UserAccountConfirm", "User", FormMethod.Post))
+{
 
-<form asp-action="UserAccountConfirm" method="post">
-    <fieldset>
-        <p><i>Please fill out the necessary fields</i></p>
+        <fieldset>
+            <p><i>Please fill out the necessary fields</i></p>
 
-        @Html.Partial("~/Views/Shared/AddEdit.cshtml", Model)
+            @Html.Partial("~/Views/Shared/AddEdit.cshtml", Model)
 
-        <br />
-        <button type="submit" class="btn btn-primary">Submit</button>
-    </fieldset>
+            <br />
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </fieldset>
 
-    <small id="emailHelp" class="form-text text-muted">We do not share any of this data.</small>
-</form>
+        <small id="emailHelp" class="form-text text-muted">We do not share any of this data.</small>
+}
