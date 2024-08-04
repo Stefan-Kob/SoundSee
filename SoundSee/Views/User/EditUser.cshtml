@@ -1,0 +1,20 @@
+﻿@model SoundSee.ViewModels.UserViewModel
+@{
+    ViewBag.Title = "EditUser";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1 class="col-md-6">Fix the Deats!</h1>
+
+<form asp-action="UserAccountConfirm" method="post">
+    <fieldset>
+        <p><i>Please fill out the necessary fields</i></p>
+
+        @Html.Partial("~/Views/Shared/AddEdit.cshtml", Model)
+
+        <br />
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </fieldset>
+
+    <small id="emailHelp" class="form-text text-muted">We do not share any of this data.</small>
+</form>

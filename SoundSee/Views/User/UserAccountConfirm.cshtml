@@ -1,0 +1,33 @@
+﻿@model SoundSee.ViewModels.UserViewModel
+@{
+    ViewBag.Title = "Confirm your Account details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Confirm your Account details</h2>
+
+<div>
+    <p class="form-label mt-4"><b>Email:</b> @Model.User.Email</p>
+    <p class="form-label mt-2"><b>Username:</b> @Model.User.Username</p>
+
+</div>
+<form asp-action="EditUser" method="post">
+    
+    <input type="hidden" asp-for="User.Email" />
+    <input type="hidden" asp-for="User.Username" />
+    <input type="hidden" asp-for="User.Password" />
+    <input type="hidden" asp-for="User.SignUpForNewsletters" />
+
+    <section class="row" aria-labelledby="aspnetTitle">
+        <h1 id="title">SoundSee</h1>
+        <p class="lead">Start communicating in a new way</p>
+        <div class="row row-cols-2">
+            <section class="col-md-2">
+                <button type="submit" class="btn btn-primary btn-mds">Edit</button>
+            </section>
+            <section class="col-md-2">
+                <p><a href="" class="btn btn-primary btn-md">Continue</a></p>
+            </section>
+        </div>
+    </section>
+</form>
