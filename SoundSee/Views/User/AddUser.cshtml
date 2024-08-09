@@ -4,20 +4,16 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>@Model.User.Name</h2>
-<h3>@Model.User.Email</h3>
-
-@if (Model.Accounts.Count == 0)
+<h1 class="col-md-6">Who are you? Please tell us!</h1>
+@using (Html.BeginForm("UserAccountConfirm", "User", FormMethod.Post, new {enctype="multipart/form-data"}))
 {
-    <p>There are no Users or accounts to show</p>
+        <fieldset>
+            <p><i>Please fill out the necessary fields</i></p>
+
+            @Html.Partial("~/Views/Shared/AddEdit.cshtml", Model)
+
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </fieldset>
+
+        <small id="emailHelp" class="form-text text-muted">We do not share any of this data.</small>
 }
-else
-{
-    foreach (var account in Model.Accounts)
-    {
-        <li>@account.Name</li>
-
-    }
-}
-
-
