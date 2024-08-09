@@ -145,6 +145,7 @@
     <Content Include="Content\Site.css" />
     <Content Include="Directory.Build.props" />
     <Content Include="Media\defaultProfile_Photo.jpg" />
+    <Content Include="Media\favicon.ico" />
     <Content Include="Media\house.svg" />
     <Content Include="Media\person.svg" />
     <Content Include="Media\plus.svg" />
@@ -217,6 +218,7 @@
     <Content Include="Views\User\Welcome.cshtml" />
     <Content Include="Views\Shared\InApp\BottomBar.cshtml" />
     <Content Include="Views\Shared\_SignInLayout.cshtml" />
+    <Content Include="Views\User\ViewAccount.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

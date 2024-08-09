@@ -6,13 +6,13 @@
     <title>@ViewBag.Title - My ASP.NET Application</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
-    <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
+    <link rel="icon" type="image/x-icon" href="~/Media/favicon.ico">
 </head>
 <body>
 
     <div class="container body-content">
         @RenderBody()
-        <nav class="navbar navbar-light" style="background-color: #ffffff65; padding-left: 2em; padding-right: 2em;">
+        <nav class="navbar navbar-light mt-0" style="background-color: #ffffff65; padding-left: 2em; padding-right: 2em;">
             <a class="navbar-brand" href="#">
                 <img src="~/Media/house.svg" width="30" height="30" alt="">
             </a>
@@ -22,7 +22,7 @@
             <a class="navbar-brand" href="#">
                 <img src="~/Media/plus.svg" width="30" height="30" alt="">
             </a>
-            <a class="navbar-brand" href="#">
+            <a class="navbar-brand" href="@Url.Action("ViewAccount", "User")">
                 <img src="~/Media/person.svg" width="30" height="30" alt="">
             </a>
         </nav>

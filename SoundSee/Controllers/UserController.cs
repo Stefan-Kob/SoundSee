@@ -76,6 +76,15 @@ namespace SoundSee.Controllers
             return View("Welcome", model);
         }
 
+        public ActionResult ViewAccount()
+        {
+            var model = new UserViewModel();
+            model.User = (User)Session["User"];
+
+            return View("ViewAccount", model);
+        }
+
+
         public ActionResult DisplayProfilePhoto()
         {
             var user = Session["User"] as User;
