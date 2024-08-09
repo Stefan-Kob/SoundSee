@@ -144,6 +144,11 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Directory.Build.props" />
+    <Content Include="Media\defaultProfile_Photo.jpg" />
+    <Content Include="Media\house.svg" />
+    <Content Include="Media\person.svg" />
+    <Content Include="Media\plus.svg" />
+    <Content Include="Media\search.svg" />
     <Content Include="Media\SoundSeeLogo.png" />
     <Content Include="Media\SoundSeeLogo.svg" />
     <Content Include="Scripts\bootstrap.bundle.js" />
@@ -209,6 +214,9 @@
     <Content Include="Views\User\UserAccountConfirm.cshtml" />
     <Content Include="Views\Shared\AddEdit.cshtml" />
     <Content Include="Views\User\EditUser.cshtml" />
+    <Content Include="Views\User\Welcome.cshtml" />
+    <Content Include="Views\Shared\InApp\BottomBar.cshtml" />
+    <Content Include="Views\Shared\_SignInLayout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -5,7 +5,7 @@
 }
 
 <h1 class="col-md-6">Fix the Deats!</h1>
-@using (Html.BeginForm("UserAccountConfirm", "User", FormMethod.Post))
+@using (Html.BeginForm("UserAccountConfirm", "User", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
 
         <fieldset>

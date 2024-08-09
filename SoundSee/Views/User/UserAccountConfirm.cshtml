@@ -9,8 +9,11 @@
 <div>
     <p class="form-label mt-4"><b>Email:</b> @Model.User.Email</p>
     <p class="form-label mt-2"><b>Username:</b> @Model.User.Username</p>
-
+    <p class="form-label mt-2"><b>Profile Photo</b>
+        <img src="@Url.Action("DisplayProfilePhoto", "User")" alt="Profile Photo" width="150em" height="150em" />
+    </p>
 </div>
+
 @using (Html.BeginForm("EditUser", "User", FormMethod.Post))
 {
     @Html.HiddenFor(model => model.User.Email)
@@ -18,15 +21,22 @@
     @Html.HiddenFor(model => model.User.Password)
     @Html.HiddenFor(model => model.User.SignUpForNewsletters)
 
+    <br />
     <section class="row" aria-labelledby="aspnetTitle">
-        <h1 id="title">SoundSee</h1>
-        <p class="lead">Start communicating in a new way</p>
         <div class="row row-cols-2">
             <section class="col-md-2">
                 <button type="submit" class="btn btn-primary btn-mds">Edit</button>
             </section>
+        </div>
+    </section>
+}
+<br />
+@using (Html.BeginForm("ContinUserToWelcome", "User", FormMethod.Post))
+{
+    <section class="row" aria-labelledby="aspnetTitle">
+        <div class="row row-cols-2">
             <section class="col-md-2">
-                <p><a href="" class="btn btn-primary btn-md">Continue</a></p>
+                <button type="submit" class="btn btn-primary btn-mds">Continue</button>
             </section>
         </div>
     </section>

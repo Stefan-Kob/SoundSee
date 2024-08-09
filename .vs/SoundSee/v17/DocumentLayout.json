@@ -3,20 +3,20 @@
   "WorkspaceRootPath": "C:\\MyPrograms\\SoundSee\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{D89C1F26-79E8-4B50-B876-8002AD60FB0E}|SoundSee\\SoundSee.csproj|c:\\myprograms\\soundsee\\soundsee\\controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D89C1F26-79E8-4B50-B876-8002AD60FB0E}|SoundSee\\SoundSee.csproj|solutionrelative:soundsee\\controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{D89C1F26-79E8-4B50-B876-8002AD60FB0E}|SoundSee\\SoundSee.csproj|c:\\myprograms\\soundsee\\soundsee\\views\\shared\\_signinlayout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{D89C1F26-79E8-4B50-B876-8002AD60FB0E}|SoundSee\\SoundSee.csproj|solutionrelative:soundsee\\views\\shared\\_signinlayout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D89C1F26-79E8-4B50-B876-8002AD60FB0E}|SoundSee\\SoundSee.csproj|c:\\myprograms\\soundsee\\soundsee\\views\\user\\welcome.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{D89C1F26-79E8-4B50-B876-8002AD60FB0E}|SoundSee\\SoundSee.csproj|solutionrelative:soundsee\\views\\user\\welcome.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{D89C1F26-79E8-4B50-B876-8002AD60FB0E}|SoundSee\\SoundSee.csproj|C:\\MyPrograms\\SoundSee\\soundsee\\views\\user\\adduser.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{D89C1F26-79E8-4B50-B876-8002AD60FB0E}|SoundSee\\SoundSee.csproj|solutionrelative:soundsee\\views\\user\\adduser.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{D89C1F26-79E8-4B50-B876-8002AD60FB0E}|SoundSee\\SoundSee.csproj|c:\\myprograms\\soundsee\\soundsee\\views\\shared\\addedit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{D89C1F26-79E8-4B50-B876-8002AD60FB0E}|SoundSee\\SoundSee.csproj|solutionrelative:soundsee\\views\\shared\\addedit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{D89C1F26-79E8-4B50-B876-8002AD60FB0E}|SoundSee\\SoundSee.csproj|c:\\myprograms\\soundsee\\soundsee\\views\\user\\useraccountconfirm.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{D89C1F26-79E8-4B50-B876-8002AD60FB0E}|SoundSee\\SoundSee.csproj|solutionrelative:soundsee\\views\\user\\useraccountconfirm.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{D89C1F26-79E8-4B50-B876-8002AD60FB0E}|SoundSee\\SoundSee.csproj|c:\\myprograms\\soundsee\\soundsee\\controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D89C1F26-79E8-4B50-B876-8002AD60FB0E}|SoundSee\\SoundSee.csproj|solutionrelative:soundsee\\controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{D89C1F26-79E8-4B50-B876-8002AD60FB0E}|SoundSee\\SoundSee.csproj|C:\\MyPrograms\\SoundSee\\soundsee\\models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -30,20 +30,46 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "AddUser.cshtml",
               "DocumentMoniker": "C:\\MyPrograms\\SoundSee\\SoundSee\\Views\\User\\AddUser.cshtml",
               "RelativeDocumentMoniker": "SoundSee\\Views\\User\\AddUser.cshtml",
               "ToolTip": "C:\\MyPrograms\\SoundSee\\SoundSee\\Views\\User\\AddUser.cshtml",
               "RelativeToolTip": "SoundSee\\Views\\User\\AddUser.cshtml",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABQAAAAAAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAcAAABpAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2024-08-03T21:34:17.236Z",
               "IsPinned": true,
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "_SignInLayout.cshtml",
+              "DocumentMoniker": "C:\\MyPrograms\\SoundSee\\SoundSee\\Views\\Shared\\_SignInLayout.cshtml",
+              "RelativeDocumentMoniker": "SoundSee\\Views\\Shared\\_SignInLayout.cshtml",
+              "ToolTip": "C:\\MyPrograms\\SoundSee\\SoundSee\\Views\\Shared\\_SignInLayout.cshtml",
+              "RelativeToolTip": "SoundSee\\Views\\Shared\\_SignInLayout.cshtml",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA4AAAAiAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-08-09T03:58:11.546Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Welcome.cshtml",
+              "DocumentMoniker": "C:\\MyPrograms\\SoundSee\\SoundSee\\Views\\User\\Welcome.cshtml",
+              "RelativeDocumentMoniker": "SoundSee\\Views\\User\\Welcome.cshtml",
+              "ToolTip": "C:\\MyPrograms\\SoundSee\\SoundSee\\Views\\User\\Welcome.cshtml",
+              "RelativeToolTip": "SoundSee\\Views\\User\\Welcome.cshtml",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAgAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-08-09T03:56:51.893Z",
               "EditorCaption": ""
             },
             {
@@ -65,32 +91,6 @@
             {
               "$type": "Bookmark",
               "Name": "ST:130:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "AddEdit.cshtml",
-              "DocumentMoniker": "C:\\MyPrograms\\SoundSee\\SoundSee\\Views\\Shared\\AddEdit.cshtml",
-              "RelativeDocumentMoniker": "SoundSee\\Views\\Shared\\AddEdit.cshtml",
-              "ToolTip": "C:\\MyPrograms\\SoundSee\\SoundSee\\Views\\Shared\\AddEdit.cshtml",
-              "RelativeToolTip": "SoundSee\\Views\\Shared\\AddEdit.cshtml",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABcAAAAGAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-08-04T22:48:59.133Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "UserAccountConfirm.cshtml",
-              "DocumentMoniker": "C:\\MyPrograms\\SoundSee\\SoundSee\\Views\\User\\UserAccountConfirm.cshtml",
-              "RelativeDocumentMoniker": "SoundSee\\Views\\User\\UserAccountConfirm.cshtml",
-              "ToolTip": "C:\\MyPrograms\\SoundSee\\SoundSee\\Views\\User\\UserAccountConfirm.cshtml",
-              "RelativeToolTip": "SoundSee\\Views\\User\\UserAccountConfirm.cshtml",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAAoAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-08-03T19:49:03.726Z",
-              "EditorCaption": ""
             }
           ]
         }
@@ -102,9 +102,9 @@
       "FloatingWindowState": {
         "Id": "9b258e74-c20c-45ed-bb48-ea3640c62d87",
         "Display": 1,
-        "X": 732,
+        "X": 434,
         "Y": 0,
-        "Width": 1193,
+        "Width": 1192,
         "Height": 625,
         "WindowState": 2
       },
@@ -115,13 +115,13 @@
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 3,
               "Title": "UserController.cs",
               "DocumentMoniker": "C:\\MyPrograms\\SoundSee\\SoundSee\\Controllers\\UserController.cs",
               "RelativeDocumentMoniker": "SoundSee\\Controllers\\UserController.cs",
               "ToolTip": "C:\\MyPrograms\\SoundSee\\SoundSee\\Controllers\\UserController.cs",
               "RelativeToolTip": "SoundSee\\Controllers\\UserController.cs",
-              "ViewState": "AQIAAAwAAAAAAAAAAAAAABsAAAA2AAAA",
+              "ViewState": "AQIAADIAAAAAAAAAAAAYwBkAAAArAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-08-03T18:53:09.707Z",
               "EditorCaption": ""
@@ -134,7 +134,7 @@
               "RelativeDocumentMoniker": "SoundSee\\Models\\User.cs",
               "ToolTip": "C:\\MyPrograms\\SoundSee\\SoundSee\\Models\\User.cs",
               "RelativeToolTip": "SoundSee\\Models\\User.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABMAAAAVAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABoAAAAxAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-08-03T19:51:19.721Z",
               "EditorCaption": ""
