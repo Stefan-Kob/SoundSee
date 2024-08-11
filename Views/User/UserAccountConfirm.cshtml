@@ -1,0 +1,42 @@
+﻿@model SoundSee.ViewModels.UserViewModel
+@{
+    ViewData["Title"] = "Confirm your Details";
+}
+
+<h2>Confirm your Account details</h2>
+
+<div>
+    <p class="form-label mt-4"><b>Email:</b> @Model.User.Email</p>
+    <p class="form-label mt-2"><b>Username:</b> @Model.User.Username</p>
+    <p class="form-label mt-2"><b>Profile Photo</b>
+        <img src="@Url.Action("DisplayProfilePhoto", "User")" alt="Profile Photo" width="150em" height="150em" />
+    </p>
+</div>
+
+@using (Html.BeginForm("EditUser", "User", FormMethod.Post))
+{
+    @Html.HiddenFor(model => model.User.Email)
+    @Html.HiddenFor(model => model.User.Username)
+    @Html.HiddenFor(model => model.User.Password)
+    @Html.HiddenFor(model => model.User.SignUpForNewsletters)
+
+    <br />
+    <section class="row" aria-labelledby="aspnetTitle">
+        <div class="row row-cols-2">
+            <section class="col-md-2">
+                <button type="submit" class="btn btn-primary btn-mds">Edit</button>
+            </section>
+        </div>
+    </section>
+}
+<br />
+@using (Html.BeginForm("ContinUserToWelcome", "User", FormMethod.Post))
+{
+    <section class="row" aria-labelledby="aspnetTitle">
+        <div class="row row-cols-2">
+            <section class="col-md-2">
+                <button type="submit" class="btn btn-primary btn-mds">Continue</button>
+            </section>
+        </div>
+    </section>
+}

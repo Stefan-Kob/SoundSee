@@ -1,0 +1,38 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - SoundSee</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrapQ.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/SoundSee.styles.css" asp-append-version="true" />
+</head>
+<body>
+
+    <div class="container body-content">
+        @RenderBody()
+
+        <footer class="mt-2 footer fixed-bottom">
+            <nav class="navbar navbar-light mt-0" style="background-color: #ffffff65; padding-left: 2em; padding-right: 2em;">
+                <a class="navbar-brand" href="#">
+                    <img src="~/Media/house.svg" width="30" height="30" alt="">
+                </a>
+                <a class="navbar-brand" href="#">
+                    <img src="~/Media/search.svg" width="30" height="30" alt="">
+                </a>
+                <a class="navbar-brand" href="#">
+                    <img src="~/Media/plus.svg" width="30" height="30" alt="">
+                </a>
+                <a class="navbar-brand" href="@Url.Action("ViewAccount", "User")">
+                    <img src="~/Media/person.svg" width="30" height="30" alt="">
+                </a>
+            </nav>
+        </footer>
+    </div>
+
+    <script src="~/bundles/jquery.js" asp-append-version="true"></script>
+    <script src="~/bundles/bootstrap.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

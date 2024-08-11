@@ -1,0 +1,18 @@
+﻿@model SoundSee.ViewModels.UserViewModel
+@{
+    ViewData["Title"] = "Add User";
+}
+
+<h1 class="col-md-6">Who are you? Please tell us!</h1>
+@using (Html.BeginForm("UserAccountConfirm", "User", FormMethod.Post, new {enctype="multipart/form-data"}))
+{
+        <fieldset>
+            <p><i>Please fill out the necessary fields</i></p>
+
+            <partial name="~/Views/Shared/AddEdit.cshtml" model="Model" />
+
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </fieldset>
+
+        <small id="emailHelp" class="form-text text-muted">We do not share any of this data.</small>
+}

@@ -1,0 +1,20 @@
+﻿@model SoundSee.ViewModels.UserViewModel
+@{
+    ViewData["Title"] = "Contact Us";
+}
+<main aria-labelledby="title">
+    <h2 id="title">@ViewBag.Title</h2>
+    <h4>@ViewBag.Message</h4>
+
+    <address>
+        123 Dont Care Ave.<br />
+        Ontatio, Canada.<br />
+        <abbr title="Phone">P:</abbr>
+        +1 123 456 7890
+    </address>
+
+    <address>
+        <strong>Support:</strong>   <a href="mailto:Support@example.com">stefan@notmyemail.com</a><br />
+        <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">stefanbutdifferent@emailer.com</a>
+    </address>
+</main>

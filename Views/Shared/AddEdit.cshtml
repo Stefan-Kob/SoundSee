@@ -1,0 +1,52 @@
+﻿@model SoundSee.ViewModels.UserViewModel
+@{
+    string emailVal = "";
+    string usernameVal = "";
+    string passwordVal = "";
+
+    if (Model.User.Email != null)
+    {
+        emailVal = Model.User.Email;
+        usernameVal = Model.User.Username;
+        passwordVal = Model.User.Password;
+
+    }
+}
+
+<div>
+    <label for="Email" class="form-label mt-3">Email address</label>
+    <input type="Email" id="Email" name="Email" class="form-control" aria-describedby="emailHelp" placeholder="johndoe@email.com" value="@emailVal">
+</div>
+
+<div>
+    *
+    <label class="col-form-label mt-2" for="Username">Username</label>
+    <input type="text" id="Username" name="Username" class="form-control" placeholder="John Doe's Super Account" id="Username" value="@usernameVal">
+</div>
+
+<div>
+    <label for="Password" class="form-label mt-2">Password</label>
+    <input type="password" id="Password" name="Password" class="form-control" placeholder="Password" autocomplete="off" value="@passwordVal">
+</div>
+
+<div class="form-check form-switch mt-3">
+    <input class="form-check-input" type="checkbox" id="SignUpForNewsletters" name="SignUpForNewsletters" id="SignUpForNewsletters">
+    <label class="form-check-label" for="SignUpForNewsletters">Sign up for marketing newsletters, and any great offers we have!</label>
+</div>
+
+<div class="mt-2">
+    <label for="Image" class="form-label mt-2">Profile Photo image</label>
+    <input class="form-control" type="file" name="Image" />
+</div>
+
+@if (Model.User.Password != null)
+{
+    <div class="mt-2">
+        <p>Current profile photo:</p>
+        <img src="@Url.Action("DisplayProfilePhoto", "User")" alt="Profile Photo" width="150em" height="150em" />
+    </div>
+    <br />
+} else
+{
+    <br />
+}

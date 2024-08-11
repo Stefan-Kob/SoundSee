@@ -1,0 +1,26 @@
+﻿@model SoundSee.ViewModels.UserViewModel
+@{
+    ViewData["Title"] = "Sign In";
+}
+
+<h1 class="col-md-6">Sign In to SoundSee</h1>
+@using (Html.BeginForm("UserAccountConfirm", "User", FormMethod.Post))
+{
+    <fieldset>
+        <p><i>Please enter your account details:</i></p>
+
+        <div>
+            <label for="Email" class="form-label mt-3">Email address</label>
+            <input type="Email" id="Email" name="Email" class="form-control" aria-describedby="emailHelp" placeholder="johndoe@email.com" value="">
+        </div>
+        <div>
+            <label for="Password" class="form-label mt-2">Password</label>
+            <input type="password" id="Password" name="Password" class="form-control" placeholder="Password" autocomplete="off" value="">
+        </div>
+
+        <br />
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </fieldset>
+
+    <small id="emailHelp" class="form-text text-muted">We do not share any of this data.</small>
+}
