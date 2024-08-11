@@ -28,3 +28,4 @@ C:\MyPrograms\SoundSee\SoundSee\obj\Debug\net8.0\refint\SoundSee.dll
 C:\MyPrograms\SoundSee\SoundSee\obj\Debug\net8.0\SoundSee.pdb
 C:\MyPrograms\SoundSee\SoundSee\obj\Debug\net8.0\SoundSee.genruntimeconfig.cache
 C:\MyPrograms\SoundSee\SoundSee\obj\Debug\net8.0\ref\SoundSee.dll
+C:\MyPrograms\SoundSee\SoundSee\obj\Debug\net8.0\SoundSee.sourcelink.json
