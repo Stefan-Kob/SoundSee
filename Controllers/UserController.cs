@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using SoundSee.Database;
 using SoundSee.Models;
 using SoundSee.ViewModels;
 using System.IO;
@@ -10,11 +12,16 @@ namespace SoundSee.Controllers
     public class UserController : Controller
     {
         private readonly IWebHostEnvironment _hostingEnvironment;
+        private readonly SoundSeeDbContext _dbContext;
 
-        public UserController(IWebHostEnvironment hostingEnvironment)
+        // Initialization
+        public UserController(IWebHostEnvironment hostingEnvironment, SoundSeeDbContext dbContext)
         {
             _hostingEnvironment = hostingEnvironment;
+            _dbContext = dbContext;
+
         }
+
 
         public IActionResult SendToSignIn()
         {
@@ -35,9 +42,10 @@ namespace SoundSee.Controllers
 
         [HttpPost]
         [Route("User/UserAccountConfirm")]
-        public IActionResult UserAccountConfirm(UserViewModel model, IFormFile file)
+        public async Task<IActionResult> UserAccountConfirm(UserViewModel model, IFormFile file)
         {
             User user = new User();
+            int MaxId = 0;
 
             if (file != null && file.Length > 0)
             {
@@ -52,10 +60,24 @@ namespace SoundSee.Controllers
             user.Email = Request.Form["Email"];
             user.SignUpForNewsletters = Request.Form["SignUpForNewsletters"];
 
+            foreach (var dbUser in _dbContext.Users)
+            {
+                MaxId = dbUser.Id;
+            }
+
+
+            user.Id = 1 + MaxId;
             model.User = user;
+
+
             HttpContext.Session.Set("UserPhoto", model.User.Profile_Photo);
 
+            _dbContext.Add(user);
+            await _dbContext.SaveChangesAsync();
+
+
             return View("UserAccountConfirm", model);
+
         }
 
         [HttpPost]

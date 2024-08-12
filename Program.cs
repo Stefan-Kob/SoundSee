@@ -1,3 +1,6 @@
+using Microsoft.EntityFrameworkCore;
+using SoundSee.Database;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -11,6 +14,10 @@ builder.Services.AddSession(options =>
     options.Cookie.HttpOnly = true;
     options.Cookie.IsEssential = true;
 });
+
+// Configure the DbContext
+builder.Services.AddDbContext<SoundSeeDbContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("ServerConnection")));
 
 var app = builder.Build();
 
