@@ -53,7 +53,7 @@ namespace SoundSee.Controllers
             user.SignUpForNewsletters = Request.Form["SignUpForNewsletters"];
 
             model.User = user;
-            HttpContext.Session.SetString("User", user.Username);
+            HttpContext.Session.Set("UserPhoto", model.User.Profile_Photo);
 
             return View("UserAccountConfirm", model);
         }
@@ -82,7 +82,7 @@ namespace SoundSee.Controllers
 
         public IActionResult DisplayProfilePhoto()
         {
-            var user = new User { Username = HttpContext.Session.GetString("User") };
+            var user = new User { Profile_Photo = HttpContext.Session.Get("UserPhoto") };
 
             if (user.Profile_Photo != null)
             {

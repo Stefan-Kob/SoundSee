@@ -5,12 +5,36 @@
       "PackagePath": "staticwebassets\\SoundSee.bundle.scp.css"
     },
     {
-      "Id": "C:\\MyPrograms\\SoundSee\\SoundSee\\wwwroot\\css\\site.css",
-      "PackagePath": "staticwebassets\\css\\site.css"
+      "Id": "C:\\MyPrograms\\SoundSee\\SoundSee\\wwwroot\\Media\\SoundSeeLogo.png",
+      "PackagePath": "staticwebassets\\Media\\SoundSeeLogo.png"
     },
     {
-      "Id": "C:\\MyPrograms\\SoundSee\\SoundSee\\wwwroot\\favicon.ico",
-      "PackagePath": "staticwebassets\\favicon.ico"
+      "Id": "C:\\MyPrograms\\SoundSee\\SoundSee\\wwwroot\\Media\\SoundSeeLogo.svg",
+      "PackagePath": "staticwebassets\\Media\\SoundSeeLogo.svg"
+    },
+    {
+      "Id": "C:\\MyPrograms\\SoundSee\\SoundSee\\wwwroot\\Media\\defaultProfile_Photo.jpg",
+      "PackagePath": "staticwebassets\\Media\\defaultProfile_Photo.jpg"
+    },
+    {
+      "Id": "C:\\MyPrograms\\SoundSee\\SoundSee\\wwwroot\\Media\\house.svg",
+      "PackagePath": "staticwebassets\\Media\\house.svg"
+    },
+    {
+      "Id": "C:\\MyPrograms\\SoundSee\\SoundSee\\wwwroot\\Media\\person.svg",
+      "PackagePath": "staticwebassets\\Media\\person.svg"
+    },
+    {
+      "Id": "C:\\MyPrograms\\SoundSee\\SoundSee\\wwwroot\\Media\\plus.svg",
+      "PackagePath": "staticwebassets\\Media\\plus.svg"
+    },
+    {
+      "Id": "C:\\MyPrograms\\SoundSee\\SoundSee\\wwwroot\\Media\\search.svg",
+      "PackagePath": "staticwebassets\\Media\\search.svg"
+    },
+    {
+      "Id": "C:\\MyPrograms\\SoundSee\\SoundSee\\wwwroot\\css\\site.css",
+      "PackagePath": "staticwebassets\\css\\site.css"
     },
     {
       "Id": "C:\\MyPrograms\\SoundSee\\SoundSee\\wwwroot\\js\\site.js",

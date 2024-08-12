@@ -29,3 +29,7 @@ C:\MyPrograms\SoundSee\SoundSee\obj\Debug\net8.0\SoundSee.pdb
 C:\MyPrograms\SoundSee\SoundSee\obj\Debug\net8.0\SoundSee.genruntimeconfig.cache
 C:\MyPrograms\SoundSee\SoundSee\obj\Debug\net8.0\ref\SoundSee.dll
 C:\MyPrograms\SoundSee\SoundSee\obj\Debug\net8.0\SoundSee.sourcelink.json
+C:\MyPrograms\SoundSee\SoundSee\bin\Debug\net8.0\SoundSee.Models.dll
+C:\MyPrograms\SoundSee\SoundSee\bin\Debug\net8.0\SoundSee.Models.pdb
+C:\MyPrograms\SoundSee\SoundSee\obj\Debug\net8.0\SoundSee.csproj.AssemblyReference.cache
+C:\MyPrograms\SoundSee\SoundSee\obj\Debug\net8.0\SoundSee.csproj.Up2Date
