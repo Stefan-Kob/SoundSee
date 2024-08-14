@@ -4,6 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - SoundSee</title>
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrapQ.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/SoundSee.styles.css" asp-append-version="true" />
@@ -31,6 +32,9 @@
         </footer>
     </div>
 
+    <script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/bundles/jquery.js" asp-append-version="true"></script>
     <script src="~/bundles/bootstrap.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)

@@ -8,7 +8,8 @@
 <div>
     <p class="form-label mt-4"><b>Email:</b> @Model.User.Email</p>
     <p class="form-label mt-2"><b>Username:</b> @Model.User.Username</p>
-    <p class="form-label mt-2"><b>Profile Photo</b>
+    <p class="form-label mt-2"><b>Profile Photo:</b>
+        <br />
         <img src="@Url.Action("DisplayProfilePhoto", "User")" alt="Profile Photo" width="150em" height="150em" />
     </p>
 </div>

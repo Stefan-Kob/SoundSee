@@ -6,7 +6,7 @@
 <h1 class="col-md-6">Fix the Deats!</h1>
 @using (Html.BeginForm("UserAccountConfirm", "User", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
-
+    @Html.AntiForgeryToken()
         <fieldset>
             <p><i>Please fill out the necessary fields</i></p>
 
