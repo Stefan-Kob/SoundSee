@@ -40,12 +40,15 @@ namespace SoundSee.Controllers
             return View("AddUser", viewmodel);
         }
 
+        // Method for adding or editing a user. Confirms the detials and then sends the use to confirm their details
         [HttpPost]
         [Route("User/UserAccountConfirm")]
         public async Task<IActionResult> UserAccountConfirm(UserViewModel model, IFormFile file)
         {
             User user = new User();
-            int MaxId = 0;
+            user.Username = Request.Form["Username"];
+            user.Password = Request.Form["Password"];
+            user.Email = Request.Form["Email"];
 
             if (file != null && file.Length > 0)
             {
@@ -54,22 +57,43 @@ namespace SoundSee.Controllers
                     user.Profile_Photo = binaryReader.ReadBytes((int)file.Length);
                 }
             }
-
-            user.Username = Request.Form["Username"];
-            user.Password = Request.Form["Password"];
-            user.Email = Request.Form["Email"];
-            user.SignUpForNewsletters = Request.Form["SignUpForNewsletters"];
-
-            foreach (var dbUser in _dbContext.Users)
+            else
             {
-                MaxId = dbUser.Id;
+                string path = Path.Combine(_hostingEnvironment.WebRootPath, "Media", "defaultProfile_Photo.jpg");
+                byte[] default_Photo_Byte = System.IO.File.ReadAllBytes(path);
+
+                user.Profile_Photo = default_Photo_Byte;
             }
 
+            if (Request.Form["SignUpForNewsletters"] != "on")
+            {
+                user.SignUpForNewsletters = "F";
+            }
+            else
+            {
+                user.SignUpForNewsletters = "T";
+            }
 
-            user.Id = 1 + MaxId;
             model.User = user;
 
+            // Validtation
+            ModelState.ClearValidationState(nameof(model.User));
 
+            foreach (var dBUser in _dbContext.Users)
+            {
+                if (model.User.Email != null && model.User.Email == dBUser.Email)
+                {
+                    ModelState.AddModelError("User.Email",
+                                             "Email already in use, please use a different email");
+                }
+            }
+
+            if (!TryValidateModel(model.User, nameof(model.User)))
+            {
+                return View("AddUser", model);
+            }
+
+            // User data is safe after this point
             HttpContext.Session.Set("UserPhoto", model.User.Profile_Photo);
 
             _dbContext.Add(user);
@@ -119,16 +143,5 @@ namespace SoundSee.Controllers
             }
         }
 
-
-
-
-
-
-
-
-
-
-        // THIS IS ONLY TEMP AND FOR DEV PURPOSES ONLY =====================*=====================*=====================
-        public static Array UserArray = new Array[100];
     }
 }

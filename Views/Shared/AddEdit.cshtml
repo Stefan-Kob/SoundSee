@@ -1,8 +1,8 @@
 ﻿@model SoundSee.ViewModels.UserViewModel
 @{
-    string emailVal = "";
-    string usernameVal = "";
-    string passwordVal = "";
+    string emailVal = string.Empty;
+    string usernameVal = string.Empty;
+    string passwordVal = string.Empty;
 
     if (Model.User.Email != null)
     {
@@ -12,22 +12,27 @@
 
     }
 }
-
 <div>
+    *
     <label for="Email" class="form-label mt-3">Email address</label>
-    <input type="Email" id="Email" name="Email" class="form-control" aria-describedby="emailHelp" placeholder="johndoe@email.com" value="@emailVal">
+    <input asp-for="User.Email" type="Email" id="Email" name="Email" class="form-control" aria-describedby="emailHelp" placeholder="johndoe@email.com" value="@emailVal">
+    <span asp-validation-for="User.Email" class="text-danger"></span>
 </div>
 
 <div>
     *
     <label class="col-form-label mt-2" for="Username">Username</label>
-    <input type="text" id="Username" name="Username" class="form-control" placeholder="John Doe's Super Account" id="Username" value="@usernameVal">
+    <input asp-for="User.Username" type="text" id="Username" name="Username" class="form-control" placeholder="John Doe's Super Account" value="@usernameVal">
+    <span asp-validation-for="User.Username" class="text-danger"></span>
 </div>
 
 <div>
+    *
     <label for="Password" class="form-label mt-2">Password</label>
-    <input type="password" id="Password" name="Password" class="form-control" placeholder="Password" autocomplete="off" value="@passwordVal">
+    <input asp-for="User.Password" type="password" id="Password" name="Password" class="form-control" placeholder="Password" autocomplete="off" value="@passwordVal">
+    <span asp-validation-for="User.Password" class="text-danger"></span>
 </div>
+
 
 <div class="form-check form-switch mt-3">
     <input class="form-check-input" type="checkbox" id="SignUpForNewsletters" name="SignUpForNewsletters" id="SignUpForNewsletters">

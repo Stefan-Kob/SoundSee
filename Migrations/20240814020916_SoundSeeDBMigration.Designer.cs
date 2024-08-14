@@ -11,15 +11,15 @@ using SoundSee.Database;
 namespace SoundSee.Migrations
 {
     [DbContext(typeof(SoundSeeDbContext))]
-    [Migration("20240812004409_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20240814020916_SoundSeeDBMigration")]
+    partial class SoundSeeDBMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "8.0.7")
+                .HasAnnotation("ProductVersion", "8.0.8")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
@@ -67,7 +67,8 @@ namespace SoundSee.Migrations
 
                     b.Property<string>("Username")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(25)
+                        .HasColumnType("nvarchar(25)");
 
                     b.HasKey("Id");
 

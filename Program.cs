@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Mvc.ModelBinding.Metadata;
 using Microsoft.EntityFrameworkCore;
 using SoundSee.Database;
 
@@ -19,6 +20,24 @@ builder.Services.AddSession(options =>
 builder.Services.AddDbContext<SoundSeeDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("ServerConnection")));
 
+// Validation
+builder.Services.AddControllers(options =>
+{
+    options.ModelMetadataDetailsProviders.Add(new SystemTextJsonValidationMetadataProvider());
+});
+
+builder.Services.AddControllers(options => options.SuppressImplicitRequiredAttributeForNonNullableReferenceTypes = true);
+
+builder.Services.AddRazorPages()
+    .AddMvcOptions(options =>
+    {
+        options.MaxModelValidationErrors = 50;
+        options.ModelBindingMessageProvider.SetValueMustNotBeNullAccessor(
+            _ => "The field is required.");
+    });
+
+
+// App build ========================*========================*========================*========================
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
