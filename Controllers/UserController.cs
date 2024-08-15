@@ -45,7 +45,9 @@ namespace SoundSee.Controllers
         [Route("User/UserAccountConfirm")]
         public async Task<IActionResult> UserAccountConfirm(UserViewModel model, IFormFile file)
         {
+            saltAndShaker saltAndShaker = new saltAndShaker();
             User user = new User();
+
             user.Username = Request.Form["Username"];
             user.Password = Request.Form["Password"];
             user.Email = Request.Form["Email"];
@@ -76,7 +78,7 @@ namespace SoundSee.Controllers
 
             model.User = user;
 
-            // Validtation
+            // Validtation (Clear > Validate > set/rerturn)
             ModelState.ClearValidationState(nameof(model.User));
 
             foreach (var dBUser in _dbContext.Users)
@@ -92,6 +94,11 @@ namespace SoundSee.Controllers
             {
                 return View("AddUser", model);
             }
+
+            // Salting password
+            string saltPassword = saltAndShaker.HashPasword(user.Password, out var salt);
+            user.salt = salt;
+            model.User.Password = saltPassword;
 
             // User data is safe after this point
             HttpContext.Session.Set("UserPhoto", model.User.Profile_Photo);
