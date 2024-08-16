@@ -22,10 +22,53 @@ namespace SoundSee.Controllers
 
         }
 
-
         public IActionResult SendToSignIn()
         {
             return View("UserSignIn");
+        }
+
+        // From sign in page, validate proper sign in, then go into the app
+        [HttpPost]
+        public IActionResult SignIn(UserViewModel model)
+        {
+            User user = new User();
+            User tempUser = new User();
+            saltAndShaker saltAndShaker = new saltAndShaker();
+
+            user.Email = Request.Form["Email"];
+            user.Password = Request.Form["Password"];
+            // Validtation (Clear > Validate > set/rerturn)
+            ModelState.ClearValidationState(nameof(model.User));
+
+            foreach (var dBUser in _dbContext.Users)
+            {
+                bool correctPassword = true;
+
+                if (dBUser.Email == user.Email)
+                {
+                    tempUser.Password = dBUser.Password;
+                    tempUser.salt = dBUser.salt;
+                    user.Email = dBUser.Email;
+                    user.Username = dBUser.Username;
+
+                    correctPassword = saltAndShaker.VerifyPassword(user.Password, tempUser.Password, tempUser.salt);
+                    if (correctPassword == false)
+                    {
+                        ModelState.AddModelError("User.Password", "Wrong password, please try again.");
+                    }
+                    break;
+                }
+            }
+
+            model.User = user;
+            if (!TryValidateModel(model.User, nameof(model.User)))
+            {
+                return View("UserSignIn", model);
+            }
+
+            model.User.Password = string.Empty;
+
+            return View("Welcome");
         }
 
         [HttpGet]
@@ -46,9 +89,14 @@ namespace SoundSee.Controllers
         public async Task<IActionResult> UserAccountConfirm(UserViewModel model, IFormFile file)
         {
             User user = new User();
+            saltAndShaker saltAndShaker = new saltAndShaker();
+
             user.Username = Request.Form["Username"];
             user.Password = Request.Form["Password"];
             user.Email = Request.Form["Email"];
+            user.Username = user.Username.Trim();
+            user.Password = user.Password.Trim();
+
 
             if (file != null && file.Length > 0)
             {
@@ -76,15 +124,14 @@ namespace SoundSee.Controllers
 
             model.User = user;
 
-            // Validtation
+            // Validtation (Clear > Validate > set/rerturn)
             ModelState.ClearValidationState(nameof(model.User));
 
             foreach (var dBUser in _dbContext.Users)
             {
                 if (model.User.Email != null && model.User.Email == dBUser.Email)
                 {
-                    ModelState.AddModelError("User.Email",
-                                             "Email already in use, please use a different email");
+                    ModelState.AddModelError("User.Email", "Email already in use, please use a different email");
                 }
             }
 
@@ -92,6 +139,11 @@ namespace SoundSee.Controllers
             {
                 return View("AddUser", model);
             }
+
+            // Salting password
+            string saltPassword = saltAndShaker.HashPasword(user.Password, out var salt);
+            user.salt = salt;
+            model.User.Password = saltPassword;
 
             // User data is safe after this point
             HttpContext.Session.Set("UserPhoto", model.User.Profile_Photo);

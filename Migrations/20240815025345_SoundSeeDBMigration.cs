@@ -31,9 +31,10 @@ namespace SoundSee.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Username = table.Column<string>(type: "nvarchar(25)", maxLength: 25, nullable: false),
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Password = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Password = table.Column<string>(type: "nvarchar(32)", maxLength: 32, nullable: false),
                     SignUpForNewsletters = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Profile_Photo = table.Column<byte[]>(type: "varbinary(max)", nullable: false)
+                    Profile_Photo = table.Column<byte[]>(type: "varbinary(max)", nullable: false),
+                    salt = table.Column<byte[]>(type: "varbinary(max)", nullable: false)
                 },
                 constraints: table =>
                 {

@@ -11,6 +11,8 @@
 	 - [ ] Likes/dislikes
 	 - [ ] Stories
  - [ ] **App customization**
+ - [x] **Sign in Page**
+ - [x] **Create Account Page**
  - [ ] **Home Page**
 	 - [ ] Profile page
 	 - [ ] Notifications page
