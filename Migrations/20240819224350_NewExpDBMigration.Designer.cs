@@ -11,8 +11,8 @@ using SoundSee.Database;
 namespace SoundSee.Migrations
 {
     [DbContext(typeof(SoundSeeDbContext))]
-    [Migration("20240815025345_SoundSeeDBMigration")]
-    partial class SoundSeeDBMigration
+    [Migration("20240819224350_NewExpDBMigration")]
+    partial class NewExpDBMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
