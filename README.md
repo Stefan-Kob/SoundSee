@@ -10,6 +10,7 @@
  - [ ] **Posts**
 	 - [ ] Likes/dislikes
 	 - [ ] Stories
+- [x] Password encryption
  - [ ] **App customization**
  - [x] **Sign in Page**
  - [x] **Create Account Page**
