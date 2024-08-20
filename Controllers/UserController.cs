@@ -24,6 +24,11 @@ namespace SoundSee.Controllers
 
         public IActionResult SendToSignIn()
         {
+            if (CheckIfSignedIn())
+            {
+                return View("Welcome");
+            }
+
             return View("UserSignIn");
         }
 
@@ -50,6 +55,7 @@ namespace SoundSee.Controllers
                     tempUser.salt = dBUser.salt;
                     user.Email = dBUser.Email;
                     user.Username = dBUser.Username;
+                    user.Profile_Photo = dBUser.Profile_Photo;
 
                     correctPassword = saltAndShaker.VerifyPassword(user.Password, tempUser.Password, tempUser.salt);
                     if (correctPassword == false)
@@ -67,18 +73,26 @@ namespace SoundSee.Controllers
             }
 
             model.User.Password = string.Empty;
+            HttpContext.Session.Set("UserPhoto", model.User.Profile_Photo);
+            HttpContext.Session.SetString("User", model.User.Username);
+            HttpContext.Session.SetString("UserEmail", model.User.Email);
 
             return View("Welcome");
         }
 
+        // Send user to create an account
         [HttpGet]
         [Route("User/AddUser")]
         public IActionResult AddUser()
         {
+            if (CheckIfSignedIn())
+            {
+                return View("Welcome");
+            }
+
             var user = new User();
             var accounts = new List<Accounts>();
             var viewmodel = new UserViewModel { User = user, Accounts = accounts };
-            HttpContext.Session.SetString("User", string.Empty);
 
             return View("AddUser", viewmodel);
         }
@@ -127,13 +141,15 @@ namespace SoundSee.Controllers
             // Validtation (Clear > Validate > set/rerturn)
             ModelState.ClearValidationState(nameof(model.User));
 
-            foreach (var dBUser in _dbContext.Users)
+            User dBUser = _dbContext.Users.FirstOrDefault(u => u.Email == model.User.Email);
+            if (dBUser != null && !string.IsNullOrEmpty(dBUser.Email))
             {
                 if (model.User.Email != null && model.User.Email == dBUser.Email)
                 {
                     ModelState.AddModelError("User.Email", "Email already in use, please use a different email");
                 }
             }
+
 
             if (!TryValidateModel(model.User, nameof(model.User)))
             {
@@ -147,6 +163,8 @@ namespace SoundSee.Controllers
 
             // User data is safe after this point
             HttpContext.Session.Set("UserPhoto", model.User.Profile_Photo);
+            HttpContext.Session.SetString("User", model.User.Username);
+            HttpContext.Session.SetString("UserEmail", model.User.Email);
 
             _dbContext.Add(user);
             await _dbContext.SaveChangesAsync();
@@ -161,6 +179,12 @@ namespace SoundSee.Controllers
         public IActionResult EditUser(UserViewModel model)
         {
             return View("EditUser", model);
+        }
+
+        public IActionResult Logout()
+        {
+            HttpContext.Session.Clear();
+            return RedirectToAction("Index", "Home");
         }
 
         [HttpPost]
@@ -194,6 +218,37 @@ namespace SoundSee.Controllers
                 return File(default_Photo_Byte, "image/jpeg");
             }
         }
+
+        public bool CheckIfSignedIn()
+        {
+            User user = new User();
+            UserViewModel model = new UserViewModel();
+
+            // Send user to sign in if already signed in
+            if (!string.IsNullOrEmpty(HttpContext.Session.GetString("User")))
+            {
+                foreach (var dBUser in _dbContext.Users)
+                {
+                    if (dBUser.Email == HttpContext.Session.GetString("UserEmail") && dBUser.Username == HttpContext.Session.GetString("User"))
+                    {
+                        user.Email = dBUser.Email;
+                        user.Username = dBUser.Username;
+                        model.User = user;
+                        HttpContext.Session.SetString("User", model.User.Username);
+                        HttpContext.Session.SetString("UserEmail", model.User.Email);
+
+                        return true;
+                    }
+                }
+            }
+
+            return false;
+        }
+
+
+
+
+
 
     }
 }

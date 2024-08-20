@@ -5,7 +5,7 @@
 namespace SoundSee.Migrations
 {
     /// <inheritdoc />
-    public partial class SoundSeeDBMigration : Migration
+    public partial class NewExpDBMigration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
