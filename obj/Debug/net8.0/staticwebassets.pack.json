@@ -17,6 +17,10 @@
       "PackagePath": "staticwebassets\\Media\\defaultProfile_Photo.jpg"
     },
     {
+      "Id": "C:\\MyPrograms\\SoundSee\\SoundSee\\wwwroot\\Media\\gear.svg",
+      "PackagePath": "staticwebassets\\Media\\gear.svg"
+    },
+    {
       "Id": "C:\\MyPrograms\\SoundSee\\SoundSee\\wwwroot\\Media\\house.svg",
       "PackagePath": "staticwebassets\\Media\\house.svg"
     },
@@ -27,6 +31,10 @@
     {
       "Id": "C:\\MyPrograms\\SoundSee\\SoundSee\\wwwroot\\Media\\plus.svg",
       "PackagePath": "staticwebassets\\Media\\plus.svg"
+    },
+    {
+      "Id": "C:\\MyPrograms\\SoundSee\\SoundSee\\wwwroot\\Media\\qr-code.svg",
+      "PackagePath": "staticwebassets\\Media\\qr-code.svg"
     },
     {
       "Id": "C:\\MyPrograms\\SoundSee\\SoundSee\\wwwroot\\Media\\search.svg",

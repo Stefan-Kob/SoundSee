@@ -1,13 +1,20 @@
 ﻿@model SoundSee.ViewModels.UserViewModel
 @{
     ViewData["Title"] = "View Account";
+    Layout = "~/Views/Shared/_SignInLayout.cshtml";
 }
 
-<div>
-    <nav class="navbar navbar-light" style="background-color: #ffffff65; padding-left: 2em; padding-right: 2em;">
-
+<div class="mb-2 fixed-top">
+    <nav class="navbar navbar-light mt-0" id="topSignedInBar">
+        <a class="navbar-brand" href="#">
+            <img src="~/Media/qr-code.svg" width="25" height="25" alt="">
+        </a>
+        <div>
+            <a class="navbar-brand" style="font-family:monospace; font-weight:bold;" href="#">@Context.Session.GetString("User")</a>
+            <img src="@Url.Action("DisplayProfilePhoto", "User")" width="30" height="30" alt="User profile photo">
+        </div>
+        <a class="navbar-brand" href="@Url.Action("ViewAccount", "User")">
+            <img src="~/Media/gear.svg" width="25" height="25" alt="">
+        </a>
     </nav>
-</div>
-<div style="background-color:#ffffffbd">
-    <p class="mb-0 pb-0">sasa</p>
 </div>

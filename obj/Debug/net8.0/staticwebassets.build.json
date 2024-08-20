@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "dkwrSV5jVPdf5whY0n18fS/OvrpoXX+cBGLTVoikOVI=",
+  "Hash": "9pSH4wWmW9EtbVuU+vQXvqD72C0HOzl6OwOMup/YmPI=",
   "Source": "SoundSee",
   "BasePath": "_content/SoundSee",
   "Mode": "Default",
@@ -1233,6 +1233,25 @@
       "OriginalItemSpec": "wwwroot\\Media\\defaultProfile_Photo.jpg"
     },
     {
+      "Identity": "C:\\MyPrograms\\SoundSee\\SoundSee\\wwwroot\\Media\\gear.svg",
+      "SourceId": "SoundSee",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\MyPrograms\\SoundSee\\SoundSee\\wwwroot\\",
+      "BasePath": "_content/SoundSee",
+      "RelativePath": "Media/gear.svg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Media\\gear.svg"
+    },
+    {
       "Identity": "C:\\MyPrograms\\SoundSee\\SoundSee\\wwwroot\\Media\\house.svg",
       "SourceId": "SoundSee",
       "SourceType": "Discovered",
@@ -1288,6 +1307,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\Media\\plus.svg"
+    },
+    {
+      "Identity": "C:\\MyPrograms\\SoundSee\\SoundSee\\wwwroot\\Media\\qr-code.svg",
+      "SourceId": "SoundSee",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\MyPrograms\\SoundSee\\SoundSee\\wwwroot\\",
+      "BasePath": "_content/SoundSee",
+      "RelativePath": "Media/qr-code.svg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Media\\qr-code.svg"
     },
     {
       "Identity": "C:\\MyPrograms\\SoundSee\\SoundSee\\wwwroot\\Media\\search.svg",
