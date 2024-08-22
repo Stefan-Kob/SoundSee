@@ -29,7 +29,7 @@ namespace SoundSee.Controllers
                 return View("Welcome");
             }
 
-            return View("UserSignIn");
+            return View("~/Views/SignIn/UserSignIn.cshtml");
         }
 
         // From sign in page, validate proper sign in, then go into the app
@@ -42,6 +42,7 @@ namespace SoundSee.Controllers
 
             user.Email = Request.Form["Email"];
             user.Password = Request.Form["Password"];
+
             // Validtation (Clear > Validate > set/rerturn)
             ModelState.ClearValidationState(nameof(model.User));
 
@@ -69,7 +70,7 @@ namespace SoundSee.Controllers
             model.User = user;
             if (!TryValidateModel(model.User, nameof(model.User)))
             {
-                return View("UserSignIn", model);
+                return View("~/Views/SignIn/UserSignIn.cshtml", model);
             }
 
             model.User.Password = string.Empty;
@@ -82,7 +83,7 @@ namespace SoundSee.Controllers
 
         // Send user to create an account
         [HttpGet]
-        [Route("User/AddUser")]
+        [Route("SignIn/AddUser")]
         public IActionResult AddUser()
         {
             if (CheckIfSignedIn())
@@ -94,12 +95,12 @@ namespace SoundSee.Controllers
             var accounts = new List<Accounts>();
             var viewmodel = new UserViewModel { User = user, Accounts = accounts };
 
-            return View("AddUser", viewmodel);
+            return View("~/Views/SignIn/AddUser.cshtml", viewmodel);
         }
 
         // Method for adding or editing a user. Confirms the detials and then sends the use to confirm their details
         [HttpPost]
-        [Route("User/UserAccountConfirm")]
+        [Route("SignIn/UserAccountConfirm")]
         public async Task<IActionResult> UserAccountConfirm(UserViewModel model, IFormFile file)
         {
             User user = new User();
@@ -153,7 +154,7 @@ namespace SoundSee.Controllers
 
             if (!TryValidateModel(model.User, nameof(model.User)))
             {
-                return View("AddUser", model);
+                return View("~/Views/SignIn/AddUser.cshtml", model);
             }
 
             // Salting password
@@ -170,12 +171,12 @@ namespace SoundSee.Controllers
             await _dbContext.SaveChangesAsync();
 
 
-            return View("UserAccountConfirm", model);
+            return View("~/Views/SignIn/UserAccountConfirm.cshtml", model);
 
         }
 
         [HttpPost]
-        [Route("User/EditUser")]
+        [Route("SignIn/EditUser")]
         public IActionResult EditUser(UserViewModel model)
         {
             return View("EditUser", model);
