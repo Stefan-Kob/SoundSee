@@ -5,6 +5,10 @@
       "PackagePath": "staticwebassets\\SoundSee.bundle.scp.css"
     },
     {
+      "Id": "C:\\MyPrograms\\SoundSee\\SoundSee\\wwwroot\\Media\\Add.svg",
+      "PackagePath": "staticwebassets\\Media\\Add.svg"
+    },
+    {
       "Id": "C:\\MyPrograms\\SoundSee\\SoundSee\\wwwroot\\Media\\SoundSeeLogo.png",
       "PackagePath": "staticwebassets\\Media\\SoundSeeLogo.png"
     },

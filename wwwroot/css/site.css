@@ -27,3 +27,11 @@ body {
     padding-bottom: 6px;
     padding-top: 6px;
 }
+.cardType1 {
+    width: 18rem;
+    right: 3px;
+}
+.cardType2 {
+    width: 25rem;
+    right: 3px;
+}

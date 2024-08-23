@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "9pSH4wWmW9EtbVuU+vQXvqD72C0HOzl6OwOMup/YmPI=",
+  "Hash": "Wr+ECsibsimbiIhZmN6FOVOreG0GNqKuf3eRtBH3AB0=",
   "Source": "SoundSee",
   "BasePath": "_content/SoundSee",
   "Mode": "Default",
@@ -1212,6 +1212,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\lib\\jquery-validation-unobtrusive\\LICENSE.txt"
+    },
+    {
+      "Identity": "C:\\MyPrograms\\SoundSee\\SoundSee\\wwwroot\\Media\\Add.svg",
+      "SourceId": "SoundSee",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\MyPrograms\\SoundSee\\SoundSee\\wwwroot\\",
+      "BasePath": "_content/SoundSee",
+      "RelativePath": "Media/Add.svg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Media\\Add.svg"
     },
     {
       "Identity": "C:\\MyPrograms\\SoundSee\\SoundSee\\wwwroot\\Media\\defaultProfile_Photo.jpg",
