@@ -1,91 +1,100 @@
-﻿@model SoundSee.ViewModels.PostViewModel
-@{
-    ViewData["Title"] = "Create Post";
-    Layout = "~/Views/Shared/_SignInLayout.cshtml";
-}
+﻿    @model SoundSee.ViewModels.PostViewModel
+    @{
+        ViewData["Title"] = "Create Post";
+        Layout = "~/Views/Shared/_SignInLayout.cshtml";
+    }
 
-<div class="mb-5 fixed-top">
-    <nav class="navbar navbar-light mt-0 text-center d-flex justify-content-center" id="topSignedInBar">
-        <a class="navbar-brand align-self-center" style="font-family:monospace; font-weight:bold;">Create a Post</a>
-    </nav>
-</div>
-
-<br />
-<br />
-@if (Model.StepCounter == 0)
-{
-    <!-- First step in adding a post -->
-    <div class="mt-5 d-flex justify-content-center">
-        <a href="@Url.Action("StartPost", "Post")" style="text-decoration:none;">
-            <div class="card cardType1 text-center">
-                <img class="card-img-top" src="~/Media/Add.svg" alt="Card image cap">
-                <div class="card-body">
-                    <p class="card-text">Create a Post!</p>
-                </div>
-            </div>
-        </a>
+    <div class="mb-5 fixed-top">
+        <nav class="navbar navbar-light mt-0 text-center d-flex justify-content-center" id="topSignedInBar">
+            <a class="navbar-brand align-self-center" style="font-family:monospace; font-weight:bold;">Create a Post</a>
+        </nav>
     </div>
-}
 
-<!-- Seccond step in adding a post -->
-@if (Model.StepCounter == 1)
-{
+    <br />
+    <br />
+    @if (Model.StepCounter == 0)
+    {
+        <!-- First step in adding a post -->
+        <div class="mt-5 d-flex justify-content-center">
+            <a href="@Url.Action("StartPost", "Post")" style="text-decoration:none;">
+                <div class="card cardType1 text-center">
+                    <img class="card-img-top" src="~/Media/Add.svg" alt="Card image cap">
+                    <div class="card-body">
+                        <p class="card-text">Create a Post!</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+    }
+
+    <!-- Seccond step in adding a post -->
+    @if (Model.StepCounter == 1)
+    {
+        <div id="postDivPart2" class="mt-5 d-flex justify-content-center">
+            <a style="text-decoration:none;">
+                <div class="card cardType2">
+                    <a href="@Url.Action("GoBackInPost", "Post")" class="btn btn-secondary">&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;- Back &lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;-</a>
+
+                    <div class="card-body card-text" style="padding:10px;">
+                        @using (Html.BeginForm("ReviewPost", "Post", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                        {
+                            @Html.AntiForgeryToken()
+                            <fieldset>
+                                <span asp-validation-for="Post.Title" class="text-danger"></span>
+                                <div>
+                                    <label for="Title" class="form-label mt-0">Title</label>
+                                    <input asp-for="Post.Title" type="text" id="Title" name="Title" class="form-control" placeholder="Walking In the Park" value="">
+                                </div>
+
+                                <div>
+                                    <label class="col-form-label mt-2" for="Description">Description</label>
+                                    <textarea asp-for="Post.Description" type="text" id="Description" name="Description" class="form-control" placeholder="I had a wonderful day ..." value=""></textarea>
+                                </div>
+
+                                <div class="mt-2">
+                                    <label for="file" class="form-label mt-2">Select a max of 3 photos</label>
+                                    <input class="form-control" multiple type="file" name="file" />
+                                </div>
+                                <br />
+
+                                <button type="submit" class="btn btn-primary">Review post ->>>>>></button>
+                            </fieldset>
+                        }
+
+                    </div>
+                </div>
+            </a>
+        </div>
+    }
+
+    <!-- Third step in adding a post -->
+    @if (Model.StepCounter == 2)
+    {
     <div id="postDivPart2" class="mt-5 d-flex justify-content-center">
         <a style="text-decoration:none;">
             <div class="card cardType2">
                 <a href="@Url.Action("GoBackInPost", "Post")" class="btn btn-secondary">&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;- Back &lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;-</a>
 
-                <div class="card-body card-text" style="padding:10px;">
-                    @using (Html.BeginForm("ReviewPost", "Post", FormMethod.Post, new { enctype = "multipart/form-data" }))
-                    {
-                        @Html.AntiForgeryToken()
-                        <fieldset>
-                            <span asp-validation-for="Post.Title" class="text-danger"></span>
-                            <div>
-                                <label for="Title" class="form-label mt-0">Title</label>
-                                <input asp-for="Post.Title" type="text" id="Title" name="Title" class="form-control" placeholder="Walking In the Park" value="">
-                            </div>
-
-                            <div>
-                                <label class="col-form-label mt-2" for="Description">Description</label>
-                                <textarea asp-for="Post.Description" type="text" id="Description" name="Description" class="form-control" placeholder="I had a wonderful day ..." value=""></textarea>
-                            </div>
-
-                            <div class="mt-2">
-                                <label for="file" class="form-label mt-2">Select a max of 3 photos</label>
-                                <input class="form-control" multiple type="file" name="file" />
-                            </div>
-                            <br />
-
-                            <button type="submit" class="btn btn-primary">Review post ->>>>>></button>
-                        </fieldset>
-                    }
-
+                <div id="postDivPart2" class="mt-5 d-flex justify-content-center">
+                    <a style="text-decoration:none;">
+                        <div class="card cardType2">
+                            @if (Model.ViewModelImage0 != null)
+                            {
+                                <img src="data:image/jpeg;base64,@Model.ViewModelImage0" height="100em" width="100em" alt="Post Image 1" />
+                            }
+                            @if (Model.ViewModelImage1 != null)
+                            {
+                                <img src="data:image/jpeg;base64,@Model.ViewModelImage1" height="100em" width="100em" alt="Post Image 2" />
+                            }
+                            @if (Model.ViewModelImage2 != null)
+                            {
+                                <img src="data:image/jpeg;base64,@Model.ViewModelImage2" height="100em" width="100em" alt="Post Image 3" />
+                            }
+                        </div>
+                    </a>
                 </div>
             </div>
         </a>
     </div>
-}
 
-<!-- Third step in adding a post -->
-@if (Model.StepCounter == 2)
-{
-    <div id="postDivPart2" class="mt-5 d-flex justify-content-center">
-        <a style="text-decoration:none;">
-            <div class="card cardType2">
-                @if (Model.Post.Image0 != null)
-                {
-                    <img src="@Model.Post.Image0" alt="Post Image 1" />
-                }
-                @if (Model.Post.Image1 != null)
-                {
-                    <img src="@Model.Post.Image1" alt="Post Image 2" />
-                }
-                @if (Model.Post.Image2 != null)
-                {
-                    <img src="@Model.Post.Image2" alt="Post Image 3" />
-                }
-            </div>
-        </a>
-    </div>
-}
+    }

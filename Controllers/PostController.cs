@@ -2,6 +2,9 @@
 using SoundSee.Database;
 using SoundSee.Models;
 using SoundSee.ViewModels;
+using System.IO;
+using System.IO.Compression;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace SoundSee.Controllers
 {
@@ -32,7 +35,7 @@ namespace SoundSee.Controllers
         }
 
         [HttpPost]
-        public IActionResult ReviewPost(PostViewModel model, IFormFile file)
+        public IActionResult ReviewPost(PostViewModel model)
         {
             Post post = new Post();
             int loopCount = 0;
@@ -44,34 +47,42 @@ namespace SoundSee.Controllers
             post.Description = post.Description.Trim();
 
             // Collecting the 3 possible photos
-            if (file != null && file.Length > 0)
+            foreach (IFormFile files in Request.Form.Files)
             {
-                for (int i = 0; i < file.Length; i++)
+                using (var binaryReader = new BinaryReader(files.OpenReadStream()))
                 {
-                    using (var binaryReader = new BinaryReader(file.OpenReadStream()))
+                    if (loopCount == 0)
                     {
-                        if (i == 0) { post.Image0 = binaryReader.ReadBytes((int)file.Length); }
-                        if (i == 1) { post.Image1 = binaryReader.ReadBytes((int)file.Length); }
-                        if (i == 2) { post.Image2 = binaryReader.ReadBytes((int)file.Length); }
+                        post.Image0 = binaryReader.ReadBytes((int)files.Length);
                     }
-                    i++;
-                    if (i >= 3) break;
+                    if (loopCount == 1)
+                    {
+                        post.Image1 = binaryReader.ReadBytes((int)files.Length);
+                    }
+                    if (loopCount == 2)
+                    {
+                        post.Image2 = binaryReader.ReadBytes((int)files.Length);
+                    }
+                    else if (loopCount == 3)
+                    {
+                        break;
+                    }
                 }
+                loopCount++;
             }
 
             // Validtation (Clear > Validate > set/rerturn)
             ModelState.ClearValidationState(nameof(model.Post));
 
-            if (post.Title == null && post.Description == null)
+            if (post.Title == "" && post.Description == "")
             {
                 ModelState.AddModelError("Post.Title", "Please enter in either a Title or a Description");
-
             }
-            if (post.Title == null && post.Image0 == null)
+            if (post.Title == "" && post.Image0 == Array.Empty<byte>())
             {
                 ModelState.AddModelError("Post.Image0", "Please enter in either a Title or a Photo");
             }
-            if (post.Description == null && post.Image0 == null)
+            if (post.Description == "" && post.Image0 == Array.Empty<byte>())
             {
                 ModelState.AddModelError("Post.Image0", "Please enter in either a Description or a Photo");
             }
@@ -84,6 +95,9 @@ namespace SoundSee.Controllers
                 return View("~/Views/User/CreatePost.cshtml", model);
             }
 
+            model.ViewModelImage0 = model.Post.Image0 != null ? Convert.ToBase64String(model.Post.Image0) : null;
+            model.ViewModelImage1 = model.Post.Image1 != null ? Convert.ToBase64String(model.Post.Image1) : null;
+            model.ViewModelImage2 = model.Post.Image2 != null ? Convert.ToBase64String(model.Post.Image2) : null;
 
             return View("~/Views/User/CreatePost.cshtml", model);
         }
@@ -95,37 +109,8 @@ namespace SoundSee.Controllers
 
             return View("~/Views/User/CreatePost.cshtml", model);
         }
+       
 
-        [HttpGet]
-        public IActionResult ShowUserImage(PostViewModel model, IFormFile file)
-        {
-            if (file != null && file.Length > 0)
-            {
-                using (var binaryReader = new BinaryReader(file.OpenReadStream()))
-                {
-                    if (model.Post.Image0 == null)
-                    {
-                        model.Post.Image0 = binaryReader.ReadBytes((int)file.Length);
-                    }
-                    if (model.Post.Image1 == null && model.Post.Image0 != null)
-                    {
-                        model.Post.Image1 = binaryReader.ReadBytes((int)file.Length);
-                    }
-                    if (model.Post.Image2 == null && model.Post.Image1 != null)
-                    {
-                        model.Post.Image2 = binaryReader.ReadBytes((int)file.Length);
-                    }
-                }
-            }
 
-            return View("~/Views/User/CreatePost.cshtml",  model);
-        }
-
-        [HttpGet]
-        public IActionResult DisplayPostPhoto(PostViewModel model, IFormFile file)
-        {
-
-            return View();
-        }
     }
 }
