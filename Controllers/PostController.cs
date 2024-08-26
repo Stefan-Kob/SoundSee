@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Hosting;
 using SoundSee.Database;
 using SoundSee.Models;
 using SoundSee.ViewModels;
@@ -95,22 +97,81 @@ namespace SoundSee.Controllers
                 return View("~/Views/User/CreatePost.cshtml", model);
             }
 
+            model.ViewModelImageVariable = model.Post.Image0 != null ? Convert.ToBase64String(model.Post.Image0) : null;
             model.ViewModelImage0 = model.Post.Image0 != null ? Convert.ToBase64String(model.Post.Image0) : null;
             model.ViewModelImage1 = model.Post.Image1 != null ? Convert.ToBase64String(model.Post.Image1) : null;
             model.ViewModelImage2 = model.Post.Image2 != null ? Convert.ToBase64String(model.Post.Image2) : null;
+
+            if (post.Title != string.Empty)
+            {
+                HttpContext.Session.SetString("Title", model.Post.Title);
+            }
+            if (post.Description != string.Empty)
+            {
+                HttpContext.Session.SetString("Description", model.Post.Description);
+            }
+            if (post.Image0 != Array.Empty<byte>())
+            {
+                HttpContext.Session.SetString("Image0", model.ViewModelImage0);
+            }
+            if (post.Image1 != Array.Empty<byte>())
+            {
+                HttpContext.Session.SetString("Image1", model.ViewModelImage1);
+            }
+            if (post.Image2 != Array.Empty<byte>())
+            {
+                HttpContext.Session.SetString("Image2", model.ViewModelImage2);
+            }
+
+            return View("~/Views/User/CreatePost.cshtml", model);
+        }
+
+        [HttpPost]
+        [Route("Post/PostConfirm")]
+        public async Task<IActionResult> PostConfirm(PostViewModel model)
+        {
+            model.StepCounter = 3;
+            Post post = new Post();
+
+            if (HttpContext.Session.GetString("Title") != null)
+            {
+                model.Post.Title = HttpContext.Session.GetString("Title");
+            }
+            if (HttpContext.Session.GetString("Description") != null)
+            {
+                model.Post.Description = HttpContext.Session.GetString("Description");
+            }
+            if (HttpContext.Session.GetString("Image0") != null)
+            {
+                model.Post.Image0 = Convert.FromBase64String(HttpContext.Session.GetString("Image0"));
+            }
+            if (HttpContext.Session.GetString("Image1") != null)
+            {
+                model.Post.Image1 = Convert.FromBase64String(HttpContext.Session.GetString("Image1"));
+            }
+            if (HttpContext.Session.GetString("Image2") != null)
+            {
+                model.Post.Image2 = Convert.FromBase64String(HttpContext.Session.GetString("Image2"));
+            }
+
+            post = model.Post;
+
+            _dbContext.Add(post);
+            await _dbContext.SaveChangesAsync();
 
             return View("~/Views/User/CreatePost.cshtml", model);
         }
 
         [HttpGet]
-        public IActionResult GoBackInPost()
+        public IActionResult GoBackInPost(int page)
         {
             PostViewModel model = new PostViewModel();
 
+            page = page--;
+            model.StepCounter = page;
+
             return View("~/Views/User/CreatePost.cshtml", model);
         }
-       
-
-
+        
     }
 }

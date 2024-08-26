@@ -35,3 +35,9 @@ body {
     width: 25rem;
     right: 3px;
 }
+
+/* Type 3 is for the image back and fourth buttons*/
+.cardType3 { 
+    width: 1em;
+    padding: 1em;
+}
