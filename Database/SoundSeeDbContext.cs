@@ -11,5 +11,6 @@ namespace SoundSee.Database
 
         public DbSet<Accounts> Accounts { get; set; }
 
+        public DbSet<Post> Posts { get; set; }
     }
 }

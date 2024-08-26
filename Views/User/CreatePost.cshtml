@@ -1,0 +1,152 @@
+﻿    @model SoundSee.ViewModels.PostViewModel
+    @{
+        ViewData["Title"] = "Create Post";
+        Layout = "~/Views/Shared/_SignInLayout.cshtml";
+    }
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const tempImage = document.getElementById("tempImage");
+        const postImages = document.querySelectorAll(".postImage");
+
+        postImages.forEach(image => {
+            image.addEventListener("click", function () {
+                tempImage.src = this.src;
+            });
+        });
+    });
+</script>
+
+    <div class="mb-5 fixed-top">
+        <nav class="navbar navbar-light mt-0 text-center d-flex justify-content-center" id="topSignedInBar">
+            <a class="navbar-brand align-self-center" style="font-family:monospace; font-weight:bold;">Create a Post</a>
+        </nav>
+    </div>
+
+    <br />
+    <br />
+    @if (Model.StepCounter == 0)
+    {
+        <!-- First step in adding a post -->
+        <div class="mt-5 d-flex justify-content-center">
+            <a href="@Url.Action("StartPost", "Post")" style="text-decoration:none;">
+                <div class="card cardType1 text-center">
+                    <img class="card-img-top" src="~/Media/Add.svg" alt="Card image cap">
+                    <div class="card-body">
+                        <p class="card-text">Create a Post!</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+    }
+
+    <!-- Seccond step in adding a post -->
+    @if (Model.StepCounter == 1)
+    {
+        <div id="postDivPart2" class="mt-5 d-flex justify-content-center">
+            <a style="text-decoration:none;">
+                <div class="card cardType2">
+                    <a href="@Url.Action("GoBackInPost", "Post", new {page = 1})" class="btn btn-secondary">&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;- Back &lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;-</a>
+
+                    <div class="card-body card-text" style="padding:10px;">
+                        @using (Html.BeginForm("ReviewPost", "Post", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                        {
+                            @Html.AntiForgeryToken()
+                            <fieldset>
+                                <span asp-validation-for="Post.Title" class="text-danger"></span>
+                                <div>
+                                    <label for="Title" class="form-label mt-0">Title</label>
+                                    <input asp-for="Post.Title" type="text" id="Title" name="Title" class="form-control" placeholder="Walking In the Park" value="">
+                                </div>
+
+                                <div>
+                                    <label class="col-form-label mt-2" for="Description">Description</label>
+                                    <textarea asp-for="Post.Description" type="text" id="Description" name="Description" class="form-control" placeholder="I had a wonderful day ..." value=""></textarea>
+                                </div>
+
+                                <div class="mt-2">
+                                    <label for="file" class="form-label mt-2">Select a max of 3 photos</label>
+                                    <input class="form-control" multiple type="file" name="file" />
+                                </div>
+                                <br />
+
+                                <button type="submit" class="btn btn-primary">Review post ->>>>>></button>
+                            </fieldset>
+                        }
+
+                    </div>
+                </div>
+            </a>
+        </div>
+    }
+
+    <!-- Third step in adding a post -->
+    @if (Model.StepCounter == 2)
+    {
+    <div id="postDivPart2" class="mt-5 d-flex justify-content-center">
+        <a style="text-decoration:none;">
+            <div class="card cardType2">
+                <a href="@Url.Action("GoBackInPost", "Post", new { page = 1})" class="btn btn-secondary">&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;- Back &lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;-</a>
+
+                @using (Html.BeginForm("PostConfirm", "Post", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                {
+                    @Html.AntiForgeryToken()
+
+                @if (Model.Post.Title != string.Empty)
+                {
+                    <h4 class="m-1">Title</h4>
+                    <p class="m-1 mb-0">@Model.Post.Title</p>
+                    <hr style="margin: 1em;" />
+                        <input id="docActionId" asp-for="Post.Title" type="hidden" value="@Model.Post.Title" />
+                }
+
+                <div class="d-flex justify-content-center">
+                    @if (Model.ViewModelImageVariable != null)
+                    {
+                        <img id="tempImage" src="data:image/jpeg;base64,@Model.ViewModelImageVariable" height="200em" width="200em" alt="Post Image" />
+                    }
+                </div>
+
+                <p class="m-1 d-flex justify-content-center"><small><i>Click to enlarge Image</i></small></p>
+                <div id="postDivPart2" class="d-flex justify-content-center">
+                    @if (Model.ViewModelImage0 != string.Empty)
+                    {
+                            <img class="postImage" href="" src="data:image/jpeg;base64,@Model.ViewModelImage0" height="50em" width="50em" alt="Post Image 1" />
+                            <input id="docActionId" asp-for="Post.Image0" type="hidden" value="@Model.ViewModelImage0" />
+                    }
+                    @if (Model.ViewModelImage1 != string.Empty)
+                    {
+                            <img class="postImage" href="" src="data:image/jpeg;base64,@Model.ViewModelImage1" height="50em" width="50em" alt="Post Image 2" />
+                            <input id="docActionId" asp-for="Post.Image1" type="hidden" value="@Model.ViewModelImage1" />
+                    }
+                    @if (Model.ViewModelImage2 != string.Empty)
+                    {
+                            <img class="postImage" href="" src="data:image/jpeg;base64,@Model.ViewModelImage2" height="50em" width="50em" alt="Post Image 3" />
+                            <input id="docActionId" asp-for="Post.Image2" type="hidden" value="@Model.ViewModelImage2" />
+                    }
+                </div>
+
+                @if (Model.Post.Description != string.Empty)
+                {
+                    <hr style="margin: 1em;" />
+                    <h4 class="m-1 mt-0">Description</h4>
+                    <p class="m-1">@Model.Post.Description</p>
+                        <input id="docActionId" asp-for="Post.Description" type="hidden" value="@Model.Post.Description" />
+                } else {
+                    <br />
+                }
+
+                    <button type="submit" class="btn btn-secondary w-100">Continue, lets post it!</button>
+                }
+            </div>
+        </a>
+    </div>
+
+    }
+
+    @if (Model.StepCounter == 3)
+    {
+    <div>
+        <p>Post has been saved in the db</p>
+    </div>
+    }
