@@ -9,6 +9,7 @@ builder.Services.AddControllersWithViews();
 
 builder.Services.AddDistributedMemoryCache();
 
+// Session
 builder.Services.AddSession(options =>
 {
     options.Cookie.Name = ".SoundSee.Session";
