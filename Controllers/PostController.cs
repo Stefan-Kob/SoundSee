@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Microsoft.Extensions.Hosting;
 using SoundSee.Database;
 using SoundSee.Models;
@@ -97,10 +98,7 @@ namespace SoundSee.Controllers
                 return View("~/Views/User/CreatePost.cshtml", model);
             }
 
-            model.ViewModelImageVariable = model.Post.Image0 != null ? Convert.ToBase64String(model.Post.Image0) : null;
-            model.ViewModelImage0 = model.Post.Image0 != null ? Convert.ToBase64String(model.Post.Image0) : null;
-            model.ViewModelImage1 = model.Post.Image1 != null ? Convert.ToBase64String(model.Post.Image1) : null;
-            model.ViewModelImage2 = model.Post.Image2 != null ? Convert.ToBase64String(model.Post.Image2) : null;
+            model = ReturnModelImages(model);
 
             if (post.Title != string.Empty)
             {
@@ -154,11 +152,13 @@ namespace SoundSee.Controllers
                 model.Post.Image2 = Convert.FromBase64String(HttpContext.Session.GetString("Image2"));
             }
 
+            model.Post.UserID = (int)HttpContext.Session.GetInt32("UserID");
             post = model.Post;
 
             _dbContext.Add(post);
             await _dbContext.SaveChangesAsync();
 
+            model = ReturnModelImages(model);
             return View("~/Views/User/CreatePost.cshtml", model);
         }
 
@@ -173,5 +173,14 @@ namespace SoundSee.Controllers
             return View("~/Views/User/CreatePost.cshtml", model);
         }
         
+        public PostViewModel ReturnModelImages(PostViewModel model)
+        {
+            model.ViewModelImageVariable = model.Post.Image0 != null ? Convert.ToBase64String(model.Post.Image0) : null;
+            model.ViewModelImage0 = model.Post.Image0 != null ? Convert.ToBase64String(model.Post.Image0) : null;
+            model.ViewModelImage1 = model.Post.Image1 != null ? Convert.ToBase64String(model.Post.Image1) : null;
+            model.ViewModelImage2 = model.Post.Image2 != null ? Convert.ToBase64String(model.Post.Image2) : null;
+
+            return (model);
+        }
     }
 }

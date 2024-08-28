@@ -53,12 +53,13 @@ namespace SoundSee.Controllers
                 if (dBUser.Email == user.Email)
                 {
                     tempUser.Password = dBUser.Password;
-                    tempUser.salt = dBUser.salt;
+                    tempUser.Salt = dBUser.Salt;
                     user.Email = dBUser.Email;
                     user.Username = dBUser.Username;
                     user.Profile_Photo = dBUser.Profile_Photo;
+                    user.Id = dBUser.Id;
 
-                    correctPassword = saltAndShaker.VerifyPassword(user.Password, tempUser.Password, tempUser.salt);
+                    correctPassword = saltAndShaker.VerifyPassword(user.Password, tempUser.Password, tempUser.Salt);
                     if (correctPassword == false)
                     {
                         ModelState.AddModelError("User.Password", "Wrong password, please try again.");
@@ -77,6 +78,7 @@ namespace SoundSee.Controllers
             HttpContext.Session.Set("UserPhoto", model.User.Profile_Photo);
             HttpContext.Session.SetString("User", model.User.Username);
             HttpContext.Session.SetString("UserEmail", model.User.Email);
+            HttpContext.Session.SetInt32("UserID", model.User.Id);
 
             return View("Welcome");
         }
@@ -159,7 +161,7 @@ namespace SoundSee.Controllers
 
             // Salting password
             string saltPassword = saltAndShaker.HashPasword(user.Password, out var salt);
-            user.salt = salt;
+            user.Salt = salt;
             model.User.Password = saltPassword;
 
             // User data is safe after this point
@@ -170,6 +172,8 @@ namespace SoundSee.Controllers
             _dbContext.Add(user);
             await _dbContext.SaveChangesAsync();
 
+            User userForID = _dbContext.Users.FirstOrDefault(u => u.Email == model.User.Email);
+            HttpContext.Session.SetInt32("UserID", userForID.Id);
 
             return View("~/Views/SignIn/UserAccountConfirm.cshtml", model);
 
@@ -237,6 +241,7 @@ namespace SoundSee.Controllers
                         model.User = user;
                         HttpContext.Session.SetString("User", model.User.Username);
                         HttpContext.Session.SetString("UserEmail", model.User.Email);
+                        HttpContext.Session.SetInt32("UserID", model.User.Id);
 
                         return true;
                     }

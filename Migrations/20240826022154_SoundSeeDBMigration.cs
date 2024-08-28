@@ -5,7 +5,7 @@
 namespace SoundSee.Migrations
 {
     /// <inheritdoc />
-    public partial class NewExpDBMigration : Migration
+    public partial class SoundSeeDBMigration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -29,6 +29,9 @@ namespace SoundSee.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    UserID = table.Column<int>(type: "int", nullable: false),
+                    MainAccount = table.Column<bool>(type: "bit", nullable: false),
+                    LinkedAccNum = table.Column<int>(type: "int", nullable: false),
                     Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Image0 = table.Column<byte[]>(type: "varbinary(max)", nullable: false),
@@ -51,7 +54,9 @@ namespace SoundSee.Migrations
                     Password = table.Column<string>(type: "nvarchar(32)", maxLength: 32, nullable: false),
                     SignUpForNewsletters = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Profile_Photo = table.Column<byte[]>(type: "varbinary(max)", nullable: false),
-                    salt = table.Column<byte[]>(type: "varbinary(max)", nullable: false)
+                    Salt = table.Column<byte[]>(type: "varbinary(max)", nullable: false),
+                    MainAccount = table.Column<bool>(type: "bit", nullable: false),
+                    LinkedAccNum = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
