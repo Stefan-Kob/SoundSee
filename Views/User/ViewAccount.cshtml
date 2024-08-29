@@ -1,9 +1,11 @@
-﻿@model SoundSee.ViewModels.UserViewModel
+﻿@model SoundSee.ViewModels.PostNUserViewModel
 @{
     ViewData["Title"] = "View Account";
     Layout = "~/Views/Shared/_SignInLayout.cshtml";
+    int i = 0;
 }
 
+<!-- Navbar -->
 <div class="mb-2 fixed-top">
     <nav class="navbar navbar-light mt-0" id="topSignedInBar">
         <a class="navbar-brand" href="#">
@@ -18,3 +20,42 @@
         </a>
     </nav>
 </div>
+
+<div class="row">
+    <img class="mt-5 col" src="@Url.Action("DisplayProfilePhoto", "User")" width="130" height="130" />
+    <div class="mt-5 col">
+        <h3>@Context.Session.GetString("User")</h3>
+        <p>Account type: @Model.UserVM.User.PublicOrPrivateAcc</p>
+    </div>
+
+</div>
+
+<div>
+    @if (Model.PostVMList.Count() != 0)
+    {
+        @foreach (var post in Model.PostVMList)
+        {
+            i++;
+            if (post.ViewModelImage0 == string.Empty)
+            {
+                <div class="col-4 mt-5 p-0 d-flex justify-content-center">
+                    <p>@post.Post.Title</p>
+                    <p>@post.Post.Description</p>
+                </div>
+
+            }
+            else
+            {
+                <div class="col-4 mt-5 p-0 d-flex justify-content-center">
+                    <img class="postImage" href="" src="data:image/jpeg;base64,@post.ViewModelImage0" height="100em" width="100em" alt="Post Image @i" />
+                </div>
+            }
+        }
+    } else
+    {
+        <p class="m-4"><a href="@Url.Action("SendToPost", "Post")">Create a post</a> to be able to see posts of yours!</p>
+    }
+
+
+</div>
+

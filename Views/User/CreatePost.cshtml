@@ -101,7 +101,7 @@
                 }
 
                 <div class="d-flex justify-content-center">
-                    @if (Model.ViewModelImageVariable != null)
+                    @if (Model.ViewModelImageVariable != string.Empty)
                     {
                         <img id="tempImage" src="data:image/jpeg;base64,@Model.ViewModelImageVariable" height="200em" width="200em" alt="Post Image" />
                     }
@@ -157,28 +157,33 @@
                     <h4 class="m-1">Title</h4>
                     <p class="m-1 mb-0">@Model.Post.Title</p>
                 }
-                <div class="d-flex justify-content-center">
-                    @if (Model.ViewModelImageVariable != null)
-                    {
-                        <img id="tempImage" src="data:image/jpeg;base64,@Model.ViewModelImageVariable" height="200em" width="200em" alt="Post Image" />
-                    }
-                </div>
 
-                <p class="m-1 d-flex justify-content-center"><small><i>Click to enlarge Image</i></small></p>
-                <div id="postDivPart2" class="d-flex justify-content-center">
-                    @if (Model.ViewModelImage0 != string.Empty)
-                    {
-                        <img class="postImage" href="" src="data:image/jpeg;base64,@Model.ViewModelImage0" height="50em" width="50em" alt="Post Image 1" />
-                    }
-                    @if (Model.ViewModelImage1 != string.Empty)
-                    {
-                        <img class="postImage" href="" src="data:image/jpeg;base64,@Model.ViewModelImage1" height="50em" width="50em" alt="Post Image 2" />
-                    }
-                    @if (Model.ViewModelImage2 != string.Empty)
-                    {
-                        <img class="postImage" href="" src="data:image/jpeg;base64,@Model.ViewModelImage2" height="50em" width="50em" alt="Post Image 3" />
-                    }
-                </div>
+                @if (Model.ViewModelImage0 != string.Empty)
+                {
+                    <div class="d-flex justify-content-center">
+                        @if (Model.ViewModelImageVariable != string.Empty)
+                        {
+                            <img id="tempImage" src="data:image/jpeg;base64,@Model.ViewModelImageVariable" height="200em" width="200em" alt="Post Image" />
+                        }
+                    </div>
+
+                    <p class="m-1 d-flex justify-content-center"><small><i>Click to enlarge Image</i></small></p>
+                    <div id="postDivPart2" class="d-flex justify-content-center">
+                        @if (Model.ViewModelImage0 != string.Empty)
+                        {
+                            <img class="postImage" href="" src="data:image/jpeg;base64,@Model.ViewModelImage0" height="50em" width="50em" alt="Post Image 1" />
+                        }
+                        @if (Model.ViewModelImage1 != string.Empty)
+                        {
+                            <img class="postImage" href="" src="data:image/jpeg;base64,@Model.ViewModelImage1" height="50em" width="50em" alt="Post Image 2" />
+                        }
+                        @if (Model.ViewModelImage2 != string.Empty)
+                        {
+                            <img class="postImage" href="" src="data:image/jpeg;base64,@Model.ViewModelImage2" height="50em" width="50em" alt="Post Image 3" />
+                        }
+                    </div>
+                }
+                
                 @if (Model.Post.Description != string.Empty)
                 {
                     <h4 class="m-1 mt-0">Description</h4>

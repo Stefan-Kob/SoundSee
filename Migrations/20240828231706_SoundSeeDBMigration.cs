@@ -53,6 +53,7 @@ namespace SoundSee.Migrations
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Password = table.Column<string>(type: "nvarchar(32)", maxLength: 32, nullable: false),
                     SignUpForNewsletters = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    PublicOrPrivateAcc = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Profile_Photo = table.Column<byte[]>(type: "varbinary(max)", nullable: false),
                     Salt = table.Column<byte[]>(type: "varbinary(max)", nullable: false),
                     MainAccount = table.Column<bool>(type: "bit", nullable: false),

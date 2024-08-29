@@ -11,7 +11,7 @@ using SoundSee.Database;
 namespace SoundSee.Migrations
 {
     [DbContext(typeof(SoundSeeDbContext))]
-    [Migration("20240826022154_SoundSeeDBMigration")]
+    [Migration("20240828231706_SoundSeeDBMigration")]
     partial class SoundSeeDBMigration
     {
         /// <inheritdoc />
@@ -109,6 +109,10 @@ namespace SoundSee.Migrations
                     b.Property<byte[]>("Profile_Photo")
                         .IsRequired()
                         .HasColumnType("varbinary(max)");
+
+                    b.Property<string>("PublicOrPrivateAcc")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<byte[]>("Salt")
                         .IsRequired()

@@ -139,6 +139,15 @@ namespace SoundSee.Controllers
                 user.SignUpForNewsletters = "T";
             }
 
+            if (Request.Form["PublicOrPrivateAcc"] != "on")
+            {
+                user.PublicOrPrivateAcc = "Public";
+            }
+            else
+            {
+                user.PublicOrPrivateAcc = "Private";
+            }
+
             model.User = user;
 
             // Validtation (Clear > Validate > set/rerturn)
@@ -201,8 +210,22 @@ namespace SoundSee.Controllers
 
         public IActionResult ViewAccount()
         {
-            var model = new UserViewModel();
-            model.User = new User { Username = HttpContext.Session.GetString("User") };
+            var model = new PostNUserViewModel();
+            model.UserVM = new UserViewModel();
+            model.UserVM.User = _dbContext.Users.FirstOrDefault(u => u.Id == HttpContext.Session.GetInt32("UserID"));
+
+            // Get all of the users posts, and put them in the list
+            foreach (Post post in _dbContext.Posts)
+            {
+                PostViewModel postModel = new PostViewModel();
+                if (post.UserID == model.UserVM.User.Id)
+                {
+                    postModel.ViewModelImage0 = post.Image0 != null ? Convert.ToBase64String(post.Image0) : null;
+                    postModel.Post = post;
+
+                    model.PostVMList.Add(postModel);
+                }
+            }
 
             return View("ViewAccount", model);
         }
