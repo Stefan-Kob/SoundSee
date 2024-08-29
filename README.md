@@ -7,7 +7,7 @@
 	 - [ ] Profiles - Private and Public
 	 - [ ] Following profiles
  - [ ] **Messaging (text and image/video)**
- - [ ] **Posts**
+ - [x] **Posts**
 	 - [ ] Likes/dislikes
 	 - [ ] Stories
 - [x] Password encryption
@@ -15,11 +15,11 @@
  - [x] **Sign in Page**
  - [x] **Create Account Page**
  - [ ] **Home Page**
-	 - [ ] Profile page
+	 - [x] Profile page
 	 - [ ] Notifications page
 	 - [ ] Messaging page
 	 - [ ] Search/explore page
-	 - [ ] Create post page
+	 - [x] Create post page
 	 - [ ] Settings page
 		 - [ ] Theme page
 		 - [ ] Account info page
