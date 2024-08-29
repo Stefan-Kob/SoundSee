@@ -2,7 +2,7 @@
 ># **Welcome to SoundSee!**
 *SoundSee* will be a responsive ASP.NET Core MVC C# web app in the social media catagory built by me. It will include:
 
- - [ ] **User accounts**
+ - [x] **User accounts**
 	 - [ ] Account management
 	 - [ ] Profiles - Private and Public
 	 - [ ] Following profiles
