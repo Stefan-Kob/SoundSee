@@ -9,6 +9,14 @@
       "PackagePath": "staticwebassets\\Media\\Add.svg"
     },
     {
+      "Id": "C:\\MyPrograms\\SoundSee\\SoundSee\\wwwroot\\Media\\Camera.png",
+      "PackagePath": "staticwebassets\\Media\\Camera.png"
+    },
+    {
+      "Id": "C:\\MyPrograms\\SoundSee\\SoundSee\\wwwroot\\Media\\PaperAirplane.png",
+      "PackagePath": "staticwebassets\\Media\\PaperAirplane.png"
+    },
+    {
       "Id": "C:\\MyPrograms\\SoundSee\\SoundSee\\wwwroot\\Media\\Small posts.svg",
       "PackagePath": "staticwebassets\\Media\\Small posts.svg"
     },

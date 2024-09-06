@@ -26,7 +26,6 @@ namespace SoundSee.Controllers
         public IActionResult ReturnSearch()
         {
 
-
             return View();
         }
 

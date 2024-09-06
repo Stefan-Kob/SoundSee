@@ -1,6 +1,20 @@
 ﻿@model SoundSee.ViewModels.UserViewModel
 @{
-    ViewData["Title"] = "Welcome!";
+    ViewData["Title"] = "Home Page";
     Layout = "~/Views/Shared/_SignInLayout.cshtml";
 }
-<h2 class="m-3 mt-5 pb-5">Welcome to the <i>home page</i></h2>
+
+<!-- Navbar -->
+<div class="mb-2 fixed-top">
+    <nav class="navbar navbar-light mt-0" id="topSignedInBar">
+        <a class="navbar-brand" href="#">
+            <img src="~/Media/Camera.png" width="25" height="25" alt="share">
+        </a>
+        <div>
+            <a class="navbar-brand" style="font-family:monospace; font-weight:bold; font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif" href="#">SoundSee</a>
+        </div>
+        <a class="navbar-brand" href="">
+            <img src="~/Media/PaperAirplane.png" width="25" height="25" alt="settings">
+        </a>
+    </nav>
+</div>
