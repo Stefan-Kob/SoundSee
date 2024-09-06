@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "Wr+ECsibsimbiIhZmN6FOVOreG0GNqKuf3eRtBH3AB0=",
+  "Hash": "zBVFxSh91XwbLNwI6yivnnwtxWJ5rBF5hJZy/HMNx5Y=",
   "Source": "SoundSee",
   "BasePath": "_content/SoundSee",
   "Mode": "Default",
@@ -1233,6 +1233,25 @@
       "OriginalItemSpec": "wwwroot\\Media\\Add.svg"
     },
     {
+      "Identity": "C:\\MyPrograms\\SoundSee\\SoundSee\\wwwroot\\Media\\chevron-double-left.svg",
+      "SourceId": "SoundSee",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\MyPrograms\\SoundSee\\SoundSee\\wwwroot\\",
+      "BasePath": "_content/SoundSee",
+      "RelativePath": "Media/chevron-double-left.svg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Media\\chevron-double-left.svg"
+    },
+    {
       "Identity": "C:\\MyPrograms\\SoundSee\\SoundSee\\wwwroot\\Media\\defaultProfile_Photo.jpg",
       "SourceId": "SoundSee",
       "SourceType": "Discovered",
@@ -1364,6 +1383,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\Media\\search.svg"
+    },
+    {
+      "Identity": "C:\\MyPrograms\\SoundSee\\SoundSee\\wwwroot\\Media\\Small posts.svg",
+      "SourceId": "SoundSee",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\MyPrograms\\SoundSee\\SoundSee\\wwwroot\\",
+      "BasePath": "_content/SoundSee",
+      "RelativePath": "Media/Small posts.svg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Media\\Small posts.svg"
     },
     {
       "Identity": "C:\\MyPrograms\\SoundSee\\SoundSee\\wwwroot\\Media\\SoundSeeLogo.png",

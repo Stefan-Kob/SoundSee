@@ -9,12 +9,20 @@
       "PackagePath": "staticwebassets\\Media\\Add.svg"
     },
     {
+      "Id": "C:\\MyPrograms\\SoundSee\\SoundSee\\wwwroot\\Media\\Small posts.svg",
+      "PackagePath": "staticwebassets\\Media\\Small posts.svg"
+    },
+    {
       "Id": "C:\\MyPrograms\\SoundSee\\SoundSee\\wwwroot\\Media\\SoundSeeLogo.png",
       "PackagePath": "staticwebassets\\Media\\SoundSeeLogo.png"
     },
     {
       "Id": "C:\\MyPrograms\\SoundSee\\SoundSee\\wwwroot\\Media\\SoundSeeLogo.svg",
       "PackagePath": "staticwebassets\\Media\\SoundSeeLogo.svg"
+    },
+    {
+      "Id": "C:\\MyPrograms\\SoundSee\\SoundSee\\wwwroot\\Media\\chevron-double-left.svg",
+      "PackagePath": "staticwebassets\\Media\\chevron-double-left.svg"
     },
     {
       "Id": "C:\\MyPrograms\\SoundSee\\SoundSee\\wwwroot\\Media\\defaultProfile_Photo.jpg",

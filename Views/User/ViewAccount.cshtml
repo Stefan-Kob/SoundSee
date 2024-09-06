@@ -4,6 +4,16 @@
     Layout = "~/Views/Shared/_SignInLayout.cshtml";
     int i = 0;
 }
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        if (window.location.hash) {
+            var element = document.querySelector(window.location.hash);
+            if (element) {
+                element.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+    });
+</script>
 
 <!-- Navbar -->
 <div class="mb-2 fixed-top">
@@ -22,40 +32,50 @@
 </div>
 
 <div class="row">
-    <img class="mt-5 col" src="@Url.Action("DisplayProfilePhoto", "User")" width="130" height="130" />
+    <img class="mt-5 col" src="@Url.Action("DisplayProfilePhoto", "User")"height="200em" />
     <div class="mt-5 col">
         <h3>@Context.Session.GetString("User")</h3>
-        <p>Account type: @Model.UserVM.User.PublicOrPrivateAcc</p>
+        <small>Account type: @Model.UserVM.User.PublicOrPrivateAcc</small>
     </div>
 
 </div>
 
-<div>
+<!-- Still needs improvements but good for now -->
+<div class="container mt-2">
     @if (Model.PostVMList.Count() != 0)
     {
-        @foreach (var post in Model.PostVMList)
-        {
-            i++;
-            if (post.ViewModelImage0 == string.Empty)
+        <div class="row">
+            @for (i = 0; i < Model.PostVMList.Count(); i++)
             {
-                <div class="col-4 mt-5 p-0 d-flex justify-content-center">
-                    <p>@post.Post.Title</p>
-                    <p>@post.Post.Description</p>
-                </div>
+                var post = Model.PostVMList[i];
+                <div class="col-sm-6 col-md-4 p-0 mb-1 d-flex flex-column">
+                    <div style="border: 1px solid #b6b6b6; border-radius:8px" class="m-1">
+                            @if (string.IsNullOrEmpty(post.ViewModelImage0))
+                            {
+                                <div>
+                                <p class="m-1 postTitle">@post.Post.Title</p>
+                                    <p style="width:90%;" class="m-1">@post.Post.Description</p>
+                                </div>
+                            }
+                            else
+                            {
+                                <div>
+                                    <img style="height:12em;width:12em;" class="postImage img-fluid" src="data:image/jpeg;base64,@post.ViewModelImage0" alt="Post Image @i" />
+                                <p class="m-1 postTitle">&nbsp;@post.Post.Title</p>
+                                <p style="width:90%;" class="m-1">@post.Post.Description</p>
+      
+                            </div>
+                            }
+                        <a href="@Url.Action("DisplayProfileFeed", "MassPost")#post-@i" class="stretched-link"></a>
 
-            }
-            else
-            {
-                <div class="col-4 mt-5 p-0 d-flex justify-content-center">
-                    <img class="postImage" href="" src="data:image/jpeg;base64,@post.ViewModelImage0" height="100em" width="100em" alt="Post Image @i" />
+                        <button onclick="" class="btn btn-secondary w-100 commentBtn">Comments</button>
+                    </div>
                 </div>
             }
-        }
-    } else
+        </div>
+    }
+    else
     {
         <p class="m-4"><a href="@Url.Action("SendToPost", "Post")">Create a post</a> to be able to see posts of yours!</p>
     }
-
-
 </div>
-

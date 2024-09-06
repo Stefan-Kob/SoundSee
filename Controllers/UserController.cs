@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using SoundSee.Database;
 using SoundSee.Models;
 using SoundSee.ViewModels;
+using System.Diagnostics;
 using System.IO;
 
 namespace SoundSee.Controllers
@@ -201,8 +202,7 @@ namespace SoundSee.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        [HttpPost]
-        [Route("User/Welcome")]
+        [HttpGet]
         public IActionResult ContinUserToWelcome(UserViewModel model)
         {
             return View("Welcome", model);
@@ -223,6 +223,15 @@ namespace SoundSee.Controllers
                     postModel.ViewModelImage0 = post.Image0 != null ? Convert.ToBase64String(post.Image0) : null;
                     postModel.Post = post;
 
+                    if (post.Title.Count() > 23)
+                    {
+                        postModel.Post.Title = post.Title.Substring(0, 23) + "...";
+                    }
+                    if (post.Description.Count() > 80)
+                    {
+                        postModel.Post.Description = post.Description.Substring(0, 100) + "...";
+                    }
+                    
                     model.PostVMList.Add(postModel);
                 }
             }
@@ -273,9 +282,6 @@ namespace SoundSee.Controllers
 
             return false;
         }
-
-
-
 
 
 
