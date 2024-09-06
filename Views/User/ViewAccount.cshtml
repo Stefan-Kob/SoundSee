@@ -19,20 +19,20 @@
 <div class="mb-2 fixed-top">
     <nav class="navbar navbar-light mt-0" id="topSignedInBar">
         <a class="navbar-brand" href="#">
-            <img src="~/Media/qr-code.svg" width="25" height="25" alt="">
+            <img src="~/Media/qr-code.svg" width="25" height="25" alt="share">
         </a>
         <div>
             <a class="navbar-brand" style="font-family:monospace; font-weight:bold;" href="#">@Context.Session.GetString("User")</a>
             <img src="@Url.Action("DisplayProfilePhoto", "User")" width="30" height="30" alt="User profile photo">
         </div>
         <a class="navbar-brand" href="@Url.Action("ViewAccount", "User")">
-            <img src="~/Media/gear.svg" width="25" height="25" alt="">
+            <img src="~/Media/gear.svg" width="25" height="25" alt="settings">
         </a>
     </nav>
 </div>
 
 <div class="row">
-    <img class="mt-5 col" src="@Url.Action("DisplayProfilePhoto", "User")"height="200em" />
+    <img class="mt-5 col" src="@Url.Action("DisplayProfilePhoto", "User")"height="150em" />
     <div class="mt-5 col">
         <h3>@Context.Session.GetString("User")</h3>
         <small>Account type: @Model.UserVM.User.PublicOrPrivateAcc</small>
@@ -50,23 +50,24 @@
                 var post = Model.PostVMList[i];
                 <div class="col-sm-6 col-md-4 p-0 mb-1 d-flex flex-column">
                     <div style="border: 1px solid #b6b6b6; border-radius:8px" class="m-1">
+                        <a href="@Url.Action("DisplayProfileFeed", "MassPost")#post-@i" style="text-decoration:none;">
                             @if (string.IsNullOrEmpty(post.ViewModelImage0))
                             {
-                                <div>
+                            <div>
                                 <p class="m-1 postTitle">@post.Post.Title</p>
-                                    <p style="width:90%;" class="m-1">@post.Post.Description</p>
-                                </div>
+                                <p style="width:90%;" class="m-1">@post.Post.Description</p>
+                            </div>
                             }
                             else
                             {
-                                <div>
-                                    <img style="height:12em;width:12em;" class="postImage img-fluid" src="data:image/jpeg;base64,@post.ViewModelImage0" alt="Post Image @i" />
+                             <div>
+                                <img style="height:12em;width:12em;" class="postImage img-fluid" src="data:image/jpeg;base64,@post.ViewModelImage0" alt="Post Image @i" />
                                 <p class="m-1 postTitle">&nbsp;@post.Post.Title</p>
                                 <p style="width:90%;" class="m-1">@post.Post.Description</p>
       
                             </div>
                             }
-                        <a href="@Url.Action("DisplayProfileFeed", "MassPost")#post-@i" class="stretched-link"></a>
+                        </a>
 
                         <button onclick="" class="btn btn-secondary w-100 commentBtn">Comments</button>
                     </div>

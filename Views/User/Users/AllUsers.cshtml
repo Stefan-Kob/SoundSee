@@ -1,18 +1,22 @@
 ﻿@model SoundSee.ViewModels.UserViewModel
 @{
-    ViewData["Title"] = "All Users";
+    ViewData["Title"] = "Search";
+    Layout = "~/Views/Shared/_SignInLayout.cshtml";
 }
-<h2>AllUsers</h2>
+<script>
+    import { Input, initMDB } from "mdb-ui-kit";
+    initMDB({ Input });
+</script>
 
-@if (Model.Accounts.Count == 0)
-{
-    <p>There are no Users or accounts to show</p>
-}
-else
-{
-    foreach (var account in Model.Accounts)
-    {
-        <li>@account.Username</li>
+<!-- Navbar -->
+<div class="mb-2 fixed-top">
+    <nav class="navbar navbar-light mt-0" id="topSignedInBar">
+        <div class="col-10">
+            <div class="form-outline" data-mdb-input-init>
+                <input type="search" id="form1" class="form-control" placeholder="Type query" aria-label="Search" />
+            </div>
+        </div>
+        <img src="~/Media/search.svg" width="30" height="30" alt="Search">
 
-    }
-}
+    </nav>
+</div>
