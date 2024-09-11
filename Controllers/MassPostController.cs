@@ -43,9 +43,6 @@ namespace SoundSee.Controllers
             return View("~/Views/User/UserFeedPage.cshtml", model);
         }
 
-
-
-
     }
 }
 

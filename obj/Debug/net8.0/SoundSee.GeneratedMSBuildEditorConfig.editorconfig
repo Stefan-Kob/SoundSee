@@ -78,6 +78,14 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxVc2Vyc1xBbGxVc2Vycy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/MyPrograms/SoundSee/SoundSee/Views/User/Users/SelectedUser.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxVc2Vyc1xTZWxlY3RlZFVzZXIuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/MyPrograms/SoundSee/SoundSee/Views/User/Users/SelectedUserFeed.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxVc2Vyc1xTZWxlY3RlZFVzZXJGZWVkLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/MyPrograms/SoundSee/SoundSee/Views/User/ViewAccount.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxWaWV3QWNjb3VudC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 

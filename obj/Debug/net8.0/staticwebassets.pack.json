@@ -57,6 +57,10 @@
       "PackagePath": "staticwebassets\\Media\\qr-code.svg"
     },
     {
+      "Id": "C:\\MyPrograms\\SoundSee\\SoundSee\\wwwroot\\Media\\rightArrow.png",
+      "PackagePath": "staticwebassets\\Media\\rightArrow.png"
+    },
+    {
       "Id": "C:\\MyPrograms\\SoundSee\\SoundSee\\wwwroot\\Media\\search.svg",
       "PackagePath": "staticwebassets\\Media\\search.svg"
     },
