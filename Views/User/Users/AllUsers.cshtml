@@ -38,7 +38,7 @@
                     {
                         <div class="m-1 d-flex justify-content-between">
                             <div>
-                                <img src="data:image/jpeg;base64,@Model.UserVM.UserImage" width="30" height="30" style="border-radius:25px;" alt="User profile photo">
+                                <img src="data:image/jpeg;base64,@user.UserImage" width="30" height="30" style="border-radius:25px;" alt="User profile photo">
                                 <a class="navbar-brand" style="font-family:monospace; font-weight:bold;" href="@Url.Action("LoadSelectedUser", "MainSearch", new { search = user.Id })">&nbsp;@user.Username</a>
                             </div>
                             <div>

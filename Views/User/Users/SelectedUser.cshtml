@@ -31,11 +31,12 @@
     </nav>
 </div>
 
-<!-- Need to edit heavily to make it the selected -->
-
+<!-- This is ok for now. Not too good though -->
 <div class="row">
-    <img class="mt-5 col" src="data:image/jpeg;base64,@Model.UserVM.UserImage" height="150em" />
-    <div class="mt-5 col">
+    <div class="col-6 col-lg-3">
+        <img class="mt-5 col" src="data:image/jpeg;base64,@Model.UserVM.UserImage" height="150em" />
+    </div>
+    <div class="mt-5 m-2 col">
         <h3>@Model.UserVM.User.Username</h3>
         <small>Account type: @Model.UserVM.User.PublicOrPrivateAcc</small>
     </div>
@@ -49,10 +50,12 @@
         <div class="row">
             @for (i = 0; i < Model.PostVMList.Count(); i++)
             {
+                string tempImage = Model.PostVMList[i].ViewModelImage0;
                 var post = Model.PostVMList[i];
+
                 <div class="col-sm-6 col-md-4 p-0 mb-1 d-flex flex-column">
                     <div style="border: 1px solid #b6b6b6; border-radius:8px" class="m-1">
-                        <a href="@Url.Action("DisplayProfileFeed", "MassPost")#post-@i" style="text-decoration:none;">
+                        <a href="@Url.Action("DisplayProfileFeed", "MassPost", new {userId = Model.UserVM.User.Id})#post-@i" style="text-decoration:none;">
                             @if (string.IsNullOrEmpty(post.ViewModelImage0))
                             {
                                 <div>
@@ -63,7 +66,7 @@
                             else
                             {
                                 <div>
-                                    <img style="height:12em;width:12em;" class="postImage img-fluid" src="data:image/jpeg;base64,@post.ViewModelImage0" alt="Post Image @i" />
+                                    <img style="height:12em;width:12em;" class="postImage img-fluid" src="data:image/jpeg;base64,@tempImage" alt="Post Image @i" />
                                     <p class="m-1 postTitle">&nbsp;@post.Post.Title</p>
                                     <p style="width:90%;" class="m-1">@post.Post.Description</p>
 

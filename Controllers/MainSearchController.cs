@@ -18,8 +18,10 @@ namespace SoundSee.Controllers
 
         }
 
-        public IActionResult GoToSearch(PostNUserViewModel model)
+        public IActionResult GoToSearch()
         { 
+            PostNUserViewModel model = new PostNUserViewModel();
+
             return View("~/Views/User/Users/AllUsers.cshtml", model);
         }
 
@@ -39,8 +41,11 @@ namespace SoundSee.Controllers
                 {
                     if (user.Username.StartsWith(searchQuest,StringComparison.InvariantCultureIgnoreCase))
                     {
-                        model.UserVM.UserImage = user.Profile_Photo != null ? Convert.ToBase64String(user.Profile_Photo) : null;
-                        model.UserVM.Users.Add(user);
+                        if (user.Username != HttpContext.Session.GetString("User"))
+                        {
+                            user.UserImage = user.Profile_Photo != null ? Convert.ToBase64String(user.Profile_Photo) : null;
+                            model.UserVM.Users.Add(user);
+                        }
                     }
                 }
                 return View("~/Views/User/Users/AllUsers.cshtml", model);

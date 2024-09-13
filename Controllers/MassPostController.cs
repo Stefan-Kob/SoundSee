@@ -19,17 +19,17 @@ namespace SoundSee.Controllers
         }
 
         [HttpGet]
-        public ActionResult DisplayProfileFeed()
+        public ActionResult DisplayProfileFeed(int userId)
         {
             var model = new PostNUserViewModel();
             model.UserVM = new UserViewModel();
-            model.UserVM.User = _dbContext.Users.FirstOrDefault(u => u.Id == HttpContext.Session.GetInt32("UserID"));
+            model.UserVM.User = _dbContext.Users.FirstOrDefault(u => u.Id == userId);
 
             // Get all of the users posts, and put them in the list
             foreach (Post post in _dbContext.Posts)
             {
                 PostViewModel postModel = new PostViewModel();
-                if (post.UserID == model.UserVM.User.Id)
+                if (post.UserID == userId)
                 {
                     postModel.ViewModelImage0 = post.Image0 != null ? Convert.ToBase64String(post.Image0) : null;
                     postModel.ViewModelImage1 = post.Image1 != null ? Convert.ToBase64String(post.Image1) : null;

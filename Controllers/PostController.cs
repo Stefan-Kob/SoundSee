@@ -159,6 +159,13 @@ namespace SoundSee.Controllers
             await _dbContext.SaveChangesAsync();
 
             model = ReturnModelImages(model);
+
+            HttpContext.Session.SetString("Title", string.Empty);
+            HttpContext.Session.SetString("Description", string.Empty);
+            HttpContext.Session.SetString("Image0", string.Empty);
+            HttpContext.Session.SetString("Image1", string.Empty);
+            HttpContext.Session.SetString("Image2", string.Empty);
+
             return View("~/Views/User/CreatePost.cshtml", model);
         }
 

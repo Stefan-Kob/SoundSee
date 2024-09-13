@@ -70,7 +70,8 @@ namespace SoundSee.Migrations
 
                     b.Property<string>("Title")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(45)
+                        .HasColumnType("nvarchar(45)");
 
                     b.Property<int>("UserID")
                         .HasColumnType("int");
@@ -116,6 +117,10 @@ namespace SoundSee.Migrations
                         .HasColumnType("varbinary(max)");
 
                     b.Property<string>("SignUpForNewsletters")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserImage")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
