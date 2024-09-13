@@ -5,7 +5,7 @@
 namespace SoundSee.Migrations
 {
     /// <inheritdoc />
-    public partial class SoundSeeDBMigration : Migration
+    public partial class SoundSeeDbMigration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -32,7 +32,7 @@ namespace SoundSee.Migrations
                     UserID = table.Column<int>(type: "int", nullable: false),
                     MainAccount = table.Column<bool>(type: "bit", nullable: false),
                     LinkedAccNum = table.Column<int>(type: "int", nullable: false),
-                    Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Title = table.Column<string>(type: "nvarchar(45)", maxLength: 45, nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Image0 = table.Column<byte[]>(type: "varbinary(max)", nullable: false),
                     Image1 = table.Column<byte[]>(type: "varbinary(max)", nullable: false),
@@ -53,10 +53,12 @@ namespace SoundSee.Migrations
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Password = table.Column<string>(type: "nvarchar(32)", maxLength: 32, nullable: false),
                     SignUpForNewsletters = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    PublicOrPrivateAcc = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Profile_Photo = table.Column<byte[]>(type: "varbinary(max)", nullable: false),
                     Salt = table.Column<byte[]>(type: "varbinary(max)", nullable: false),
                     MainAccount = table.Column<bool>(type: "bit", nullable: false),
-                    LinkedAccNum = table.Column<int>(type: "int", nullable: false)
+                    LinkedAccNum = table.Column<int>(type: "int", nullable: false),
+                    UserImage = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {

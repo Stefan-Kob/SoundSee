@@ -1,0 +1,61 @@
+﻿@model SoundSee.ViewModels.PostNUserViewModel
+@{
+    ViewData["Title"] = "View Posts";
+    Layout = "~/Views/Shared/_SignInLayout.cshtml";
+    int i = 0;
+}
+
+<!-- Navbar -->
+<div class="mb-5 fixed-top">
+    <nav class="navbar navbar-light mt-0" id="topSignedInBar">
+        <a class="navbar-brand" href="@Url.Action("ViewAccount", "User")">
+            <img src="~/Media/chevron-double-left.svg" width="30" height="30" alt="Go Back">
+        </a>
+        <div>
+            <a class="navbar-brand" style="font-family:monospace; font-weight:bold;" href="#">Your Posts</a>
+            <img src="~/Media/Small posts.svg" width="30" height="30" alt="User profile photo">
+        </div>
+        <a class="navbar-brand" href="@Url.Action("ViewAccount", "User")">
+            <img src="~/Media/gear.svg" width="25" height="25" alt="">
+        </a>
+    </nav>
+</div>
+
+<br />
+<div class="mt-4">
+    @if (Model.PostVMList.Count() != 0)
+    {
+        @foreach (var post in Model.PostVMList)
+        {
+            i++;
+            <div class="container" id="post-@i">
+                <div class="row justify-content-center">
+                    <div class="col-lg-7 col-sm-9 col-md-10 p-0 mb-1 d-flex flex-column">
+                        <div style="border: 1px solid #b6b6b6; border-radius:8px" class="m-1">
+                            @if (string.IsNullOrEmpty(post.ViewModelImage0))
+                            {
+                                <div>
+                                    <p class="m-1 postTitle">@post.Post.Title</p>
+                                    <p style="width:90%;" class="m-1">@post.Post.Description</p>
+                                </div>
+                            }
+                            else
+                            {
+                                <div>
+                                    <img style="height:20em;width:20em" class="postImage img-fluid" src="data:image/jpeg;base64,@post.ViewModelImage0" alt="Post Image @i" />
+                                    <p class="m-1 postTitle">@post.Post.Title</p>
+                                    <p style="width:90%;" class="m-1">@post.Post.Description</p>
+                                </div>
+                            }
+                            <button onclick="" class="btn btn-secondary w-100 commentBtn">Comments</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    }
+    else
+    {
+        <p class="m-4"><a href="@Url.Action("SendToPost", "Post")">How did you get here!? Please create a post.</a></p>
+    }
+</div>

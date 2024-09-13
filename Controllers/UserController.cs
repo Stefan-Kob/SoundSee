@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using SoundSee.Database;
 using SoundSee.Models;
 using SoundSee.ViewModels;
+using System.Diagnostics;
 using System.IO;
 
 namespace SoundSee.Controllers
@@ -139,6 +140,15 @@ namespace SoundSee.Controllers
                 user.SignUpForNewsletters = "T";
             }
 
+            if (Request.Form["PublicOrPrivateAcc"] != "on")
+            {
+                user.PublicOrPrivateAcc = "Public";
+            }
+            else
+            {
+                user.PublicOrPrivateAcc = "Private";
+            }
+
             model.User = user;
 
             // Validtation (Clear > Validate > set/rerturn)
@@ -193,16 +203,18 @@ namespace SoundSee.Controllers
         }
 
         [HttpPost]
-        [Route("User/Welcome")]
         public IActionResult ContinUserToWelcome(UserViewModel model)
         {
-            return View("Welcome", model);
+            return View("~/Views/User/Welcome.cshtml", model);
         }
 
         public IActionResult ViewAccount()
         {
-            var model = new UserViewModel();
-            model.User = new User { Username = HttpContext.Session.GetString("User") };
+            var model = new PostNUserViewModel();
+            model.UserVM = new UserViewModel();
+            model.UserVM.User = _dbContext.Users.FirstOrDefault(u => u.Id == HttpContext.Session.GetInt32("UserID"));
+
+            model.PostVMList = GetPostList(model);
 
             return View("ViewAccount", model);
         }
@@ -251,10 +263,30 @@ namespace SoundSee.Controllers
             return false;
         }
 
+        public List<PostViewModel> GetPostList(PostNUserViewModel model)
+        {
+            // Get all of the users posts, and put them in the list
+            foreach (Post post in _dbContext.Posts)
+            {
+                PostViewModel postModel = new PostViewModel();
+                if (post.UserID == model.UserVM.User.Id)
+                {
+                    postModel.ViewModelImage0 = post.Image0 != null ? Convert.ToBase64String(post.Image0) : null;
+                    postModel.Post = post;
 
+                    if (post.Title.Count() > 23)
+                    {
+                        postModel.Post.Title = post.Title.Substring(0, 23) + "...";
+                    }
+                    if (post.Description.Count() > 80)
+                    {
+                        postModel.Post.Description = post.Description.Substring(0, 100) + "...";
+                    }
 
-
-
-
+                    model.PostVMList.Add(postModel);
+                }
+            }
+            return model.PostVMList;
+        }
     }
 }

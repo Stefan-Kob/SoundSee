@@ -9,12 +9,28 @@
       "PackagePath": "staticwebassets\\Media\\Add.svg"
     },
     {
+      "Id": "C:\\MyPrograms\\SoundSee\\SoundSee\\wwwroot\\Media\\Camera.png",
+      "PackagePath": "staticwebassets\\Media\\Camera.png"
+    },
+    {
+      "Id": "C:\\MyPrograms\\SoundSee\\SoundSee\\wwwroot\\Media\\PaperAirplane.png",
+      "PackagePath": "staticwebassets\\Media\\PaperAirplane.png"
+    },
+    {
+      "Id": "C:\\MyPrograms\\SoundSee\\SoundSee\\wwwroot\\Media\\Small posts.svg",
+      "PackagePath": "staticwebassets\\Media\\Small posts.svg"
+    },
+    {
       "Id": "C:\\MyPrograms\\SoundSee\\SoundSee\\wwwroot\\Media\\SoundSeeLogo.png",
       "PackagePath": "staticwebassets\\Media\\SoundSeeLogo.png"
     },
     {
       "Id": "C:\\MyPrograms\\SoundSee\\SoundSee\\wwwroot\\Media\\SoundSeeLogo.svg",
       "PackagePath": "staticwebassets\\Media\\SoundSeeLogo.svg"
+    },
+    {
+      "Id": "C:\\MyPrograms\\SoundSee\\SoundSee\\wwwroot\\Media\\chevron-double-left.svg",
+      "PackagePath": "staticwebassets\\Media\\chevron-double-left.svg"
     },
     {
       "Id": "C:\\MyPrograms\\SoundSee\\SoundSee\\wwwroot\\Media\\defaultProfile_Photo.jpg",
@@ -39,6 +55,10 @@
     {
       "Id": "C:\\MyPrograms\\SoundSee\\SoundSee\\wwwroot\\Media\\qr-code.svg",
       "PackagePath": "staticwebassets\\Media\\qr-code.svg"
+    },
+    {
+      "Id": "C:\\MyPrograms\\SoundSee\\SoundSee\\wwwroot\\Media\\rightArrow.png",
+      "PackagePath": "staticwebassets\\Media\\rightArrow.png"
     },
     {
       "Id": "C:\\MyPrograms\\SoundSee\\SoundSee\\wwwroot\\Media\\search.svg",

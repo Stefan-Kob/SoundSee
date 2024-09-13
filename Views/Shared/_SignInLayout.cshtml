@@ -16,18 +16,26 @@
 
         <footer class="mt-2 footer fixed-bottom">
             <nav class="navbar navbar-light mt-0" id="topSignedInBar">
-                <a class="navbar-brand" href="#">
-                    <img src="~/Media/house.svg" width="30" height="30" alt="">
-                </a>
-                <a class="navbar-brand" href="#">
-                    <img src="~/Media/search.svg" width="30" height="30" alt="">
-                </a>
-                <a class="navbar-brand" href="@Url.Action("SendToPost", "Post")">
-                    <img src="~/Media/plus.svg" width="30" height="30" alt="">
-                </a>
-                <a class="navbar-brand" href="@Url.Action("ViewAccount", "User")">
-                    <img src="~/Media/person.svg" width="30" height="30" alt="">
-                </a>
+                <form action="@Url.Action("ContinUserToWelcome", "User")" method="post">
+                    <button type="submit" class="navbar-brand btn btn-outline-light">
+                        <img src="~/Media/house.svg" width="20" height="30" alt="Home">
+                    </button>
+                </form>
+                <form action="@Url.Action("GoToSearch", "MainSearch")">
+                    <button type="submit" class="navbar-brand btn btn-outline-light">
+                        <img src="~/Media/search.svg" width="20" height="30" alt="Search">
+                    </button>
+                </form>
+                <form action="@Url.Action("SendToPost", "Post")">
+                    <button type="submit" class="navbar-brand btn btn-outline-light">
+                        <img src="~/Media/plus.svg" width="20" height="30" alt="Post">
+                    </button>
+                </form>
+                <form action="@Url.Action("ViewAccount", "User")">
+                    <button type="submit" class="navbar-brand btn btn-outline-light">
+                        <img src="~/Media/person.svg" width="20" height="30" alt="View Account">
+                    </button>
+                </form>
             </nav>
         </footer>
     </div>

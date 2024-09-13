@@ -11,8 +11,8 @@ using SoundSee.Database;
 namespace SoundSee.Migrations
 {
     [DbContext(typeof(SoundSeeDbContext))]
-    [Migration("20240826022154_SoundSeeDBMigration")]
-    partial class SoundSeeDBMigration
+    [Migration("20240913030134_SoundSeeDbMigration")]
+    partial class SoundSeeDbMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -73,7 +73,8 @@ namespace SoundSee.Migrations
 
                     b.Property<string>("Title")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(45)
+                        .HasColumnType("nvarchar(45)");
 
                     b.Property<int>("UserID")
                         .HasColumnType("int");
@@ -110,11 +111,19 @@ namespace SoundSee.Migrations
                         .IsRequired()
                         .HasColumnType("varbinary(max)");
 
+                    b.Property<string>("PublicOrPrivateAcc")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<byte[]>("Salt")
                         .IsRequired()
                         .HasColumnType("varbinary(max)");
 
                     b.Property<string>("SignUpForNewsletters")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserImage")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 

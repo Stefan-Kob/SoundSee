@@ -1,6 +1,6 @@
-﻿@model SoundSee.ViewModels.PostNUserViewModel
+﻿@model SoundSee.ViewModels.PostNUserViewModel;
 @{
-    ViewData["Title"] = "View Account";
+    ViewData["Title"] = $"{Model.UserVM.User.Username} Profile";
     Layout = "~/Views/Shared/_SignInLayout.cshtml";
     int i = 0;
 }
@@ -18,12 +18,12 @@
 <!-- Navbar -->
 <div class="mb-2 fixed-top">
     <nav class="navbar navbar-light mt-0" id="topSignedInBar">
-        <a class="navbar-brand" href="#">
-            <img src="~/Media/qr-code.svg" width="25" height="25" alt="share">
+        <a class="navbar-brand" href="@Url.Action("GoToSearch", "MainSearch")">
+            <img src="~/Media/chevron-double-left.svg" width="30" height="30" alt="Search">
         </a>
         <div>
-            <a class="navbar-brand" style="font-family:monospace; font-weight:bold;" href="#">@Context.Session.GetString("User")</a>
-            <img src="@Url.Action("DisplayProfilePhoto", "User")" width="30" height="30" alt="User profile photo">
+            <a class="navbar-brand" style="font-family:monospace; font-weight:bold;" href="#">@Model.UserVM.User.Username</a>
+            <img src="data:image/jpeg;base64,@Model.UserVM.UserImage" width="30" height="30" alt="@Model.UserVM.User.Username's profile photo">
         </div>
         <a class="navbar-brand" href="@Url.Action("ViewAccount", "User")">
             <img src="~/Media/gear.svg" width="25" height="25" alt="settings">
@@ -34,12 +34,13 @@
 <!-- This is ok for now. Not too good though -->
 <div class="row">
     <div class="col-6 col-lg-3">
-        <img class="mt-5 col" src="@Url.Action("DisplayProfilePhoto", "User")" height="150em" />
+        <img class="mt-5 col" src="data:image/jpeg;base64,@Model.UserVM.UserImage" height="150em" />
     </div>
     <div class="mt-5 m-2 col">
-        <h3>@Context.Session.GetString("User")</h3>
+        <h3>@Model.UserVM.User.Username</h3>
         <small>Account type: @Model.UserVM.User.PublicOrPrivateAcc</small>
     </div>
+
 </div>
 
 <!-- Still needs improvements but good for now (shows the posts) -->
@@ -49,6 +50,7 @@
         <div class="row">
             @for (i = 0; i < Model.PostVMList.Count(); i++)
             {
+                string tempImage = Model.PostVMList[i].ViewModelImage0;
                 var post = Model.PostVMList[i];
 
                 <div class="col-sm-6 col-md-4 p-0 mb-1 d-flex flex-column">
@@ -56,19 +58,19 @@
                         <a href="@Url.Action("DisplayProfileFeed", "MassPost", new {userId = Model.UserVM.User.Id})#post-@i" style="text-decoration:none;">
                             @if (string.IsNullOrEmpty(post.ViewModelImage0))
                             {
-                            <div>
-                                <p class="m-1 postTitle">@post.Post.Title</p>
-                                <p style="width:90%;" class="m-1">@post.Post.Description</p>
-                            </div>
+                                <div>
+                                    <p class="m-1 postTitle">@post.Post.Title</p>
+                                    <p style="width:90%;" class="m-1">@post.Post.Description</p>
+                                </div>
                             }
                             else
                             {
-                             <div>
-                                <img style="height:12em;width:12em;" class="postImage img-fluid" src="data:image/jpeg;base64,@post.ViewModelImage0" alt="Post Image @i" />
-                                <p class="m-1 postTitle">&nbsp;@post.Post.Title</p>
-                                <p style="width:90%;" class="m-1">@post.Post.Description</p>
-      
-                            </div>
+                                <div>
+                                    <img style="height:12em;width:12em;" class="postImage img-fluid" src="data:image/jpeg;base64,@tempImage" alt="Post Image @i" />
+                                    <p class="m-1 postTitle">&nbsp;@post.Post.Title</p>
+                                    <p style="width:90%;" class="m-1">@post.Post.Description</p>
+
+                                </div>
                             }
                         </a>
 
@@ -80,6 +82,6 @@
     }
     else
     {
-        <p class="m-4"><a href="@Url.Action("SendToPost", "Post")">Create a post</a> to be able to see posts of yours!</p>
+        <p class="m-4">@Model.UserVM.User.Username has not created any posts yet!</p>
     }
 </div>
