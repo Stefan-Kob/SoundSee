@@ -1,6 +1,6 @@
 
 ># **Welcome to SoundSee!**
-*SoundSee* will be a responsive ASP.NET Core MVC C# web app in the social media catagory built by me. It will include:
+*SoundSee* will be a responsive ASP.NET Core MVC C# web app in the social media category I built, Stefan Kobetich. It will include:
 
  - [x] **User accounts**
 	 - [ ] Account management
