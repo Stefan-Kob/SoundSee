@@ -16,15 +16,20 @@
  - [x] **Create Account Page**
  - [ ] **Home Page**
 	 - [x] Profile page
+	 	- [x] User Feed
+  	 	- [x] View other accounts page
+     		- [x] Other user feed 
 	 - [ ] Notifications page
 	 - [ ] Messaging page
 	 - [ ] Search/explore page
+  	 	- [x] Search part
+  	 	- [ ] Explore part
 	 - [x] Create post page
 	 - [ ] Settings page
 		 - [ ] Theme page
 		 - [ ] Account info page
 		 - [ ] Reset password page
-		 - [ ] About the app
+		 - [ ] About the app (once signed in)
 
 ## Future aspirations:
 
@@ -32,3 +37,5 @@
  - [ ] Android app
 	 - [ ] Available on the Android app store
  - [ ] More features
+ - [ ] Better UI
+ - [ ] Performance tweaks
