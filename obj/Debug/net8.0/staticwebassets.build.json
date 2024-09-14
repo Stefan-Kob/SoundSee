@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "fN0jZGpQoUDjpurnmKz4we0YaXE+EP7cJlVPu52MLpQ=",
+  "Hash": "lu1KpRyYK8lWnE2gzbvaa7JKSny2lfBVIUhVlya0JtU=",
   "Source": "SoundSee",
   "BasePath": "_content/SoundSee",
   "Mode": "Default",
@@ -1231,6 +1231,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\Media\\Add.svg"
+    },
+    {
+      "Identity": "C:\\MyPrograms\\SoundSee\\SoundSee\\wwwroot\\Media\\bellIcon.png",
+      "SourceId": "SoundSee",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\MyPrograms\\SoundSee\\SoundSee\\wwwroot\\",
+      "BasePath": "_content/SoundSee",
+      "RelativePath": "Media/bellIcon.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Media\\bellIcon.png"
     },
     {
       "Identity": "C:\\MyPrograms\\SoundSee\\SoundSee\\wwwroot\\Media\\Camera.png",

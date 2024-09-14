@@ -10,7 +10,9 @@ namespace SoundSee.ViewModels
 
         public List<PostViewModel> PostVMList { get; set; } = new List<PostViewModel>();
 
-        public string SearchQuest {  get; set; } = string.Empty;
+        public string SearchQuest { get; set; } = string.Empty;
+
+        public string Requested { get; set; } = string.Empty;
 
     }
 }

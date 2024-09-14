@@ -13,6 +13,8 @@
             }
         }
     });
+
+    var button = document.getElementById("")
 </script>
 
 <!-- Navbar -->
@@ -34,13 +36,31 @@
 <!-- This is ok for now. Not too good though -->
 <div class="row">
     <div class="col-6 col-lg-3">
-        <img class="mt-5 col" src="data:image/jpeg;base64,@Model.UserVM.UserImage" height="150em" />
+        <img class="mt-5 col" src="data:image/jpeg;base64,@Model.UserVM.UserImage" style="height:12em;width:14em;" />
     </div>
     <div class="mt-5 m-2 col">
         <h3>@Model.UserVM.User.Username</h3>
         <small>Account type: @Model.UserVM.User.PublicOrPrivateAcc</small>
-    </div>
 
+        <br />
+        <div class="mt-1">
+            @if(Model.UserVM.User.PublicOrPrivateAcc == "Public")
+            {
+                <button class="btn btn-primary" onclick="">Follow</button>
+            }
+            else
+            {
+                if (Model.Requested == "Y")
+                {
+                    <p class="btn btn-secondary"><i>Requested</i></p>
+                }
+                else
+                {
+                    <button class="btn btn-primary" href="@Url.Action("ProcessFollowReq", "FollowReq", new {selectedId = Model.UserVM.User.Id});">Request to Follow</button>
+                }
+            }
+        </div>
+    </div>
 </div>
 
 <!-- Still needs improvements but good for now (shows the posts) -->
@@ -69,7 +89,7 @@
                                     <img style="height:12em;width:12em;" class="postImage img-fluid" src="data:image/jpeg;base64,@tempImage" alt="Post Image @i" />
                                     <p class="m-1 postTitle">&nbsp;@post.Post.Title</p>
                                     <p style="width:90%;" class="m-1">@post.Post.Description</p>
-
+    
                                 </div>
                             }
                         </a>
@@ -82,6 +102,6 @@
     }
     else
     {
-        <p class="m-4">@Model.UserVM.User.Username has not created any posts yet!</p>
+        <p class="m-4"><b>@Model.UserVM.User.Username</b> has not created any posts yet!</p>
     }
 </div>

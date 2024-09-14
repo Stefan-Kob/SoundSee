@@ -1,11 +1,12 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
 namespace SoundSee.Migrations
 {
     /// <inheritdoc />
-    public partial class SoundSeeDbMigration : Migration
+    public partial class SoundSeeDBMigration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -21,6 +22,52 @@ namespace SoundSee.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Accounts", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ChatInfoPointers",
+                columns: table => new
+                {
+                    ChatID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ChatName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ChatImage = table.Column<byte[]>(type: "varbinary(max)", nullable: false),
+                    RequestID = table.Column<int>(type: "int", nullable: false),
+                    ChatUser1 = table.Column<int>(type: "int", nullable: false),
+                    ChatUser2 = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ChatInfoPointers", x => x.ChatID);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "FollowRequests",
+                columns: table => new
+                {
+                    RequestID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    TargetUserID = table.Column<int>(type: "int", nullable: false),
+                    AskingUserID = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_FollowRequests", x => x.RequestID);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Messages",
+                columns: table => new
+                {
+                    MessageID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ChatID = table.Column<int>(type: "int", nullable: false),
+                    MessContent = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    MessTimeDate = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Messages", x => x.MessageID);
                 });
 
             migrationBuilder.CreateTable(
@@ -71,6 +118,15 @@ namespace SoundSee.Migrations
         {
             migrationBuilder.DropTable(
                 name: "Accounts");
+
+            migrationBuilder.DropTable(
+                name: "ChatInfoPointers");
+
+            migrationBuilder.DropTable(
+                name: "FollowRequests");
+
+            migrationBuilder.DropTable(
+                name: "Messages");
 
             migrationBuilder.DropTable(
                 name: "Posts");
