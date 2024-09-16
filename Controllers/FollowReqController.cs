@@ -22,11 +22,11 @@ namespace SoundSee.Controllers
         {
             MainSearchController mainSearchController = new MainSearchController(_hostingEnvironment, _dbContext);
             PostNUserViewModel model = new PostNUserViewModel();
+            FollowRequests followReq = new FollowRequests();
 
             model = mainSearchController.LoadingOfUser(model, 1, selectedId);
             model.Requested = "Y";
 
-            FollowRequests followReq = new FollowRequests();
             followReq.AskingUserID = (int)HttpContext.Session.GetInt32("UserID");
             followReq.TargetUserID = model.UserVM.User.Id;
 
@@ -36,5 +36,35 @@ namespace SoundSee.Controllers
             return View("~/Views/User/Users/SelectedUser.cshtml", model);
         }
 
+        public async Task<IActionResult> FollowUser(int selectedId)
+        {
+            MainSearchController mainSearchController = new MainSearchController(_hostingEnvironment, _dbContext);
+            PostNUserViewModel model = new PostNUserViewModel();
+            FollowList followList = new FollowList();
+
+            followList.FollowedID = selectedId;
+            followList.FollowerID = (int)HttpContext.Session.GetInt32("UserID");
+            _dbContext.Add(followList);
+            await _dbContext.SaveChangesAsync();
+
+            model = mainSearchController.LoadingOfUser(model, 2, selectedId);
+
+            return View("~/Views/User/Users/SelectedUser.cshtml", model);
+        }
+
+        public async Task<IActionResult> UnFollowUser(int selectedId)
+        {
+            MainSearchController mainSearchController = new MainSearchController(_hostingEnvironment, _dbContext);
+            PostNUserViewModel model = new PostNUserViewModel();
+            FollowList followList =_dbContext.FollowList.FirstOrDefault(u => u.FollowedID == selectedId && u.FollowerID == (int)HttpContext.Session.GetInt32("UserID"));
+
+            _dbContext.Remove(followList);
+            await _dbContext.SaveChangesAsync();
+
+            model = mainSearchController.LoadingOfUser(model, 3, selectedId);
+
+
+            return View("~/Views/User/Users/SelectedUser.cshtml", model);
+        }
     }
 }

@@ -42,6 +42,20 @@ namespace SoundSee.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "FollowList",
+                columns: table => new
+                {
+                    FollowingID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    FollowedID = table.Column<int>(type: "int", nullable: false),
+                    FollowerID = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_FollowList", x => x.FollowingID);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "FollowRequests",
                 columns: table => new
                 {
@@ -121,6 +135,9 @@ namespace SoundSee.Migrations
 
             migrationBuilder.DropTable(
                 name: "ChatInfoPointers");
+
+            migrationBuilder.DropTable(
+                name: "FollowList");
 
             migrationBuilder.DropTable(
                 name: "FollowRequests");

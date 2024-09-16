@@ -12,7 +12,7 @@ using SoundSee.Database;
 namespace SoundSee.Migrations
 {
     [DbContext(typeof(SoundSeeDbContext))]
-    [Migration("20240914165314_SoundSeeDBMigration")]
+    [Migration("20240915225638_SoundSeeDBMigration")]
     partial class SoundSeeDBMigration
     {
         /// <inheritdoc />
@@ -70,6 +70,25 @@ namespace SoundSee.Migrations
                     b.HasKey("ChatID");
 
                     b.ToTable("ChatInfoPointers");
+                });
+
+            modelBuilder.Entity("SoundSee.Models.FollowList", b =>
+                {
+                    b.Property<int>("FollowingID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("FollowingID"));
+
+                    b.Property<int>("FollowedID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("FollowerID")
+                        .HasColumnType("int");
+
+                    b.HasKey("FollowingID");
+
+                    b.ToTable("FollowList");
                 });
 
             modelBuilder.Entity("SoundSee.Models.FollowRequests", b =>

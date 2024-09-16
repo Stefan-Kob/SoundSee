@@ -18,5 +18,7 @@ namespace SoundSee.Database
         public DbSet<Message> Messages { get; set; }
 
         public DbSet<FollowRequests> FollowRequests { get; set; }
+
+        public DbSet<FollowList> FollowList { get; set; }
     }
 }

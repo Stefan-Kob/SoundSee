@@ -48,6 +48,10 @@ namespace SoundSee.Controllers
                                 break;
                             }
                             user.UserImage = user.Profile_Photo != null ? Convert.ToBase64String(user.Profile_Photo) : null;
+                            if (user.Username.Count() >= 18)
+                            {
+                                user.Username = user.Username.Substring(0, 18) + "...";
+                            }
                             model.UserVM.Users.Add(user);
                         }
                     }
@@ -71,7 +75,7 @@ namespace SoundSee.Controllers
             // Create User
             model.PostVM = new PostViewModel();
 
-            if (type == 1 && selectedId != 0)
+            if (type == 1 || type == 2 || type == 3 && selectedId != 0)
             {
                 model.UserVM.User = _dbContext.Users.FirstOrDefault(u => u.Id == selectedId);
             }
@@ -94,17 +98,61 @@ namespace SoundSee.Controllers
                 }
             }
 
-            // See if you have followed them or not
-            FollowRequests followReq = _dbContext.FollowRequests.FirstOrDefault(u => u.TargetUserID == model.UserVM.User.Id);
-            if (followReq != null && followReq.AskingUserID == HttpContext.Session.GetInt32("UserID"))
+            if (model.UserVM.User.PublicOrPrivateAcc == "Public")
             {
-                model.Requested = "Y";
+                var userId = HttpContext.Session.GetInt32("UserID");
+                if (userId == null)
+                {
+                    // Handle the case where the session key is not set
+                    string igloo = "fuck";
+                }
+                FollowList followList = new FollowList();
+                if (_dbContext.FollowList.Count() != 0)
+                {
+                    followList = _dbContext.FollowList.FirstOrDefault(u => u.FollowedID == model.UserVM.User.Id && u.FollowerID == (int)HttpContext.Session.GetInt32("UserID"));
+                }
+ 
+                if (followList != null || type == 2)
+                {
+                    model.Requested = "Y";
+                }
+                else
+                {
+                    model.Requested = "N";
+                }
             }
             else
             {
-                model.Requested = "N";
-            }
+                // See if you have followed them or not after knowing this is not a public account
+                FollowRequests followReq = new FollowRequests();
+                if (_dbContext.FollowRequests.Count() != 0)
+                {
+                    followReq = _dbContext.FollowRequests.FirstOrDefault(u => u.TargetUserID == model.UserVM.User.Id && u.AskingUserID == (int)HttpContext.Session.GetInt32("UserID"));
+                }
 
+                FollowList followList = new FollowList();
+                if (_dbContext.FollowList.Count() != 0)
+                {
+                    followList = _dbContext.FollowList.FirstOrDefault(u => u.FollowedID == model.UserVM.User.Id && u.FollowerID == (int)HttpContext.Session.GetInt32("UserID"));
+                }
+
+                if (followList != null)
+                {
+                    model.Requested = "F";
+                }
+                if (followReq != null && followReq.AskingUserID == HttpContext.Session.GetInt32("UserID"))
+                {
+                    model.Requested = "Y";
+                }
+                else
+                {
+                    model.Requested = "N";
+                }
+                if (type == 3)
+                {
+                    model.Requested = "N";
+                }
+            }
             return model;
         }
 

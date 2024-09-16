@@ -40,6 +40,7 @@ namespace SoundSee.Controllers
             User user = new User();
             User tempUser = new User();
             saltAndShaker saltAndShaker = new saltAndShaker();
+            int inDBCheck = 0;
 
             user.Email = Request.Form["Email"];
             user.Password = Request.Form["Password"];
@@ -59,6 +60,7 @@ namespace SoundSee.Controllers
                     user.Username = dBUser.Username;
                     user.Profile_Photo = dBUser.Profile_Photo;
                     user.Id = dBUser.Id;
+                    inDBCheck = 1;
 
                     correctPassword = saltAndShaker.VerifyPassword(user.Password, tempUser.Password, tempUser.Salt);
                     if (correctPassword == false)
@@ -67,6 +69,12 @@ namespace SoundSee.Controllers
                     }
                     break;
                 }
+            }
+
+            if (inDBCheck == 0)
+            {
+                ModelState.AddModelError("User.Email", "Wrong email or password, please try again.");
+                ModelState.AddModelError("User.Password", "Wrong email or password, please try again.");
             }
 
             model.User = user;

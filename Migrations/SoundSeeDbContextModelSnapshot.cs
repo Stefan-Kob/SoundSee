@@ -69,6 +69,25 @@ namespace SoundSee.Migrations
                     b.ToTable("ChatInfoPointers");
                 });
 
+            modelBuilder.Entity("SoundSee.Models.FollowList", b =>
+                {
+                    b.Property<int>("FollowingID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("FollowingID"));
+
+                    b.Property<int>("FollowedID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("FollowerID")
+                        .HasColumnType("int");
+
+                    b.HasKey("FollowingID");
+
+                    b.ToTable("FollowList");
+                });
+
             modelBuilder.Entity("SoundSee.Models.FollowRequests", b =>
                 {
                     b.Property<int>("RequestID")
