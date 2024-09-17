@@ -40,6 +40,7 @@ namespace SoundSee.Controllers
             User user = new User();
             User tempUser = new User();
             saltAndShaker saltAndShaker = new saltAndShaker();
+            int inDBCheck = 0;
 
             user.Email = Request.Form["Email"];
             user.Password = Request.Form["Password"];
@@ -59,6 +60,7 @@ namespace SoundSee.Controllers
                     user.Username = dBUser.Username;
                     user.Profile_Photo = dBUser.Profile_Photo;
                     user.Id = dBUser.Id;
+                    inDBCheck = 1;
 
                     correctPassword = saltAndShaker.VerifyPassword(user.Password, tempUser.Password, tempUser.Salt);
                     if (correctPassword == false)
@@ -67,6 +69,12 @@ namespace SoundSee.Controllers
                     }
                     break;
                 }
+            }
+
+            if (inDBCheck == 0)
+            {
+                ModelState.AddModelError("User.Email", "Wrong email or password, please try again.");
+                ModelState.AddModelError("User.Password", "Wrong email or password, please try again.");
             }
 
             model.User = user;
@@ -215,6 +223,8 @@ namespace SoundSee.Controllers
             model.UserVM.User = _dbContext.Users.FirstOrDefault(u => u.Id == HttpContext.Session.GetInt32("UserID"));
 
             model.PostVMList = GetPostList(model);
+
+            // In seperate method, create a notificaiton method to gather notifications. Then show the notifications on the viewAccount page as a hidden div that takes over part of the page (possibly scrollable)
 
             return View("ViewAccount", model);
         }

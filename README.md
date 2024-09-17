@@ -4,8 +4,8 @@
 
  - [x] **User accounts**
 	 - [ ] Account management
-	 - [ ] Profiles - Private and Public
-	 - [ ] Following profiles
+	 - [x] Profiles - Private and Public
+	 - [x] Following profiles
  - [ ] **Messaging (text and image/video)**
  - [x] **Posts**
 	 - [ ] Likes/dislikes
@@ -19,7 +19,7 @@
 	 	- [x] User Feed
   	 	- [x] View other accounts page
      		- [x] Other user feed 
-	 - [ ] Notifications page
+	 - [ ] Notifications section
 	 - [ ] Messaging page
 	 - [ ] Search/explore page
   	 	- [x] Search part

@@ -12,5 +12,13 @@ namespace SoundSee.Database
         public DbSet<Accounts> Accounts { get; set; }
 
         public DbSet<Post> Posts { get; set; }
+
+        public DbSet<ChatInfoPointer> ChatInfoPointers { get; set; }
+
+        public DbSet<Message> Messages { get; set; }
+
+        public DbSet<FollowRequests> FollowRequests { get; set; }
+
+        public DbSet<FollowList> FollowList { get; set; }
     }
 }

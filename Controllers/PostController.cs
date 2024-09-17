@@ -1,13 +1,7 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
-using Microsoft.Extensions.Hosting;
+﻿using Microsoft.AspNetCore.Mvc;
 using SoundSee.Database;
 using SoundSee.Models;
 using SoundSee.ViewModels;
-using System.IO;
-using System.IO.Compression;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace SoundSee.Controllers
 {

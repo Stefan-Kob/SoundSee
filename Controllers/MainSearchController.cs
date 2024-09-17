@@ -9,7 +9,7 @@ namespace SoundSee.Controllers
     {
         private readonly IWebHostEnvironment _hostingEnvironment;
         private readonly SoundSeeDbContext _dbContext;
-
+        private string search = string.Empty;
         // Initialization
         public MainSearchController(IWebHostEnvironment hostingEnvironment, SoundSeeDbContext dbContext)
         {
@@ -43,7 +43,15 @@ namespace SoundSee.Controllers
                     {
                         if (user.Username != HttpContext.Session.GetString("User"))
                         {
+                            if (model.UserVM.Users.Count >= 10)
+                            {
+                                break;
+                            }
                             user.UserImage = user.Profile_Photo != null ? Convert.ToBase64String(user.Profile_Photo) : null;
+                            if (user.Username.Count() >= 18)
+                            {
+                                user.Username = user.Username.Substring(0, 18) + "...";
+                            }
                             model.UserVM.Users.Add(user);
                         }
                     }
@@ -52,18 +60,36 @@ namespace SoundSee.Controllers
             }
         }
 
-        public IActionResult LoadSelectedUser(string search)
+        // Send user to see the selected accounts page
+        public IActionResult LoadSelectedUser(string search, int userID)
         {
             PostNUserViewModel model = new PostNUserViewModel();
+            this.search = search;
+            model = LoadingOfUser(model, 0, 0, userID);
+
+            return View("~/Views/User/Users/SelectedUser.cshtml", model);
+        }
+
+        public PostNUserViewModel LoadingOfUser(PostNUserViewModel model, int type, int selectedId, int userID)
+        {
+            // Create User
             model.PostVM = new PostViewModel();
 
-            model.UserVM.User = _dbContext.Users.FirstOrDefault(u => u.Id == Convert.ToInt64(search));
+            if (type == 1 || type == 2 || type == 3 && selectedId != 0)
+            {
+                model.UserVM.User = _dbContext.Users.FirstOrDefault(u => u.Id == selectedId);
+            }
+            else
+            {
+                model.UserVM.User = _dbContext.Users.FirstOrDefault(u => u.Id == Convert.ToInt64(search));
+            }
+
             model.UserVM.UserImage = model.UserVM.User.Profile_Photo != null ? Convert.ToBase64String(model.UserVM.User.Profile_Photo) : null;
 
+            // Add users posts
             foreach (Post post in _dbContext.Posts)
             {
                 PostViewModel postModel = new PostViewModel();
-
                 if (post.UserID == model.UserVM.User.Id)
                 {
                     postModel.Post = post;
@@ -71,9 +97,58 @@ namespace SoundSee.Controllers
                 }
             }
 
-            return View("~/Views/User/Users/SelectedUser.cshtml", model);
-        }
+            // Checking following and request account status
+            if (model.UserVM.User.PublicOrPrivateAcc == "Public")
+            {
+                FollowList followList = new FollowList();
+                if (_dbContext.FollowList.Count() != 0)
+                {
+                    followList = _dbContext.FollowList.FirstOrDefault(u => u.FollowedID == model.UserVM.User.Id && u.FollowerID == userID);
+                }
+ 
+                if (followList != null || type == 2)
+                {
+                    model.Requested = "Y";
+                }
+                else
+                {
+                    model.Requested = "N";
+                }
+            }
+            else
+            {
+                // See if you have followed them or not after knowing this is not a public account
+                FollowRequests followReq = new FollowRequests();
+                if (_dbContext.FollowRequests.Count() != 0)
+                {
+                    followReq = _dbContext.FollowRequests.FirstOrDefault(u => u.TargetUserID == model.UserVM.User.Id && u.AskingUserID == userID);
+                }
 
+                FollowList followList = new FollowList();
+                if (_dbContext.FollowList.Count() != 0)
+                {
+                    followList = _dbContext.FollowList.FirstOrDefault(u => u.FollowedID == model.UserVM.User.Id && u.FollowerID == userID);
+                }
+
+                if (followList != null)
+                {
+                    model.Requested = "F";
+                }
+                if (followReq != null && followReq.AskingUserID == userID)
+                {
+                    model.Requested = "Y";
+                }
+                else
+                {
+                    model.Requested = "N";
+                }
+                if (type == 3)
+                {
+                    model.Requested = "N";
+                }
+            }
+            return model;
+        }
 
 
 
