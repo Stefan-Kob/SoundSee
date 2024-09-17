@@ -31,6 +31,7 @@
     </nav>
 </div>
 
+<!-- Main profile info -->
 <!-- This is ok for now. Not too good though -->
 <div class="row">
     <div class="col-6 col-lg-3">
@@ -40,9 +41,10 @@
         <h3>@Context.Session.GetString("User")</h3>
         <small>Account type: @Model.UserVM.User.PublicOrPrivateAcc</small>
 
-        <!-- Need to create notifications, then following/requesting, then messages will be possible -->
+        <!-- Need to create notifications -->
         <br />
         <img src="~/Media/bellIcon.png" class="mt-1" alt="Bell Icon" width="45em" />
+        <p id="notificationAmount"></p>
         <div class="overflow-y: scroll mt-1">
             <a href="">
             </a>
@@ -50,7 +52,8 @@
     </div>
 </div>
 
-<!-- Still needs improvements but good for now (shows the posts) -->
+<!-- Posts -->
+<!-- Still needs improvements but good for now -->
 <div class="container mt-2">
     @if (Model.PostVMList.Count() != 0)
     {

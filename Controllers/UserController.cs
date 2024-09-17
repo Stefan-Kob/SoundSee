@@ -224,6 +224,8 @@ namespace SoundSee.Controllers
 
             model.PostVMList = GetPostList(model);
 
+            // In seperate method, create a notificaiton method to gather notifications. Then show the notifications on the viewAccount page as a hidden div that takes over part of the page (possibly scrollable)
+
             return View("ViewAccount", model);
         }
 
