@@ -39,10 +39,10 @@
                         <div class="m-1 d-flex justify-content-between">
                             <div>
                                 <img src="data:image/jpeg;base64,@user.UserImage" width="30" height="30" style="border-radius:25px;" alt="User profile photo">
-                                <a class="navbar-brand" style="font-family:monospace; font-weight:bold;" href="@Url.Action("LoadSelectedUser", "MainSearch", new { search = user.Id })">&nbsp;@user.Username</a>
+                                <a class="navbar-brand" style="font-family:monospace; font-weight:bold;" href="@Url.Action("LoadSelectedUser", "MainSearch", new { search = user.Id,  userID = Context.Session.GetInt32("UserID") })">&nbsp;@user.Username</a>
                             </div>
                             <div>
-                                <a href="@Url.Action("LoadSelectedUser", "MainSearch", new { search = user.Id })"><img src="~/Media/rightArrow.png" width="25" height="25" style="border-radius:25px;" alt="Right Arrow"></a>
+                                <a href="@Url.Action("LoadSelectedUser", "MainSearch", new { search = user.Id, userID = Context.Session.GetInt32("UserID") })"><img src="~/Media/rightArrow.png" width="25" height="25" style="border-radius:25px;" alt="Right Arrow"></a>
                             </div>
                         </div>
                     }

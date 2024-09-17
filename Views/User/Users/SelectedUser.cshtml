@@ -48,18 +48,18 @@
             {
                 @if (Model.Requested == "Y")
                 {
-                    <a class="btn btn-secondary" href="@Url.Action("UnFollowUser", "FollowReq", new { selectedId = Model.UserVM.User.Id})">Un-Follow</a>
+                    <a class="btn btn-secondary" href="@Url.Action("UnFollowUser", "FollowReq", new { selectedId = Model.UserVM.User.Id, userID = Context.Session.GetInt32("UserID")})">Un-Follow</a>
                 }
                 else
                 {
-                    <a class="btn btn-primary" href="@Url.Action("FollowUser", "FollowReq", new { selectedId = Model.UserVM.User.Id})">Follow</a>
+                    <a class="btn btn-primary" href="@Url.Action("FollowUser", "FollowReq", new { selectedId = Model.UserVM.User.Id, userID = Context.Session.GetInt32("UserID")})">Follow</a>
                 }
             }
             else
             {
                 if (Model.Requested == "F")
                 {
-                    <a class="btn btn-secondary" href="@Url.Action("UnFollowUser", "FollowReq", new { selectedId = Model.UserVM.User.Id})">Un-Follow</a>
+                    <a class="btn btn-secondary" href="@Url.Action("UnFollowUser", "FollowReq", new { selectedId = Model.UserVM.User.Id, userID = Context.Session.GetInt32("UserID")})">Un-Follow</a>
                 }
                 if (Model.Requested == "Y")
                 {
@@ -67,7 +67,7 @@
                 }
                 else
                 {
-                    <a class="btn btn-primary" href="@Url.Action("ProcessFollowReq", "FollowReq", new { selectedId = Model.UserVM.User.Id})">Request to Follow</a>
+                    <a class="btn btn-primary" href="@Url.Action("ProcessFollowReq", "FollowReq", new { selectedId = Model.UserVM.User.Id, userID = Context.Session.GetInt32("UserID")})">Request to Follow</a>
                 }
             }
         </div>

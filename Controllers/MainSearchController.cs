@@ -61,16 +61,16 @@ namespace SoundSee.Controllers
         }
 
         // Send user to see the selected accounts page
-        public IActionResult LoadSelectedUser(string search)
+        public IActionResult LoadSelectedUser(string search, int userID)
         {
             PostNUserViewModel model = new PostNUserViewModel();
             this.search = search;
-            model = LoadingOfUser(model, 0, 0);
+            model = LoadingOfUser(model, 0, 0, userID);
 
             return View("~/Views/User/Users/SelectedUser.cshtml", model);
         }
 
-        public PostNUserViewModel LoadingOfUser(PostNUserViewModel model, int type, int selectedId)
+        public PostNUserViewModel LoadingOfUser(PostNUserViewModel model, int type, int selectedId, int userID)
         {
             // Create User
             model.PostVM = new PostViewModel();
@@ -90,7 +90,6 @@ namespace SoundSee.Controllers
             foreach (Post post in _dbContext.Posts)
             {
                 PostViewModel postModel = new PostViewModel();
-
                 if (post.UserID == model.UserVM.User.Id)
                 {
                     postModel.Post = post;
@@ -98,18 +97,13 @@ namespace SoundSee.Controllers
                 }
             }
 
+            // Checking following and request account status
             if (model.UserVM.User.PublicOrPrivateAcc == "Public")
             {
-                var userId = HttpContext.Session.GetInt32("UserID");
-                if (userId == null)
-                {
-                    // Handle the case where the session key is not set
-                    string igloo = "fuck";
-                }
                 FollowList followList = new FollowList();
                 if (_dbContext.FollowList.Count() != 0)
                 {
-                    followList = _dbContext.FollowList.FirstOrDefault(u => u.FollowedID == model.UserVM.User.Id && u.FollowerID == (int)HttpContext.Session.GetInt32("UserID"));
+                    followList = _dbContext.FollowList.FirstOrDefault(u => u.FollowedID == model.UserVM.User.Id && u.FollowerID == userID);
                 }
  
                 if (followList != null || type == 2)
@@ -127,20 +121,20 @@ namespace SoundSee.Controllers
                 FollowRequests followReq = new FollowRequests();
                 if (_dbContext.FollowRequests.Count() != 0)
                 {
-                    followReq = _dbContext.FollowRequests.FirstOrDefault(u => u.TargetUserID == model.UserVM.User.Id && u.AskingUserID == (int)HttpContext.Session.GetInt32("UserID"));
+                    followReq = _dbContext.FollowRequests.FirstOrDefault(u => u.TargetUserID == model.UserVM.User.Id && u.AskingUserID == userID);
                 }
 
                 FollowList followList = new FollowList();
                 if (_dbContext.FollowList.Count() != 0)
                 {
-                    followList = _dbContext.FollowList.FirstOrDefault(u => u.FollowedID == model.UserVM.User.Id && u.FollowerID == (int)HttpContext.Session.GetInt32("UserID"));
+                    followList = _dbContext.FollowList.FirstOrDefault(u => u.FollowedID == model.UserVM.User.Id && u.FollowerID == userID);
                 }
 
                 if (followList != null)
                 {
                     model.Requested = "F";
                 }
-                if (followReq != null && followReq.AskingUserID == HttpContext.Session.GetInt32("UserID"))
+                if (followReq != null && followReq.AskingUserID == userID)
                 {
                     model.Requested = "Y";
                 }

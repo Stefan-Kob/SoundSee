@@ -18,16 +18,16 @@ namespace SoundSee.Controllers
             _dbContext = dbContext;
         }
 
-        public async Task<IActionResult> ProcessFollowReq(int selectedId)
+        public async Task<IActionResult> ProcessFollowReq(int selectedId, int userID)
         {
             MainSearchController mainSearchController = new MainSearchController(_hostingEnvironment, _dbContext);
             PostNUserViewModel model = new PostNUserViewModel();
             FollowRequests followReq = new FollowRequests();
 
-            model = mainSearchController.LoadingOfUser(model, 1, selectedId);
+            model = mainSearchController.LoadingOfUser(model, 1, selectedId, userID);
             model.Requested = "Y";
 
-            followReq.AskingUserID = (int)HttpContext.Session.GetInt32("UserID");
+            followReq.AskingUserID = userID;
             followReq.TargetUserID = model.UserVM.User.Id;
 
             _dbContext.Add(followReq);
@@ -36,32 +36,32 @@ namespace SoundSee.Controllers
             return View("~/Views/User/Users/SelectedUser.cshtml", model);
         }
 
-        public async Task<IActionResult> FollowUser(int selectedId)
+        public async Task<IActionResult> FollowUser(int selectedId, int userID)
         {
             MainSearchController mainSearchController = new MainSearchController(_hostingEnvironment, _dbContext);
             PostNUserViewModel model = new PostNUserViewModel();
             FollowList followList = new FollowList();
 
             followList.FollowedID = selectedId;
-            followList.FollowerID = (int)HttpContext.Session.GetInt32("UserID");
+            followList.FollowerID = userID;
             _dbContext.Add(followList);
             await _dbContext.SaveChangesAsync();
 
-            model = mainSearchController.LoadingOfUser(model, 2, selectedId);
+            model = mainSearchController.LoadingOfUser(model, 2, selectedId, userID);
 
             return View("~/Views/User/Users/SelectedUser.cshtml", model);
         }
 
-        public async Task<IActionResult> UnFollowUser(int selectedId)
+        public async Task<IActionResult> UnFollowUser(int selectedId, int userID)
         {
             MainSearchController mainSearchController = new MainSearchController(_hostingEnvironment, _dbContext);
             PostNUserViewModel model = new PostNUserViewModel();
-            FollowList followList =_dbContext.FollowList.FirstOrDefault(u => u.FollowedID == selectedId && u.FollowerID == (int)HttpContext.Session.GetInt32("UserID"));
+            FollowList followList =_dbContext.FollowList.FirstOrDefault(u => u.FollowedID == selectedId && u.FollowerID == userID);
 
             _dbContext.Remove(followList);
             await _dbContext.SaveChangesAsync();
 
-            model = mainSearchController.LoadingOfUser(model, 3, selectedId);
+            model = mainSearchController.LoadingOfUser(model, 3, selectedId, userID);
 
 
             return View("~/Views/User/Users/SelectedUser.cshtml", model);
