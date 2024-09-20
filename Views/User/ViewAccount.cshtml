@@ -13,6 +13,22 @@
             }
         }
     });
+    function showHiddenDiv() {
+        var x = document.getElementById("hiddenDiv");
+        if (x.style.display === "none") {
+            x.style.display = "block";
+        } else {
+            x.style.display = "none";
+        }
+    }
+    function showHiddenDiv2() {
+        var x = document.getElementById("hiddenDiv2");
+        if (x.style.display === "none") {
+            x.style.display = "block";
+        } else {
+            x.style.display = "none";
+        }
+    }
 </script>
 
 <!-- Navbar -->
@@ -22,10 +38,10 @@
             <img src="~/Media/qr-code.svg" width="25" height="25" alt="share">
         </a>
         <div>
-            <a class="navbar-brand" style="font-family:monospace; font-weight:bold;" href="#">@Context.Session.GetString("User")</a>
+            <a class="navbar-brand" style="font-family:monospace; font-weight:bold;" onclick="showHiddenDiv2()">@Context.Session.GetString("User")</a>
             <img src="@Url.Action("DisplayProfilePhoto", "User")" width="30" height="30" alt="User profile photo">
         </div>
-        <a class="navbar-brand" href="@Url.Action("ViewAccount", "User")">
+        <a onclick="showHiddenDiv2()" class="navbar-brand" href="@Url.Action("ViewAccount", "User")">
             <img src="~/Media/gear.svg" width="25" height="25" alt="settings">
         </a>
     </nav>
@@ -34,21 +50,72 @@
 <!-- Main profile info -->
 <!-- This is ok for now. Not too good though -->
 <div class="row">
-    <div class="col-6 col-lg-3">
-        <img class="mt-5 col" src="@Url.Action("DisplayProfilePhoto", "User")" style="height:12em;width:14em;" />
+    <a class="col-5 col-md-4 col-lg-2">
+        <div>
+            <img class="mt-5 col img-fluid" src="@Url.Action("DisplayProfilePhoto", "User")" />
+        </div>
+    </a>
+    <div id="hiddenDiv2" class="p-0 mt-5 notification-overlay text-centers">
+        <a href="@Url.Action("Logout", "User");" class="m-1 btn btn-danger">Sign Out</a>
     </div>
+
     <div class="mt-5 m-2 col">
         <h3>@Context.Session.GetString("User")</h3>
         <small>Account type: @Model.UserVM.User.PublicOrPrivateAcc</small>
 
-        <!-- Need to create notifications -->
+        <!-- Notifications -->
         <br />
-        <img src="~/Media/bellIcon.png" class="mt-1" alt="Bell Icon" width="45em" />
         <p id="notificationAmount"></p>
         <div class="overflow-y: scroll mt-1">
-            <a href="">
+            <a style="text-decoration:none;" onclick="showHiddenDiv()">
+                <img src="~/Media/bellIcon.png" class="mt-1" alt="Bell Icon" width="45em" />
+                    @if (Model.NotificationVMList.Count() != 0)
+                    {
+                    <small>
+                        @Model.NotificationVMList.Count()*
+                    </small>
+
+                    } 
+                    else
+                    {
+                    <small>0</small>
+                    }
             </a>
         </div>
+
+        <div id="hiddenDiv" style="width:fit-content;" class="m-1 mt-5 notification-overlay">
+            @if (Model.NotificationVMList.Count() != 0)
+            {
+                <div class="row">
+                    @foreach (var NotificationVM in Model.NotificationVMList)
+                    {
+                        <div class="m-1 d-flex">
+                            <div>
+                                <img src="data:image/jpeg;base64,@NotificationVM.ReqUser.UserImage" width="30" height="30" style="border-radius:25px;" alt="User profile photo">&nbsp;&nbsp;
+                            </div>
+                            <div>
+                                <p>@NotificationVM.ReqUser.Username wants to <b>Follow</b> you &nbsp;</p>
+                            </div>
+
+                            <a href="">
+                                <img src="/Media/YES.png" width="30" height="30" style="border-radius:25px;" alt="User profile photo">
+                            </a>
+                            &nbsp;|&nbsp;
+                            <a href="">
+                                <img src="/Media/NO.png" width="30" height="30" style="border-radius:25px;" alt="User profile photo">
+                            </a>
+                        </div>
+                    }
+                </div>
+            }
+            else
+            {
+                <div class="row m-1 mb-0 blackColor">
+                    <p>No Notifications to show!</p>
+                </div>
+            }
+        </div>
+
     </div>
 </div>
 

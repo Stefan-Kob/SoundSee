@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "lu1KpRyYK8lWnE2gzbvaa7JKSny2lfBVIUhVlya0JtU=",
+  "Hash": "ocJHg7eu4zRWs2IiFigfbF1YGYcX6V7gHcIHv2dFMMQ=",
   "Source": "SoundSee",
   "BasePath": "_content/SoundSee",
   "Mode": "Default",
@@ -1347,6 +1347,25 @@
       "OriginalItemSpec": "wwwroot\\Media\\house.svg"
     },
     {
+      "Identity": "C:\\MyPrograms\\SoundSee\\SoundSee\\wwwroot\\Media\\NO.png",
+      "SourceId": "SoundSee",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\MyPrograms\\SoundSee\\SoundSee\\wwwroot\\",
+      "BasePath": "_content/SoundSee",
+      "RelativePath": "Media/NO.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Media\\NO.png"
+    },
+    {
       "Identity": "C:\\MyPrograms\\SoundSee\\SoundSee\\wwwroot\\Media\\PaperAirplane.png",
       "SourceId": "SoundSee",
       "SourceType": "Discovered",
@@ -1516,6 +1535,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\Media\\SoundSeeLogo.svg"
+    },
+    {
+      "Identity": "C:\\MyPrograms\\SoundSee\\SoundSee\\wwwroot\\Media\\YES.png",
+      "SourceId": "SoundSee",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\MyPrograms\\SoundSee\\SoundSee\\wwwroot\\",
+      "BasePath": "_content/SoundSee",
+      "RelativePath": "Media/YES.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Media\\YES.png"
     }
   ]
 }

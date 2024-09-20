@@ -201,13 +201,13 @@ namespace SoundSee.Controllers
         [Route("SignIn/EditUser")]
         public IActionResult EditUser(UserViewModel model)
         {
-            return View("EditUser", model);
+            return View("~/Views/SignIn/EditUser.cshtml", model);
         }
 
         public IActionResult Logout()
         {
             HttpContext.Session.Clear();
-            return RedirectToAction("Index", "Home");
+            return View("~/Views/Home/Index.cshtml");
         }
 
         [HttpPost]
@@ -220,11 +220,14 @@ namespace SoundSee.Controllers
         {
             var model = new PostNUserViewModel();
             model.UserVM = new UserViewModel();
+            model.NotificationVMList = new List<NotificationViewModel>();
             model.UserVM.User = _dbContext.Users.FirstOrDefault(u => u.Id == HttpContext.Session.GetInt32("UserID"));
 
             model.PostVMList = GetPostList(model);
 
             // In seperate method, create a notificaiton method to gather notifications. Then show the notifications on the viewAccount page as a hidden div that takes over part of the page (possibly scrollable)
+
+            model.NotificationVMList = GetNotificationList(model);
 
             return View("ViewAccount", model);
         }
@@ -273,28 +276,47 @@ namespace SoundSee.Controllers
             return false;
         }
 
+        public List<NotificationViewModel> GetNotificationList(PostNUserViewModel model)
+        {
+            // Get all of the users notifications, and put them in the ViewModel list. Will include more notifications in the future
+            foreach (FollowRequests followReq in _dbContext.FollowRequests)
+            {
+                NotificationViewModel NotifModel = new NotificationViewModel();
+                if (followReq.TargetUserID == model.UserVM.User.Id)
+                {
+                    NotifModel.ReqUser = _dbContext.Users.FirstOrDefault(u => u.Id == followReq.AskingUserID);
+                    NotifModel.ReqUser.UserImage = NotifModel.ReqUser.Profile_Photo != null ? Convert.ToBase64String(NotifModel.ReqUser.Profile_Photo) : null;
+                    model.NotificationVMList.Add(NotifModel);
+                }
+            }
+            return model.NotificationVMList;
+        }
+
         public List<PostViewModel> GetPostList(PostNUserViewModel model)
         {
             // Get all of the users posts, and put them in the list
             foreach (Post post in _dbContext.Posts)
             {
-                PostViewModel postModel = new PostViewModel();
-                if (post.UserID == model.UserVM.User.Id)
+                if (post != null)
                 {
-                    postModel.ViewModelImage0 = post.Image0 != null ? Convert.ToBase64String(post.Image0) : null;
-                    postModel.Post = post;
-
-                    if (post.Title.Count() > 23)
+                    PostViewModel postModel = new PostViewModel();
+                    if (post.UserID == model.UserVM.User.Id)
                     {
-                        postModel.Post.Title = post.Title.Substring(0, 23) + "...";
-                    }
-                    if (post.Description.Count() > 80)
-                    {
-                        postModel.Post.Description = post.Description.Substring(0, 100) + "...";
-                    }
+                        postModel.ViewModelImage0 = post.Image0 != null ? Convert.ToBase64String(post.Image0) : null;
+                        postModel.Post = post;
 
-                    model.PostVMList.Add(postModel);
-                }
+                        if (post.Title.Count() > 23)
+                        {
+                            postModel.Post.Title = post.Title.Substring(0, 23) + "...";
+                        }
+                        if (post.Description.Count() > 80)
+                        {
+                            postModel.Post.Description = post.Description.Substring(0, 100) + "...";
+                        }
+
+                        model.PostVMList.Add(postModel);
+                    }
+                } 
             }
             return model.PostVMList;
         }

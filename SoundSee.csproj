@@ -34,4 +34,8 @@
     <ProjectReference Include="..\SoundSee.Models\SoundSee.Models.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\css\" />
+  </ItemGroup>
+
 </Project>
