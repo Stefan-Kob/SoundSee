@@ -74,17 +74,17 @@ namespace SoundSee.Controllers
             UserController userController = new UserController(_hostingEnvironment, _dbContext);
             PostNUserViewModel model = new PostNUserViewModel();
             FollowList followList = new FollowList();
-            model = userController.GetUserAccountToDisplay(model, userID);
 
-            FollowRequests followReq = _dbContext.FollowRequests.FirstOrDefault(u => u.TargetUserID == model.UserVM.User.Id && u.AskingUserID == requestUserId);
-            followReq.TargetUserID = model.UserVM.User.Id;
-            followReq.AskingUserID = requestUserId;
-            followList.FollowedID = model.UserVM.User.Id;
+            FollowRequests followReq = _dbContext.FollowRequests.FirstOrDefault(u => u.TargetUserID == userID && u.AskingUserID == requestUserId);
+
+            followList.FollowedID = userID;
             followList.FollowerID = requestUserId;
 
             _dbContext.Remove(followReq);
             _dbContext.Add(followList);
             await _dbContext.SaveChangesAsync();
+
+            model = userController.GetUserAccountToDisplay(model, userID);
 
             return View("~/Views/User/ViewAccount.cshtml", model);
         }
