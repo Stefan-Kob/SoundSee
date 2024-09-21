@@ -104,7 +104,7 @@
                                 <img src="/Media/YES.png" width="30" height="30" style="border-radius:25px;" alt="User profile photo">
                             </a>
                             &nbsp;|&nbsp;
-                            <a href="@Url.Action("DenyFollowReq", "FollowReq")">
+                            <a href="@Url.Action("DenyFollowReq", "FollowReq", new { requestUserId = NotificationVM.ReqUser.Id, userID = Model.UserVM.User.Id })">
                                 <img src="/Media/NO.png" width="30" height="30" style="border-radius:25px;" alt="User profile photo">
                             </a>
                         </div>
