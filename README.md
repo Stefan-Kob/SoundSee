@@ -19,7 +19,7 @@
 	 	- [x] User Feed
   	 	- [x] View other accounts page
      		- [x] Other user feed 
-	 - [ ] Notifications section
+	 - [x] Notifications section
 	 - [ ] Messaging page
 	 - [ ] Search/explore page
   	 	- [x] Search part
