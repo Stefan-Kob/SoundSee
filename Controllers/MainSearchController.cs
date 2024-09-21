@@ -134,17 +134,17 @@ namespace SoundSee.Controllers
                 {
                     model.Requested = "F";
                 }
-                if (followReq != null && followReq.AskingUserID == userID)
+                if (followReq != null && followReq.AskingUserID == userID && followList == null)
                 {
                     model.Requested = "Y";
                 }
-                else
-                {
-                    model.Requested = "N";
-                }
                 if (type == 3)
                 {
-                    model.Requested = "N";
+                    model.Requested = "RF";
+                }
+                if (model.Requested == string.Empty)
+                {
+                    model.Requested = "RF";
                 }
             }
             return model;

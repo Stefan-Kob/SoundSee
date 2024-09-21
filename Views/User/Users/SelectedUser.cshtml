@@ -65,7 +65,7 @@
                 {
                     <p class="btn btn-secondary"><i>Requested</i></p>
                 }
-                else
+                if (Model.Requested == "RF")
                 {
                     <a class="btn btn-primary" href="@Url.Action("ProcessFollowReq", "FollowReq", new { selectedId = Model.UserVM.User.Id, userID = Context.Session.GetInt32("UserID")})">Request to Follow</a>
                 }

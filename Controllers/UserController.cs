@@ -218,16 +218,9 @@ namespace SoundSee.Controllers
 
         public IActionResult ViewAccount()
         {
-            var model = new PostNUserViewModel();
-            model.UserVM = new UserViewModel();
-            model.NotificationVMList = new List<NotificationViewModel>();
-            model.UserVM.User = _dbContext.Users.FirstOrDefault(u => u.Id == HttpContext.Session.GetInt32("UserID"));
-
-            model.PostVMList = GetPostList(model);
-
-            // In seperate method, create a notificaiton method to gather notifications. Then show the notifications on the viewAccount page as a hidden div that takes over part of the page (possibly scrollable)
-
-            model.NotificationVMList = GetNotificationList(model);
+            PostNUserViewModel model = new PostNUserViewModel();
+            int? userID = HttpContext.Session.GetInt32("UserID");
+            model = GetUserAccountToDisplay(model, userID);
 
             return View("ViewAccount", model);
         }
@@ -320,5 +313,18 @@ namespace SoundSee.Controllers
             }
             return model.PostVMList;
         }
+
+        public PostNUserViewModel GetUserAccountToDisplay(PostNUserViewModel model, int? userID)
+        {
+            model.UserVM = new UserViewModel();
+            model.NotificationVMList = new List<NotificationViewModel>();
+            model.UserVM.User = _dbContext.Users.FirstOrDefault(u => u.Id == userID);
+
+            model.PostVMList = GetPostList(model);
+            model.NotificationVMList = GetNotificationList(model);
+
+            return model;
+        }
+
     }
 }

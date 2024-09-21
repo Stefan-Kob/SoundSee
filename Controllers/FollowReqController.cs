@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Hosting.Internal;
 using SoundSee.Database;
 using SoundSee.Models;
 using SoundSee.ViewModels;
@@ -65,6 +67,32 @@ namespace SoundSee.Controllers
 
 
             return View("~/Views/User/Users/SelectedUser.cshtml", model);
+        }
+
+        public async Task<IActionResult> AcceptFollowReq(int requestUserId, int userID)
+        {
+            UserController userController = new UserController(_hostingEnvironment, _dbContext);
+            PostNUserViewModel model = new PostNUserViewModel();
+            FollowList followList = new FollowList();
+            model = userController.GetUserAccountToDisplay(model, userID);
+
+            FollowRequests followReq = _dbContext.FollowRequests.FirstOrDefault(u => u.TargetUserID == model.UserVM.User.Id && u.AskingUserID == requestUserId);
+            followReq.TargetUserID = model.UserVM.User.Id;
+            followReq.AskingUserID = requestUserId;
+            followList.FollowedID = model.UserVM.User.Id;
+            followList.FollowerID = requestUserId;
+
+            _dbContext.Remove(followReq);
+            _dbContext.Add(followList);
+            await _dbContext.SaveChangesAsync();
+
+            return View("~/Views/User/ViewAccount.cshtml", model);
+        }
+
+        public async Task<IActionResult> DenyFollowReq()
+        {
+
+            return View();
         }
     }
 }

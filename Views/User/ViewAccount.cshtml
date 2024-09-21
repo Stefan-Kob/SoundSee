@@ -55,8 +55,10 @@
             <img class="mt-5 col img-fluid" src="@Url.Action("DisplayProfilePhoto", "User")" />
         </div>
     </a>
-    <div id="hiddenDiv2" class="p-0 mt-5 notification-overlay text-centers">
-        <a href="@Url.Action("Logout", "User");" class="m-1 btn btn-danger">Sign Out</a>
+
+    <!-- Hidden div for signing out -->
+    <div id="hiddenDiv2" class="p-0 mt-5 notification-overlay text-center">
+        <a href="@Url.Action("Logout", "User")" class="m-1 btn btn-danger">Sign Out</a>
     </div>
 
     <div class="mt-5 m-2 col">
@@ -83,6 +85,7 @@
             </a>
         </div>
 
+        <!-- Hidden div to show notifications -->
         <div id="hiddenDiv" style="width:fit-content;" class="m-1 mt-5 notification-overlay">
             @if (Model.NotificationVMList.Count() != 0)
             {
@@ -97,11 +100,11 @@
                                 <p>@NotificationVM.ReqUser.Username wants to <b>Follow</b> you &nbsp;</p>
                             </div>
 
-                            <a href="">
+                            <a href="@Url.Action("AcceptFollowReq", "FollowReq", new { requestUserId = NotificationVM.ReqUser.Id, userID = Model.UserVM.User.Id })">
                                 <img src="/Media/YES.png" width="30" height="30" style="border-radius:25px;" alt="User profile photo">
                             </a>
                             &nbsp;|&nbsp;
-                            <a href="">
+                            <a href="@Url.Action("DenyFollowReq", "FollowReq")">
                                 <img src="/Media/NO.png" width="30" height="30" style="border-radius:25px;" alt="User profile photo">
                             </a>
                         </div>
