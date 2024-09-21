@@ -99,36 +99,33 @@
                     <hr style="margin: 1em;" />
                     <input id="docActionId" asp-for="Post.Title" type="hidden" value="@Model.Post.Title" />
                 }
+                    <div class="d-flex flex-column align-items-center justify-content-center">
+                        @if (Model.ViewModelImageVariable != string.Empty)
+                        {
+                            <img id="tempImage" src="data:image/jpeg;base64,@Model.ViewModelImageVariable" height="200em" width="200em" alt="Post Image" />
+                            <p class="m-1 d-flex justify-content-center"><small><i>Click to enlarge Image</i></small></p>
 
-                <div class="d-flex justify-content-center">
-                    @if (Model.ViewModelImageVariable != string.Empty)
-                    {
-                        <img id="tempImage" src="data:image/jpeg;base64,@Model.ViewModelImageVariable" height="200em" width="200em" alt="Post Image" />
-                    }
-                </div>
+                            <div id="postDivPart2" class="d-flex flex-row justify-content-center mt-2">
+                                @if (Model.ViewModelImage0 != string.Empty)
+                                {
+                                    <img class="postImage" src="data:image/jpeg;base64,@Model.ViewModelImage0" height="50em" width="50em" alt="Post Image 1" />
+                                }
+                                @if (Model.ViewModelImage1 != string.Empty)
+                                {
+                                    <img class="postImage" src="data:image/jpeg;base64,@Model.ViewModelImage1" height="50em" width="50em" alt="Post Image 2" />
+                                }
+                                @if (Model.ViewModelImage2 != string.Empty)
+                                {
+                                    <img class="postImage" src="data:image/jpeg;base64,@Model.ViewModelImage2" height="50em" width="50em" alt="Post Image 3" />
+                                }
+                            </div>
+                        }
+                    </div>
 
-                <p class="m-1 d-flex justify-content-center"><small><i>Click to enlarge Image</i></small></p>
-                <div id="postDivPart2" class="d-flex justify-content-center">
-                    @if (Model.ViewModelImage0 != string.Empty)
-                    {
-                            <img class="postImage" href="" src="data:image/jpeg;base64,@Model.ViewModelImage0" height="50em" width="50em" alt="Post Image 1" />
-                            <input id="docActionId" asp-for="Post.Image0" type="hidden" value="@Model.ViewModelImage0" />
-                    }
-                    @if (Model.ViewModelImage1 != string.Empty)
-                    {
-                            <img class="postImage" href="" src="data:image/jpeg;base64,@Model.ViewModelImage1" height="50em" width="50em" alt="Post Image 2" />
-                            <input id="docActionId" asp-for="Post.Image1" type="hidden" value="@Model.ViewModelImage1" />
-                    }
-                    @if (Model.ViewModelImage2 != string.Empty)
-                    {
-                            <img class="postImage" href="" src="data:image/jpeg;base64,@Model.ViewModelImage2" height="50em" width="50em" alt="Post Image 3" />
-                            <input id="docActionId" asp-for="Post.Image2" type="hidden" value="@Model.ViewModelImage2" />
-                    }
-                </div>
+
 
                 @if (Model.Post.Description != string.Empty)
                 {
-                    <hr style="margin: 1em;" />
                     <h4 class="m-1 mt-0">Description</h4>
                     <p class="m-1">@Model.Post.Description</p>
                         <input id="docActionId" asp-for="Post.Description" type="hidden" value="@Model.Post.Description" />
@@ -190,6 +187,7 @@
                     <h4 class="m-1 mt-0">Description</h4>
                     <p class="m-1">@Model.Post.Description</p>
                 }
+                <br />
                 @using (Html.BeginForm("ViewAccount", "User", FormMethod.Post, new { enctype = "multipart/form-data" }))
                 {
                     @Html.AntiForgeryToken()

@@ -13,6 +13,10 @@
       "PackagePath": "staticwebassets\\Media\\Camera.png"
     },
     {
+      "Id": "C:\\MyPrograms\\SoundSee\\SoundSee\\wwwroot\\Media\\NO.png",
+      "PackagePath": "staticwebassets\\Media\\NO.png"
+    },
+    {
       "Id": "C:\\MyPrograms\\SoundSee\\SoundSee\\wwwroot\\Media\\PaperAirplane.png",
       "PackagePath": "staticwebassets\\Media\\PaperAirplane.png"
     },
@@ -27,6 +31,10 @@
     {
       "Id": "C:\\MyPrograms\\SoundSee\\SoundSee\\wwwroot\\Media\\SoundSeeLogo.svg",
       "PackagePath": "staticwebassets\\Media\\SoundSeeLogo.svg"
+    },
+    {
+      "Id": "C:\\MyPrograms\\SoundSee\\SoundSee\\wwwroot\\Media\\YES.png",
+      "PackagePath": "staticwebassets\\Media\\YES.png"
     },
     {
       "Id": "C:\\MyPrograms\\SoundSee\\SoundSee\\wwwroot\\Media\\bellIcon.png",

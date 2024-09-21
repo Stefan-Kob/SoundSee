@@ -23,6 +23,10 @@ namespace SoundSee.Controllers
         {
             return View();
         }
+        public IActionResult KnownBugs()
+        {
+            return View();
+        }
 
         public IActionResult Privacy()
         {

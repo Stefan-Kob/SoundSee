@@ -108,7 +108,14 @@ namespace SoundSee.Controllers
  
                 if (followList != null || type == 2)
                 {
-                    model.Requested = "Y";
+                    if (followList.FollowerID == userID || type == 2)
+                    {
+                        model.Requested = "Y";
+                    }
+                    else
+                    {
+                        model.Requested = "N";
+                    }
                 }
                 else
                 {
@@ -130,21 +137,21 @@ namespace SoundSee.Controllers
                     followList = _dbContext.FollowList.FirstOrDefault(u => u.FollowedID == model.UserVM.User.Id && u.FollowerID == userID);
                 }
 
-                if (followList != null)
+                if (followList != null && followList.FollowingID == userID)
                 {
                     model.Requested = "F";
                 }
-                if (followReq != null && followReq.AskingUserID == userID)
+                if (followReq != null && followReq.AskingUserID == userID && followList == null)
                 {
                     model.Requested = "Y";
                 }
-                else
-                {
-                    model.Requested = "N";
-                }
                 if (type == 3)
                 {
-                    model.Requested = "N";
+                    model.Requested = "RF";
+                }
+                if (model.Requested == string.Empty)
+                {
+                    model.Requested = "RF";
                 }
             }
             return model;
