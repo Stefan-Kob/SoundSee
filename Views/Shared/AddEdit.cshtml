@@ -21,6 +21,19 @@
             x.type = "password";
         }
     }
+    function toggleDiscoverCheckbox() {
+        var publicOrPrivateAcc = document.getElementById("PublicOrPrivateAcc");
+        var hiddenCheckBox = document.getElementById("hiddenCheckBox");
+        if (publicOrPrivateAcc.checked) {
+            hiddenCheckBox.style.display = "block";
+        } else {
+            hiddenCheckBox.style.display = "none";
+        }
+    }
+
+    window.onload = function () {
+        toggleDiscoverCheckbox();
+    };
 </script>
 <div>
     *
@@ -28,8 +41,12 @@
     <input asp-for="User.Email" type="Email" id="Email" name="Email" class="form-control" aria-describedby="emailHelp" placeholder="johndoe@email.com" value="@emailVal">
     <span asp-validation-for="User.Email" class="text-danger"></span>
     <div class="form-check form-switch mt-3">
-        <input class="form-check-input" type="checkbox" id="PublicOrPrivateAcc" name="PublicOrPrivateAcc" id="PublicOrPrivateAcc">
+        <input class="form-check-input" type="checkbox" id="PublicOrPrivateAcc" name="PublicOrPrivateAcc" onchange="toggleDiscoverCheckbox()">
         <label class="form-check-label" for="PublicOrPrivateAcc">Select to make your account <b>Private</b>, otherwise its <b>Public</b></label>
+    </div>
+    <div id="hiddenCheckBox" class="form-check form-switch mt-3" style="display:none;">
+        <input class="form-check-input" type="checkbox" id="ShowInDiscover" name="ShowInDiscover">
+        <label class="form-check-label" for="ShowInDiscover">Select to make your account <b>not Show</b> in the discover page, otherwise its <b>Discoverable</b></label>
     </div>
 </div>
 

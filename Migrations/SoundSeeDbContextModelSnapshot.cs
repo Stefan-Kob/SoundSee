@@ -160,6 +160,9 @@ namespace SoundSee.Migrations
                     b.Property<bool>("MainAccount")
                         .HasColumnType("bit");
 
+                    b.Property<DateTime>("PostDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasMaxLength(45)
@@ -207,6 +210,10 @@ namespace SoundSee.Migrations
                     b.Property<byte[]>("Salt")
                         .IsRequired()
                         .HasColumnType("varbinary(max)");
+
+                    b.Property<string>("ShowInDiscover")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("SignUpForNewsletters")
                         .IsRequired()

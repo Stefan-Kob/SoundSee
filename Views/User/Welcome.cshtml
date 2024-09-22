@@ -1,8 +1,22 @@
-﻿@model SoundSee.ViewModels.UserViewModel
+﻿@model SoundSee.ViewModels.PostNUserViewModel
 @{
     ViewData["Title"] = "Your Feed";
     Layout = "~/Views/Shared/_SignInLayout.cshtml";
+    int i = 0;
 }
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const postImages = document.querySelectorAll(".postImage");
+
+        postImages.forEach(image => {
+            image.addEventListener("click", function () {
+                const tempImage = document.getElementById(this.dataset.tempImageId);
+                tempImage.src = this.src;
+            });
+        });
+    });
+</script>
 
 <!-- Navbar -->
 <div class="mb-2 fixed-top">
@@ -17,4 +31,76 @@
             <img src="~/Media/PaperAirplane.png" width="25" height="25" alt="settings">
         </a>
     </nav>
+</div>
+
+<br />
+<div class="mt-4">
+    @if (Model.PostVMList.Count() != 0)
+    {
+        @foreach (var post in Model.PostVMList)
+        {
+            i++;
+            <div class="container" id="post-@i">
+                <div class="row justify-content-center">
+                    <div class="col-lg-7 col-sm-9 col-md-10 p-0 mb-1 d-flex flex-column">
+                        <div style="border: 1px solid #b6b6b6; border-radius:8px" class="m-1">
+                            @if (string.IsNullOrEmpty(post.ViewModelImage0))
+                            {
+                                <div>
+                                    <p class="m-1 postTitle">@post.Post.Title</p>
+                                    <p style="width:90%;" class="m-1">@post.Post.Description</p>
+                                </div>
+                            }
+                            else
+                            {
+                                @if (post.ViewModelImage0 != string.Empty)
+                                {
+                                    <div class="d-flex justify-content-center mt-1">
+                                        @if (post.ViewModelImageVariable != string.Empty)
+                                        {
+                                            <img id="tempImage-@i" src="data:image/jpeg;base64,@post.ViewModelImageVariable" height="225em" width="225em" alt="Post Image" />
+                                        }
+                                    </div>
+
+                                    <div id="postDivPart2-@i" class="d-flex justify-content-center">
+                                        @if (post.ViewModelImage0 != string.Empty)
+                                        {
+                                            <img class="postImage" data-temp-image-id="tempImage-@i" src="data:image/jpeg;base64,@post.ViewModelImage0" height="40em" width="40em" alt="Post Image 1" />
+                                        }
+                                        @if (post.ViewModelImage1 != string.Empty)
+                                        {
+                                            <img class="postImage" data-temp-image-id="tempImage-@i" src="data:image/jpeg;base64,@post.ViewModelImage1" height="40em" width="40em" alt="Post Image 2" />
+                                        }
+                                        @if (post.ViewModelImage2 != string.Empty)
+                                        {
+                                            <img class="postImage" data-temp-image-id="tempImage-@i" src="data:image/jpeg;base64,@post.ViewModelImage2" height="40em" width="40em" alt="Post Image 3" />
+                                        }
+                                    </div>
+                                }
+                                <div>
+                                    <p class="m-1 postTitle">@post.Post.Title</p>
+                                    <p style="width:90%;" class="m-1">@post.Post.Description</p>
+                                </div>
+                            }
+                            <p class="m-1"><b>Posted:</b>@post.Post.PostDate</p>
+                            <button onclick="" class="btn btn-secondary w-100 commentBtn">Comments</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    }
+    else
+    {
+        <div class="mt-5 d-flex justify-content-center">
+            <a href="@Url.Action("GoToSearch", "MainSearch")" style="text-decoration:none;">
+                <div class="card cardType1 text-center">
+                    <img class="card-img-top mt-2" src="~/Media/search.svg" alt="Search" height="150em">
+                    <div class="card-body">
+                        <p class="card-text"><i>Follow someone</i> to see posts!<i>*</i></p>
+                    </div>
+                </div>
+            </a>
+        </div>
+    }
 </div>

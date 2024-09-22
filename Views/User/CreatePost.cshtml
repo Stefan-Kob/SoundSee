@@ -1,8 +1,8 @@
-﻿    @model SoundSee.ViewModels.PostViewModel
-    @{
-        ViewData["Title"] = "Create Post";
-        Layout = "~/Views/Shared/_SignInLayout.cshtml";
-    }
+﻿@model SoundSee.ViewModels.PostViewModel
+@{
+    ViewData["Title"] = "Create Post";
+    Layout = "~/Views/Shared/_SignInLayout.cshtml";
+}
 
 <script>
     document.addEventListener("DOMContentLoaded", function () {
@@ -31,7 +31,7 @@
         <div class="mt-5 d-flex justify-content-center">
             <a href="@Url.Action("StartPost", "Post")" style="text-decoration:none;">
                 <div class="card cardType1 text-center">
-                    <img class="card-img-top" src="~/Media/Add.svg" alt="Card image cap">
+                    <img class="card-img-top" src="~/Media/Add.svg" alt="Create Post">
                     <div class="card-body">
                         <p class="card-text">Create a Post!</p>
                     </div>

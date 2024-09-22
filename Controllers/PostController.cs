@@ -148,6 +148,7 @@ namespace SoundSee.Controllers
 
             model.Post.UserID = (int)HttpContext.Session.GetInt32("UserID");
             post = model.Post;
+            post.PostDate = DateTime.Now;
 
             _dbContext.Add(post);
             await _dbContext.SaveChangesAsync();

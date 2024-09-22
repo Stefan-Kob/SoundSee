@@ -95,6 +95,7 @@ namespace SoundSee.Migrations
                     LinkedAccNum = table.Column<int>(type: "int", nullable: false),
                     Title = table.Column<string>(type: "nvarchar(45)", maxLength: 45, nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    PostDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Image0 = table.Column<byte[]>(type: "varbinary(max)", nullable: false),
                     Image1 = table.Column<byte[]>(type: "varbinary(max)", nullable: false),
                     Image2 = table.Column<byte[]>(type: "varbinary(max)", nullable: false)
@@ -115,6 +116,7 @@ namespace SoundSee.Migrations
                     Password = table.Column<string>(type: "nvarchar(32)", maxLength: 32, nullable: false),
                     SignUpForNewsletters = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     PublicOrPrivateAcc = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ShowInDiscover = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Profile_Photo = table.Column<byte[]>(type: "varbinary(max)", nullable: false),
                     Salt = table.Column<byte[]>(type: "varbinary(max)", nullable: false),
                     MainAccount = table.Column<bool>(type: "bit", nullable: false),
