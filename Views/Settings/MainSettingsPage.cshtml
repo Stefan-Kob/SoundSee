@@ -7,6 +7,34 @@
 <!-- Navbar -->
 <div class="mb-2 fixed-top">
     <nav class="navbar navbar-light mt-0" id="topSignedInBar">
-
+        <a class="navbar-brand" href="@Url.Action("ViewAccount", "User")">
+            <img src="~/Media/chevron-double-left.svg" width="30" height="30" alt="Search">
+        </a>
+        <div>
+            <a class="navbar-brand" style="font-family:monospace; font-weight:bold;">Settings</a>
+        </div>
+        <div>
+        </div>
     </nav>
+</div>
+
+<div class="mt-5">
+    <div class="m-3 justify-content-center">
+        <a>
+            <p>Account Info</p>
+            <hr />
+        </a>
+        <a>
+            <p>Reset Password</p>
+            <hr />
+        </a>
+        <a>
+            <p>App Info</p>
+            <hr />
+        </a>
+        <a>
+            <p>Customize your experience</p>
+            <hr />
+        </a>
+    </div>
 </div>

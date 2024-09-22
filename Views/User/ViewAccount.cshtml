@@ -41,7 +41,7 @@
             <a class="navbar-brand" style="font-family:monospace; font-weight:bold;" onclick="showHiddenDiv2()">@Context.Session.GetString("User")</a>
             <img src="@Url.Action("DisplayProfilePhoto", "User")" width="30" height="30" alt="User profile photo">
         </div>
-        <a onclick="showHiddenDiv2()" class="navbar-brand" href="@Url.Action("ViewAccount", "User")">
+        <a onclick="showHiddenDiv2()" class="navbar-brand" href="@Url.Action("SeeMainSettingsPage", "Settings")">
             <img src="~/Media/gear.svg" width="25" height="25" alt="settings">
         </a>
     </nav>
