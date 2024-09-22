@@ -12,7 +12,7 @@ using SoundSee.Database;
 namespace SoundSee.Migrations
 {
     [DbContext(typeof(SoundSeeDbContext))]
-    [Migration("20240915225638_SoundSeeDBMigration")]
+    [Migration("20240921222545_SoundSeeDBMigration")]
     partial class SoundSeeDBMigration
     {
         /// <inheritdoc />
@@ -163,6 +163,9 @@ namespace SoundSee.Migrations
                     b.Property<bool>("MainAccount")
                         .HasColumnType("bit");
 
+                    b.Property<DateTime>("PostDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasMaxLength(45)
@@ -210,6 +213,10 @@ namespace SoundSee.Migrations
                     b.Property<byte[]>("Salt")
                         .IsRequired()
                         .HasColumnType("varbinary(max)");
+
+                    b.Property<string>("ShowInDiscover")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("SignUpForNewsletters")
                         .IsRequired()

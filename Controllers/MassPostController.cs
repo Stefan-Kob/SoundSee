@@ -19,7 +19,7 @@ namespace SoundSee.Controllers
         }
 
         [HttpGet]
-        public ActionResult DisplayProfileFeed(int userId)
+        public ActionResult DisplayProfileFeed(int userId, int type)
         {
             var model = new PostNUserViewModel();
             model.UserVM = new UserViewModel();
@@ -28,9 +28,10 @@ namespace SoundSee.Controllers
             // Get all of the users posts, and put them in the list
             foreach (Post post in _dbContext.Posts)
             {
-                PostViewModel postModel = new PostViewModel();
                 if (post.UserID == userId)
                 {
+                    PostViewModel postModel = new PostViewModel();
+                    postModel.ViewModelImageVariable = post.Image0 != null ? Convert.ToBase64String(post.Image0) : null;
                     postModel.ViewModelImage0 = post.Image0 != null ? Convert.ToBase64String(post.Image0) : null;
                     postModel.ViewModelImage1 = post.Image1 != null ? Convert.ToBase64String(post.Image1) : null;
                     postModel.ViewModelImage2 = post.Image2 != null ? Convert.ToBase64String(post.Image2) : null;
@@ -39,8 +40,14 @@ namespace SoundSee.Controllers
                     model.PostVMList.Add(postModel);
                 }
             }
-
-            return View("~/Views/User/UserFeedPage.cshtml", model);
+            if (type == 1)
+            {
+                return View("~/Views/User/Users/SelectedUserFeed.cshtml", model);
+            }
+            else
+            {
+                return View("~/Views/User/UserFeedPage.cshtml", model);
+            }
         }
 
     }

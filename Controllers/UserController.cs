@@ -27,7 +27,9 @@ namespace SoundSee.Controllers
         {
             if (CheckIfSignedIn())
             {
-                return View("Welcome");
+                PostNUserViewModel model = new PostNUserViewModel();
+                model.PostVMList = PostVMListFP(model, HttpContext.Session.GetInt32("UserID"));
+                return View("Welcome", model);
             }
 
             return View("~/Views/SignIn/UserSignIn.cshtml");
@@ -35,8 +37,12 @@ namespace SoundSee.Controllers
 
         // From sign in page, validate proper sign in, then go into the app
         [HttpPost]
-        public IActionResult SignIn(UserViewModel model)
+        public IActionResult SignIn(UserViewModel userModel)
         {
+            PostNUserViewModel model = new PostNUserViewModel();
+            model.UserVM = new UserViewModel();
+            model.UserVM = userModel;
+
             User user = new User();
             User tempUser = new User();
             saltAndShaker saltAndShaker = new saltAndShaker();
@@ -46,7 +52,7 @@ namespace SoundSee.Controllers
             user.Password = Request.Form["Password"];
 
             // Validtation (Clear > Validate > set/rerturn)
-            ModelState.ClearValidationState(nameof(model.User));
+            ModelState.ClearValidationState(nameof(model.UserVM.User));
 
             foreach (var dBUser in _dbContext.Users)
             {
@@ -70,26 +76,27 @@ namespace SoundSee.Controllers
                     break;
                 }
             }
-
+                
             if (inDBCheck == 0)
             {
                 ModelState.AddModelError("User.Email", "Wrong email or password, please try again.");
                 ModelState.AddModelError("User.Password", "Wrong email or password, please try again.");
             }
 
-            model.User = user;
-            if (!TryValidateModel(model.User, nameof(model.User)))
+            model.UserVM.User = user;
+            if (!TryValidateModel(model.UserVM.User, nameof(model.UserVM.User)))
             {
                 return View("~/Views/SignIn/UserSignIn.cshtml", model);
             }
 
-            model.User.Password = string.Empty;
-            HttpContext.Session.Set("UserPhoto", model.User.Profile_Photo);
-            HttpContext.Session.SetString("User", model.User.Username);
-            HttpContext.Session.SetString("UserEmail", model.User.Email);
-            HttpContext.Session.SetInt32("UserID", model.User.Id);
+            model.UserVM.User.Password = string.Empty;
+            HttpContext.Session.Set("UserPhoto", model.UserVM.User.Profile_Photo);
+            HttpContext.Session.SetString("User", model.UserVM.User.Username);
+            HttpContext.Session.SetString("UserEmail", model.UserVM.User.Email);
+            HttpContext.Session.SetInt32("UserID", model.UserVM.User.Id);
 
-            return View("Welcome");
+            model.PostVMList = PostVMListFP(model, HttpContext.Session.GetInt32("UserID"));
+            return View("Welcome", model);
         }
 
         // Send user to create an account
@@ -99,7 +106,9 @@ namespace SoundSee.Controllers
         {
             if (CheckIfSignedIn())
             {
-                return View("Welcome");
+                PostNUserViewModel model = new PostNUserViewModel();
+                model.PostVMList = PostVMListFP(model, HttpContext.Session.GetInt32("UserID"));
+                return View("~/Views/User/Welcome.cshtml", model);
             }
 
             var user = new User();
@@ -157,6 +166,14 @@ namespace SoundSee.Controllers
                 user.PublicOrPrivateAcc = "Private";
             }
 
+            if (Request.Form["ShowInDiscover"] != "on")
+            {
+                user.ShowInDiscover = "N";
+            }
+            else
+            {
+                user.ShowInDiscover = "Y";
+            }
             model.User = user;
 
             // Validtation (Clear > Validate > set/rerturn)
@@ -170,7 +187,6 @@ namespace SoundSee.Controllers
                     ModelState.AddModelError("User.Email", "Email already in use, please use a different email");
                 }
             }
-
 
             if (!TryValidateModel(model.User, nameof(model.User)))
             {
@@ -211,8 +227,9 @@ namespace SoundSee.Controllers
         }
 
         [HttpPost]
-        public IActionResult ContinUserToWelcome(UserViewModel model)
+        public IActionResult ContinUserToWelcome(PostNUserViewModel model)
         {
+            model.PostVMList = PostVMListFP(model, HttpContext.Session.GetInt32("UserID"));
             return View("~/Views/User/Welcome.cshtml", model);
         }
 
@@ -279,9 +296,13 @@ namespace SoundSee.Controllers
                 {
                     NotifModel.ReqUser = _dbContext.Users.FirstOrDefault(u => u.Id == followReq.AskingUserID);
                     NotifModel.ReqUser.UserImage = NotifModel.ReqUser.Profile_Photo != null ? Convert.ToBase64String(NotifModel.ReqUser.Profile_Photo) : null;
+                    NotifModel.ID = followReq.RequestID;
                     model.NotificationVMList.Add(NotifModel);
                 }
             }
+
+            model.NotificationVMList = model.NotificationVMList.OrderByDescending(n => n.ID).ToList();
+
             return model.NotificationVMList;
         }
 
@@ -295,7 +316,10 @@ namespace SoundSee.Controllers
                     PostViewModel postModel = new PostViewModel();
                     if (post.UserID == model.UserVM.User.Id)
                     {
+                        postModel.ViewModelImageVariable = post.Image0 != null ? Convert.ToBase64String(post.Image0) : null;
                         postModel.ViewModelImage0 = post.Image0 != null ? Convert.ToBase64String(post.Image0) : null;
+                        postModel.ViewModelImage1 = post.Image1 != null ? Convert.ToBase64String(post.Image1) : null;
+                        postModel.ViewModelImage1 = post.Image2 != null ? Convert.ToBase64String(post.Image1) : null;
                         postModel.Post = post;
 
                         if (post.Title.Count() > 23)
@@ -311,6 +335,51 @@ namespace SoundSee.Controllers
                     }
                 } 
             }
+
+            model.PostVMList = model.PostVMList.OrderByDescending(n => n.Post.Id).ToList();
+
+            return model.PostVMList;
+        }
+
+        // Returns a list of posts (users welcome page)
+        public List<PostViewModel> PostVMListFP(PostNUserViewModel model, int? userId)
+        {
+            // Get the list of ID's of people the user follow (.followedID)
+            foreach (FollowList followList in _dbContext.FollowList)
+            {
+                if (followList.FollowerID == userId)
+                {
+                    model.FolllowListList.Add(followList);
+                }
+            }
+
+            // Get all of the users posts, and put them in the list
+            if (model.FolllowListList != null)
+            {
+                foreach (Post post in _dbContext.Posts)
+                {
+                    if (post != null)
+                    {
+                        foreach (FollowList follow in model.FolllowListList)
+                        {
+                            if (post.UserID == follow.FollowedID)
+                            {
+                                PostViewModel postModel = new PostViewModel();
+                                postModel.ViewModelImageVariable = post.Image0 != null ? Convert.ToBase64String(post.Image0) : null;
+                                postModel.ViewModelImage0 = post.Image0 != null ? Convert.ToBase64String(post.Image0) : null;
+                                postModel.ViewModelImage1 = post.Image1 != null ? Convert.ToBase64String(post.Image1) : null;
+                                postModel.ViewModelImage1 = post.Image2 != null ? Convert.ToBase64String(post.Image1) : null;
+                                postModel.Post = post;
+
+                                model.PostVMList.Add(postModel);
+                            }
+                        }
+                    }
+                }
+            }
+
+            model.PostVMList = model.PostVMList.OrderByDescending(n => n.Post.Id).ToList();
+
             return model.PostVMList;
         }
 

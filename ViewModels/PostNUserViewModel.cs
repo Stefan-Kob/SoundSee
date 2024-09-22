@@ -1,4 +1,6 @@
-﻿namespace SoundSee.ViewModels
+﻿using SoundSee.Models;
+
+namespace SoundSee.ViewModels
 {
     public class PostNUserViewModel
     {
@@ -9,6 +11,8 @@
         public NotificationViewModel NotificationVM { get; set; } = new NotificationViewModel();
 
         public List<NotificationViewModel> NotificationVMList { get; set; } = new List<NotificationViewModel>();
+
+        public List<FollowList> FolllowListList { get; set; } = new List<FollowList> { };
 
         public List<PostViewModel> PostVMList { get; set; } = new List<PostViewModel>();
 

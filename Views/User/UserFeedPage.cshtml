@@ -1,9 +1,23 @@
 ﻿@model SoundSee.ViewModels.PostNUserViewModel
 @{
-    ViewData["Title"] = "View Posts";
+    ViewData["Title"] = "Your Posts";
     Layout = "~/Views/Shared/_SignInLayout.cshtml";
     int i = 0;
 }
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const postImages = document.querySelectorAll(".postImage");
+
+        postImages.forEach(image => {
+            image.addEventListener("click", function () {
+                const tempImage = document.getElementById(this.dataset.tempImageId);
+                tempImage.src = this.src;
+            });
+        });
+    });
+</script>
+
 
 <!-- Navbar -->
 <div class="mb-5 fixed-top">
@@ -41,12 +55,36 @@
                             }
                             else
                             {
+                                @if (post.ViewModelImage0 != string.Empty)
+                                {
+                                    <div class="d-flex justify-content-center">
+                                        @if (post.ViewModelImageVariable != string.Empty)
+                                        {
+                                            <img id="tempImage-@i" src="data:image/jpeg;base64,@post.ViewModelImageVariable" height="200em" width="200em" alt="Post Image" />
+                                        }
+                                    </div>
+
+                                    <div id="postDivPart2-@i" class="d-flex justify-content-center">
+                                        @if (post.ViewModelImage0 != string.Empty)
+                                        {
+                                            <img class="postImage" data-temp-image-id="tempImage-@i" src="data:image/jpeg;base64,@post.ViewModelImage0" height="50em" width="50em" alt="Post Image 1" />
+                                        }
+                                        @if (post.ViewModelImage1 != string.Empty)
+                                        {
+                                            <img class="postImage" data-temp-image-id="tempImage-@i" src="data:image/jpeg;base64,@post.ViewModelImage1" height="50em" width="50em" alt="Post Image 2" />
+                                        }
+                                        @if (post.ViewModelImage2 != string.Empty)
+                                        {
+                                            <img class="postImage" data-temp-image-id="tempImage-@i" src="data:image/jpeg;base64,@post.ViewModelImage2" height="50em" width="50em" alt="Post Image 3" />
+                                        }
+                                    </div>
+                                }
                                 <div>
-                                    <img style="height:20em;width:20em" class="postImage img-fluid" src="data:image/jpeg;base64,@post.ViewModelImage0" alt="Post Image @i" />
                                     <p class="m-1 postTitle">@post.Post.Title</p>
                                     <p style="width:90%;" class="m-1">@post.Post.Description</p>
                                 </div>
                             }
+                            <p class="m-1"><b>Posted:</b>@post.Post.PostDate</p>
                             <button onclick="" class="btn btn-secondary w-100 commentBtn">Comments</button>
                         </div>
                     </div>

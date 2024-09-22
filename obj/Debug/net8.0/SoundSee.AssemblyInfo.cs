@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("SoundSee")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+40081a2af0338c7b4c7ad8d19dfc0b29e39791d5")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+4976d9058462aa9570d1fbf8630d4fc3ad7038d8")]
 [assembly: System.Reflection.AssemblyProductAttribute("SoundSee")]
 [assembly: System.Reflection.AssemblyTitleAttribute("SoundSee")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

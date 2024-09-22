@@ -89,10 +89,20 @@ namespace SoundSee.Controllers
             return View("~/Views/User/ViewAccount.cshtml", model);
         }
 
-        public async Task<IActionResult> DenyFollowReq()
+        public async Task<IActionResult> DenyFollowReq(int requestUserId, int userID)
         {
+            UserController userController = new UserController(_hostingEnvironment, _dbContext);
+            PostNUserViewModel model = new PostNUserViewModel();
+            FollowList followList = new FollowList();
 
-            return View();
+            FollowRequests followReq = _dbContext.FollowRequests.FirstOrDefault(u => u.TargetUserID == userID && u.AskingUserID == requestUserId);
+
+            _dbContext.Remove(followReq);
+            await _dbContext.SaveChangesAsync();
+
+            model = userController.GetUserAccountToDisplay(model, userID);
+
+            return View("~/Views/User/ViewAccount.cshtml", model);
         }
     }
 }
